@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent: #f2dda4;
+  --tertiary: #272727;
+}
+
+.accent-color {
+  color: var(--accent);
+}
+
+.accent-bg {
+  color: var(--accent);
+}
+
+.tertiary-color {
+  color: #f2dda4;
+}
+
+.tertiary-bg {
+  background: #272727;
+}
