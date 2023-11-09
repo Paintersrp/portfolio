@@ -18,7 +18,7 @@
 </script>
 
 <Content yIn={-750} yOut={-750}>
-  <header class="text-center space-y-4 text-color">
+  <header class="text-center space-y-4 accent-color">
     <h1 class="text-6xl font-bold text-white md:text-8xl leading-none shadow-text">
       Steven Painter
     </h1>
@@ -27,7 +27,7 @@
       textClass="text-5xl font-bold"
       containerClass="w-full text-center"
     />
-    <p class="text-color text-xl md:text-2xl text-white font-light">
+    <p class="accent-color text-xl md:text-2xl text-white font-light">
       Fullstack Developer | Backend Enthusiast | UI/UX Dabbler
     </p>
   </header>
@@ -40,9 +40,3 @@
     </p>
   </section>
 </Content>
-
-<style>
-  .text-color {
-    color: #f2dda4;
-  }
-</style>

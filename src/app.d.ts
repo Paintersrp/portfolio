@@ -29,6 +29,18 @@ declare global {
   }
 
   type Socials = Social[];
+
+  interface NavigationItem {
+    title: string;
+    route: string;
+  }
+
+  type NavigationItems = NavigationItem[];
+
+  interface Metadata {
+    title: string;
+    date: Date;
+  }
 }
 
 export {};

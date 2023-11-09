@@ -10,9 +10,9 @@
 
 {#if pathname === '/projects'}
   <Navigator position="top" link="/" />
-  <Navigator position="bottom" link="/third" />
+  <Navigator position="bottom" link="/blog" />
 {/if}
 
-{#if pathname === '/third'}
+{#if pathname === '/blog'}
   <Navigator position="top" link="/projects" />
 {/if}

@@ -2,6 +2,8 @@
   import { writable } from 'svelte/store';
   import { Header, Gradient, MenuOverlay, Navigation, Socials } from '$comp';
   import '../app.css';
+  import { onMount } from 'svelte';
+  import { preloadCode } from '$app/navigation';
 
   export let data;
 
@@ -10,6 +12,30 @@
   function toggleMenu() {
     isMenuOpen.update((n) => !n);
   }
+
+  const navItems: NavigationItems = [
+    {
+      title: 'Home',
+      route: '/'
+    },
+    {
+      title: 'Projects',
+      route: '/projects'
+    },
+    {
+      title: 'Blog',
+      route: '/blog'
+    },
+    {
+      title: 'Fourth',
+      route: '/blog/fourth'
+    }
+  ];
+
+  onMount(() => {
+    const navRoutes = navItems.map((item) => item.route);
+    preloadCode(...navRoutes);
+  });
 
   $: pathname = data.url;
 </script>
@@ -20,7 +46,7 @@
   <Socials />
 
   {#if $isMenuOpen}
-    <MenuOverlay onClick={toggleMenu} />
+    <MenuOverlay {navItems} onClick={toggleMenu} />
   {/if}
 
   <slot />

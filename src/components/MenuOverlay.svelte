@@ -3,13 +3,8 @@
   import { blur } from 'svelte/transition';
   import MenuOverlayLink from './MenuOverlayLink.svelte';
 
+  export let navItems: NavigationItems;
   export let onClick: () => void;
-
-  const links = [
-    { path: '/', text: 'Home' },
-    { path: '/projects', text: 'Projects' },
-    { path: 'third', text: 'Blog' }
-  ];
 </script>
 
 <div
@@ -18,8 +13,8 @@
   class="fixed inset-0 bg-gradient-to-br to-cyan-500 from-blue-700 flex items-center justify-center p-4 z-40"
 >
   <div class="flex flex-col" data-sveltekit-preload-data="tap" data-sveltekit-preload-code="tap">
-    {#each links as link}
-      <MenuOverlayLink {onClick} link={link.path} linkText={link.text} />
+    {#each navItems as item}
+      <MenuOverlayLink {onClick} link={item.route} linkText={item.title} />
     {/each}
   </div>
 </div>

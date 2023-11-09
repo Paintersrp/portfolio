@@ -1,4 +1,5 @@
 export { default as AnimatedText } from './AnimatedText.svelte';
+export { default as BlogContent } from './BlogContent.svelte';
 export { default as Content } from './Content.svelte';
 export { default as Gradient } from './Gradient.svelte';
 export { default as Header } from './Header.svelte';

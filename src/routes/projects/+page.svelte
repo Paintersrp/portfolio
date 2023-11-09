@@ -1,18 +1,32 @@
 <script lang="ts">
-  import { writable } from 'svelte/store';
+  import { slide } from 'svelte/transition';
+  import { sineOut } from 'svelte/easing';
+  import type { NavigationTarget } from '@sveltejs/kit';
+  import { writable, type Writable } from 'svelte/store';
   import { afterNavigate, beforeNavigate } from '$app/navigation';
   import { projectsDirIn, projectsDirOut } from '$lib/stores';
   import { Content } from '$comp';
-
   import { projects } from './const';
-  import { updateTransitionDirections } from './utils';
-  import { slide } from 'svelte/transition';
-  import { sineOut } from 'svelte/easing';
 
   const selectedProject = writable<Project>(projects[0]);
 
   const selectProject = (project: Project) => {
     $selectedProject = project;
+  };
+
+  const updateTransitionDirections = (
+    to: NavigationTarget | null,
+    directionStore: Writable<number>
+  ) => {
+    if (to) {
+      const route = to.route.id;
+
+      if (route === '/') {
+        directionStore.set(750);
+      } else if (route === '/blog') {
+        directionStore.set(-750);
+      }
+    }
   };
 
   beforeNavigate(({ to }) => {
@@ -29,6 +43,7 @@
     class="flex h-full w-full max-w-5xl mx-auto rounded-2xl shadow-xl overflow-hidden p-3"
     style="background: rgba(255, 255, 255, 0.05);"
   >
+    <!-- Sidebar Project Selection -->
     <aside class="w-1/3 lg:w-1/3 overflow-y-auto pr-2 text-white hidden md:block">
       <nav class="space-y-2">
         {#each projects as project (project.id)}
@@ -42,7 +57,6 @@
               ? 'background: rgba(255, 255, 255, 0.3);'
               : 'background: rgba(255, 255, 255, 0.1);'}
           >
-            <!-- Project Image and Title -->
             <img
               src={project.imgUrl}
               alt={project.title}
@@ -57,7 +71,7 @@
       </nav>
     </aside>
 
-    <!-- Main Content with Project Details -->
+    <!-- Project Showcase -->
     <div class="w-full">
       {#key $selectedProject}
         <section

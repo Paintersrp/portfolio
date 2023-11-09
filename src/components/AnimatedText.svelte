@@ -9,7 +9,7 @@
   export let duration: number = 1500;
 
   let index = 0;
-  let roller: any;
+  let roller: NodeJS.Timeout;
   let height: string | null = null;
 
   onMount(() => {
@@ -46,6 +46,3 @@
     </h1>
   {/key}
 </div>
-
-<style>
-</style>
