@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
 declare global {
@@ -20,8 +21,38 @@ declare global {
     liveDemo: string;
   };
 
+  type Skill = { text: string; icon: IconType };
+
   type IconSize = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
-  type IconType = 'github' | 'twitter' | 'linkedin' | 'email' | 'down' | 'up';
+  type IconType =
+    | 'analysis'
+    | 'babel'
+    | 'code'
+    | 'css'
+    | 'database'
+    | 'django'
+    | 'docker'
+    | 'down'
+    | 'email'
+    | 'engineer'
+    | 'express'
+    | 'flask'
+    | 'github'
+    | 'html'
+    | 'javascript'
+    | 'koa'
+    | 'landscape'
+    | 'linkedin'
+    | 'node'
+    | 'python'
+    | 'react'
+    | 'right'
+    | 'sass'
+    | 'svelte'
+    | 'twitter'
+    | 'up'
+    | 'vue'
+    | 'webpack';
 
   interface Social {
     name: IconType;
@@ -41,6 +72,28 @@ declare global {
     title: string;
     date: Date;
   }
+
+  interface Post {
+    title: string;
+    excerpt: string;
+    date: Date;
+    updated: Date;
+    coverImage: string;
+    coverWidth: number;
+    coverHeight: number;
+    categories: string[];
+
+    PostContent: any;
+  }
+
+  declare namespace svelteHTML {
+    interface HTMLAttributes {
+      'on:intersecting'?: (event: CustomEvent<IntersectionObserverEntry>) => any;
+      'on:mutate'?: (event: CustomEvent<MutationRecord[]>) => any;
+    }
+  }
+
+  IntersectingEventTarget = EventTarget & { classList: string };
 }
 
 export {};

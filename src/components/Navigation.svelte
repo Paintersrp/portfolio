@@ -4,9 +4,9 @@
   export let pathname: string;
 </script>
 
-{#if pathname === '/'}
+<!-- {#if pathname === '/'}
   <Navigator position="bottom" link="/projects" />
-{/if}
+{/if} -->
 
 {#if pathname === '/projects'}
   <Navigator position="top" link="/" />

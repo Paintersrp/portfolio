@@ -1,6 +1,7 @@
 export const projects = [
   {
     id: 1,
+    date: '11/10/2021',
     title: 'Personal Blog',
     description: 'Dive into my personal musings on life, technology, and continuous learning.',
     details:
@@ -13,6 +14,7 @@ export const projects = [
   },
   {
     id: 2,
+    date: '11/11/2021',
     title: 'Basketball Predictor',
     description:
       'Harnessing the power of machine learning to forecast sports event results with enhanced accuracy.',
@@ -26,6 +28,7 @@ export const projects = [
   },
   {
     id: 3,
+    date: '11/12/2021',
     title: 'Sales Forecaster',
     description: 'Optimize your inventory with our AI-powered sales forecasting tool.',
     details:
@@ -38,6 +41,7 @@ export const projects = [
   },
   {
     id: 4,
+    date: '11/13/2021',
     title: 'API Gateway',
     description: 'A robust API gateway to streamline your services and data flow.',
     details:

@@ -4,6 +4,8 @@
 
   export let data;
 
+  console.log(data);
+
   const { title, excerpt, date, updated, coverImage, coverWidth, coverHeight, categories } =
     data.meta;
   const { PostContent } = data;
@@ -13,6 +15,7 @@
   };
 </script>
 
+<!-- SEO -->
 <svelte:head>
   <title>{title}</title>
   <meta data-key="description" name="description" content={excerpt} />
@@ -28,6 +31,7 @@
   <meta property="og:image:height" content={coverHeight} />
   <!-- <meta property="og:image" content="https://yourdomain.com/image_path" /> -->
 </svelte:head>
+
 <Content yIn={750} yOut={750}>
   <article class="flex-grow flex flex-col p-4 md:p-12 space-y-6 max-w-3xl mx-auto mt-16">
     <figure class="flex justify-center">
@@ -47,6 +51,7 @@
       </div>
     </div>
 
+    <!-- Markdown Content as Svelte Component -->
     <div class="prose">
       <svelte:component this={PostContent} />
     </div>

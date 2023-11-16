@@ -1,9 +1,10 @@
 <script lang="ts">
-  import { DownIcon, EmailIcon, LinkedinIcon, GithubIcon, TwitterIcon, UpIcon } from './icons';
+  import * as Icons from './icons';
 
   export let iconClass: string = '';
-  export let size: 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' = 'md';
-  export let type: 'github' | 'twitter' | 'linkedin' | 'email' | 'down' | 'up';
+  export let size: '4xl' | '3xl' | 'xxl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs' | 'xxs' = 'md';
+
+  export let type: IconType;
 
   const sizeMap = {
     xxs: '1rem',
@@ -12,16 +13,40 @@
     md: '1.75rem',
     lg: '2rem',
     xl: '2.25rem',
-    xxl: '2.5rem'
+    xxl: '2.5rem',
+    '3xl': '2.75rem',
+    '4xl': '3rem'
   };
 
   const iconMap = {
-    github: GithubIcon,
-    twitter: TwitterIcon,
-    linkedin: LinkedinIcon,
-    email: EmailIcon,
-    down: DownIcon,
-    up: UpIcon
+    analysis: Icons.AnalysisIcon,
+    babel: Icons.BabelIcon,
+    code: Icons.CodeIcon,
+    css: Icons.CssIcon,
+    database: Icons.DatabaseIcon,
+    django: Icons.DjangoIcon,
+    docker: Icons.DockerIcon,
+    engineer: Icons.EngineerIcon,
+    express: Icons.ExpressIcon,
+    flask: Icons.FlaskIcon,
+    github: Icons.GithubIcon,
+    html: Icons.HtmlIcon,
+    twitter: Icons.TwitterIcon,
+    javascript: Icons.JavascriptIcon,
+    koa: Icons.KoaIcon,
+    landscape: Icons.LandscapeIcon,
+    linkedin: Icons.LinkedinIcon,
+    node: Icons.NodeIcon,
+    python: Icons.PythonIcon,
+    react: Icons.ReactIcon,
+    right: Icons.RightIcon,
+    sass: Icons.SassIcon,
+    svelte: Icons.SvelteIcon,
+    email: Icons.EmailIcon,
+    down: Icons.DownIcon,
+    up: Icons.UpIcon,
+    vue: Icons.VueIcon,
+    webpack: Icons.WebpackIcon
   };
 
   $: iconSize = sizeMap[size];

@@ -6,7 +6,7 @@
 </script>
 
 <div
-  class="flex-grow flex flex-col items-center justify-center p-12 md:p-12 space-y-6 max-w-full lg:p-4 mx-auto overflow-x-hidden overflow-y-hidden w-full"
+  class="flex-grow flex flex-col items-center justify-center py-3 md:py-12 space-y-3 md:space-y-6 max-w-full lg:p-4 mx-auto overflow-x-hidden overflow-y-hidden w-full"
   in:fly={{ y: yIn, duration: 500, delay: 700 }}
   out:fly={{ y: yOut, duration: 500 }}
 >

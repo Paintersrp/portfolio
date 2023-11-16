@@ -1,136 +1,187 @@
 <script lang="ts">
-  import { slide } from 'svelte/transition';
-  import { sineOut } from 'svelte/easing';
-  import type { NavigationTarget } from '@sveltejs/kit';
-  import { writable, type Writable } from 'svelte/store';
+  import { inview } from 'svelte-inview';
+
   import { afterNavigate, beforeNavigate } from '$app/navigation';
   import { projectsDirIn, projectsDirOut } from '$lib/stores';
-  import { Content } from '$comp';
+  import { adjustTransition } from '$lib/utils';
   import { projects } from './const';
+  import { Content } from '$comp';
 
-  const selectedProject = writable<Project>(projects[0]);
+  const routesAbove = ['/'];
+  const routesBelow = ['/blog'];
 
-  const selectProject = (project: Project) => {
-    $selectedProject = project;
-  };
+  let projectsData = projects.map((project) => ({ ...project, isVisible: false }));
 
-  const updateTransitionDirections = (
-    to: NavigationTarget | null,
-    directionStore: Writable<number>
-  ) => {
-    if (to) {
-      const route = to.route.id;
-
-      if (route === '/') {
-        directionStore.set(750);
-      } else if (route === '/blog') {
-        directionStore.set(-750);
-      }
-    }
-  };
-
+  //* Changes the out direction of the overall application page transition based on the route
   beforeNavigate(({ to }) => {
-    updateTransitionDirections(to, projectsDirOut);
+    adjustTransition(to, projectsDirOut, routesAbove, routesBelow);
   });
 
+  //* Changes the in direction of the overall application page transition based on the route
   afterNavigate(({ to }) => {
-    updateTransitionDirections(to, projectsDirIn);
+    adjustTransition(to, projectsDirIn, routesAbove, routesBelow);
   });
+
+  // Flips the marker position based on whether the index is even or odd
+  function markerClass(index: number) {
+    return index % 2 === 0 ? 'right-[-30px] lg:right-[-40px]' : 'left-[-30px] lg:left-[-40px]';
+  }
+
+  function handleProjectInView(event: CustomEvent<ObserverEventDetails>, index: number) {
+    projectsData = projectsData.map((project, idx) => {
+      // Check if index matches the triggered index and adjusts the isVisible state
+      if (idx === index) {
+        return { ...project, isVisible: event.detail.inView };
+      }
+
+      // Otherwise return as is
+      return project;
+    });
+  }
 </script>
 
 <Content yIn={$projectsDirIn} yOut={$projectsDirOut}>
-  <div
-    class="flex h-full w-full max-w-5xl mx-auto rounded-2xl shadow-xl overflow-hidden p-3"
-    style="background: rgba(255, 255, 255, 0.05);"
-  >
-    <!-- Sidebar Project Selection -->
-    <aside class="w-1/3 lg:w-1/3 overflow-y-auto pr-2 text-white hidden md:block">
-      <nav class="space-y-2">
-        {#each projects as project (project.id)}
-          <button
-            on:click={() => selectProject(project)}
-            disabled={project.id === $selectedProject.id}
-            class={`group w-full text-left flex items-center p-3 transition-colors duration-150 rounded-lg ${
-              project.id === $selectedProject.id ? '' : 'hover:!bg-cyan-700'
-            } ${project.id === $selectedProject.id ? '' : 'hover:!bg-opacity-25'}`}
-            style={project.id === $selectedProject.id
-              ? 'background: rgba(255, 255, 255, 0.3);'
-              : 'background: rgba(255, 255, 255, 0.1);'}
-          >
-            <img
-              src={project.imgUrl}
-              alt={project.title}
-              class="w-14 h-14 object-cover rounded-lg mr-3"
-            />
-            <div>
-              <h3 class="font-semibold text-sm">{project.title}</h3>
-              <p class="text-xs">{project.technologies.join(', ')}</p>
-            </div>
-          </button>
-        {/each}
-      </nav>
-    </aside>
+  <div class="container mx-auto px-4 py-10">
+    <div class="relative">
+      <div
+        class="absolute left-1/2 transform -translate-x-1/2 w-[3px] bg-cyan-100 h-full hidden lg:block"
+      />
 
-    <!-- Project Showcase -->
-    <div class="w-full">
-      {#key $selectedProject}
-        <section
-          class="flex flex-col justify-center text-white"
-          in:slide={{ duration: 400, easing: sineOut }}
-          out:slide={{ duration: 400, easing: sineOut }}
+      {#each projectsData as project, index (index)}
+        <div
+          use:inview={{ threshold: 0.75, unobserveOnEnter: true }}
+          on:inview_change={(event) => handleProjectInView(event, index)}
         >
-          <div class="bg-white bg-opacity-10 rounded-lg p-6 space-y-4">
-            <img
-              class="w-2/3 h-64 object-cover rounded-lg shadow mx-auto"
-              src={$selectedProject.imgUrl}
-              alt={$selectedProject.title}
-            />
-            <h1 class="text-3xl font-bold text-center accent-color">{$selectedProject.title}</h1>
-            <p class="text-base">{$selectedProject.details}</p>
-            <div class="flex justify-center space-x-4 mt-6">
-              <a
-                href={$selectedProject.repoUrl}
-                class="px-4 py-2 text-sm font-bold rounded-md bg-cyan-700 bg-opacity-25 hover:bg-cyan-900 hover:bg-opacity-25 shadow-md"
-              >
-                GitHub
-              </a>
-              <a
-                href={$selectedProject.liveDemo}
-                class="px-4 py-2 text-sm font-bold rounded-md bg-cyan-700 bg-opacity-25 hover:bg-cyan-900 hover:bg-opacity-25 shadow-md"
-              >
-                Live Demo
-              </a>
+          <div
+            class:left-in={project.isVisible && index % 2 === 0}
+            class:left-out={!project.isVisible && index % 2 === 0}
+            class:right-in={project.isVisible && index % 2 === 1}
+            class:right-out={!project.isVisible && index % 2 === 1}
+            class={`timeline-item rounded-lg shadow-lg ${index % 2 === 0 ? 'left' : 'right'} `}
+          >
+            <div
+              class={`absolute top-0 w-20 h-10 bg-cyan-700 text-white flex items-center justify-center text-xs rounded-lg font-bold ${markerClass(
+                index
+              )}`}
+              style="transform: translateY(-50%);"
+            >
+              <time>{project.date}</time>
             </div>
-          </div>
+            <div
+              class="content bg-white bg-opacity-20 text-white shadow-lg rounded-lg p-4 transform transition duration-500"
+            >
+              <div class="img-container mb-4">
+                <img src={project.imgUrl} alt={project.title} class="object-cover rounded-lg" />
+              </div>
+              <h3 class="text-lg font-bold mb-3">{project.title}</h3>
+              <p class="mb-4">{project.description}</p>
 
-          <div class="grid grid-cols-2 gap-4 mt-2">
-            <div class="bg-white bg-opacity-10 rounded-lg p-6">
-              <h2 class="text-2xl font-semibold mb-4 text-cyan-100 text-center">Features</h2>
-              <div class="flex flex-wrap gap-2">
-                {#each $selectedProject.features as feature}
-                  <span
-                    class="bg-cyan-900 bg-opacity-25 text-cyan-100 rounded-full px-4 py-1 text-xs font-medium"
-                    >{feature}</span
-                  >
-                {/each}
+              <div class="flex justify-evenly w-full gap-4">
+                <div class="tech-features mb-4">
+                  <h4 class="text-md font-semibold text-center mb-1">Features</h4>
+                  <ul class="list-disc list-inside">
+                    {#each project.features as feature}
+                      <li>{feature}</li>
+                    {/each}
+                  </ul>
+                </div>
+                <div class="tech-features mb-4">
+                  <h4 class="text-md font-semibold text-center mb-1">Technologies</h4>
+                  <ul class="list-disc list-inside">
+                    {#each project.technologies as tech}
+                      <li>{tech}</li>
+                    {/each}
+                  </ul>
+                </div>
+              </div>
+              <div class="flex justify-between">
+                <a
+                  href={project.repoUrl}
+                  class="px-2 md:px-4 my-auto py-2 text-xs md:text-sm font-bold rounded-md bg-cyan-700 bg-opacity-75 hover:bg-cyan-900 hover:bg-opacity-75 shadow-md"
+                  >GitHub</a
+                >
+                <a
+                  href={project.liveDemo}
+                  class="px-2 md:px-4 my-auto py-2 text-xs md:text-sm font-bold rounded-md bg-cyan-700 bg-opacity-75 hover:bg-cyan-900 hover:bg-opacity-75 shadow-md"
+                  >Live Demo</a
+                >
               </div>
             </div>
-
-            <div class="bg-white bg-opacity-10 rounded-lg p-6">
-              <h2 class="text-2xl font-semibold mb-4 text-cyan-100 text-center">Technologies</h2>
-              <div class="flex flex-wrap gap-2">
-                {#each $selectedProject.technologies as technology}
-                  <span
-                    class="bg-cyan-900 bg-opacity-25 text-cyan-100 rounded-full px-4 py-1 text-xs font-medium"
-                  >
-                    {technology}
-                  </span>
-                {/each}
-              </div>
-            </div>
           </div>
-        </section>
-      {/key}
+        </div>
+      {/each}
     </div>
   </div>
 </Content>
+
+<style>
+  .timeline {
+    position: relative;
+    padding: 0;
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 80px;
+    width: calc(50% - 20px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &.left {
+      left: calc(0% - 35px);
+    }
+
+    &.right {
+      left: calc(50% + 55px);
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .timeline-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .content {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 25px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .img-container {
+    max-height: 250px;
+    overflow: hidden;
+  }
+
+  @media (max-width: 768px) {
+    .timeline-item {
+      width: 100%;
+      left: 0 !important;
+    }
+
+    .timeline:before {
+      left: 20px;
+    }
+  }
+
+  .left-in {
+    animation: enter-left-flip-right 0.75s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  }
+
+  .left-out {
+    animation: exit-left-flip-left 0.75s cubic-bezier(0.47, 0, 0.745, 0.715) both;
+  }
+
+  .right-in {
+    animation: enter-right-flip-left 0.75s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  }
+
+  .right-out {
+    animation: exit-right-flip-right 0.75s cubic-bezier(0.47, 0, 0.745, 0.715) both;
+  }
+</style>

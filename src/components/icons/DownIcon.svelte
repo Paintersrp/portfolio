@@ -5,6 +5,7 @@
 <svg
   xmlns="http://www.w3.org/2000/svg"
   height={iconSize}
+  width={iconSize}
   fill="currentColor"
   viewBox="0 -960 960 960"
 >
