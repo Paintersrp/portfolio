@@ -21,7 +21,7 @@ const config = {
   preprocess: [vitePreprocess(), mdsvex(mdsvexOptions)],
 
   kit: {
-    adapter: adapter({ runtime: 'nodejs18.x' }),
+    adapter: adapter({ runtime: 'edge' }),
     alias: {
       $comp: 'src/components'
     }
