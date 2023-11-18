@@ -21,7 +21,13 @@ declare global {
     liveDemo: string;
   };
 
-  type Skill = { text: string; icon: IconType };
+  type Skill = {
+    text: string;
+    icon: IconType;
+    progress: string;
+    isExpanded: boolean;
+    description: string;
+  };
 
   type IconSize = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
   type IconType =

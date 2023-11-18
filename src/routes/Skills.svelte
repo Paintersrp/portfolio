@@ -3,16 +3,16 @@
   import { sineOut } from 'svelte/easing';
   import { blur } from 'svelte/transition';
 
-  import { backendSkills, frontendSkills, generalSkills } from './skills';
-  import Icon from '$comp/Icon.svelte';
+  import { backendSkills, frontendSkills, generalSkills } from '$lib/const';
+  import { Icon } from '$comp';
 
   let combinedSkills = [...frontendSkills, ...backendSkills, ...generalSkills];
 
-  function toggleSkill(toggledSkill: any) {
+  const toggleSkill = (toggledSkill: Skill) => {
     combinedSkills = combinedSkills.map((skill) => {
       return skill.text === toggledSkill.text ? { ...skill, isExpanded: !skill.isExpanded } : skill;
     });
-  }
+  };
 </script>
 
 <section id="skills" class="w-screen pt-16 px-16 text-white py-10">

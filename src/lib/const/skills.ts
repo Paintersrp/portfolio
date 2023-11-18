@@ -1,20 +1,3 @@
-export const skills = [
-  'TypeScript',
-  'Python',
-  'React',
-  'Svelte',
-  'Backend Systems',
-  'Cloud Services',
-  'Database Management',
-  'RESTful & GraphQL APIs',
-  'Progressive Web Apps',
-  'Machine Learning',
-  'Data Engineering',
-  'Data Visualization'
-];
-
-// 1
-
 export const generalSkills: {
   text: string;
   icon: IconType;

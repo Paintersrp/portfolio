@@ -1,6 +1,6 @@
 <script lang="ts">
   import { inview } from 'svelte-inview';
-  import { projects } from './projects/const';
+  import { projects } from '$lib/const';
 
   let projectsData = projects.map((project) => ({ ...project, isVisible: false }));
 

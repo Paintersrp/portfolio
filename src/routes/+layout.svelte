@@ -68,6 +68,7 @@
 <main
   class="flex flex-col bg-gradient-to-l from-cyan-500 to-blue-600 min-h-screen overflow-x-hidden overflow-y-hidden w-full"
 >
+  <!-- Application Header -->
   <header class="p-1 fixed top-0 right-0 justify-end z-50">
     <MenuIcon open={$isMenuOpen} onClick={toggleMenu} />
   </header>
@@ -96,11 +97,7 @@
       out:blur={{ easing: sineIn, amount: 15, duration: 300 }}
       class="fixed inset-0 bg-gradient-to-l to-cyan-500 from-blue-600 flex items-center justify-center p-4 z-40"
     >
-      <div
-        class="flex flex-col"
-        data-sveltekit-preload-data="tap"
-        data-sveltekit-preload-code="tap"
-      >
+      <div class="flex flex-col">
         {#each navItems as item}
           <button
             on:click={() => navigateToSection(item.route)}
@@ -115,4 +112,6 @@
 
   <!-- Page Slot -->
   <slot />
+
+  <!-- Footer ? -->
 </main>

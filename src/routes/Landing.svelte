@@ -1,6 +1,20 @@
 <script lang="ts">
   import { AnimatedText } from '$comp';
-  import { skills } from './skills';
+
+  export const messagesToAnimate = [
+    'TypeScript',
+    'Python',
+    'React',
+    'Svelte',
+    'Backend Systems',
+    'Cloud Services',
+    'Database Management',
+    'RESTful & GraphQL APIs',
+    'Progressive Web Apps',
+    'Machine Learning',
+    'Data Engineering',
+    'Data Visualization'
+  ];
 </script>
 
 <section
@@ -25,7 +39,7 @@
       </p>
     </div>
     <div class="container text-in-blur min-h-[50px]">
-      <AnimatedText messages={skills} textClass="text-2xl md:text-5xl font-bold" />
+      <AnimatedText messages={messagesToAnimate} textClass="text-2xl md:text-5xl font-bold" />
     </div>
   </header>
 </section>
