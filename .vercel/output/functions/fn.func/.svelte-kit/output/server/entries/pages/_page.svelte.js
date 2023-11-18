@@ -1,6 +1,5 @@
-import { c as create_ssr_component, o as onDestroy, a as add_attribute, d as escape, e as each, n as null_to_empty, v as validate_component } from "../../chunks/ssr.js";
-import { C as Content } from "../../chunks/Content.js";
-/* empty css                                                   */import { I as Icon } from "../../chunks/Icon.js";
+import { c as create_ssr_component, o as onDestroy, a as add_attribute, d as escape, e as each, h as null_to_empty, v as validate_component } from "../../chunks/ssr.js";
+import { I as Icon } from "../../chunks/Scroller.svelte_svelte_type_style_lang.js";
 const AnimatedText = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { messages } = $$props;
   let { textClass = "" } = $$props;
@@ -23,6 +22,15 @@ const ChevronArrow = create_ssr_component(($$result, $$props, $$bindings, slots)
   if ($$props.point === void 0 && $$bindings.point && point !== void 0)
     $$bindings.point(point);
   return `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"${add_attribute("class", `w-10 h-10 accent-color-hover ${point === "up" ? "rotate-180" : ""}`, 0)}><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>`;
+});
+const Content = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let { yIn } = $$props;
+  let { yOut } = $$props;
+  if ($$props.yIn === void 0 && $$bindings.yIn && yIn !== void 0)
+    $$bindings.yIn(yIn);
+  if ($$props.yOut === void 0 && $$bindings.yOut && yOut !== void 0)
+    $$bindings.yOut(yOut);
+  return `<div class="flex-grow flex flex-col items-center justify-center py-3 md:py-12 space-y-3 md:space-y-6 max-w-full lg:p-4 mx-auto overflow-x-hidden overflow-y-hidden w-full">${slots.default ? slots.default({}) : ``}</div>`;
 });
 Promise.resolve();
 const projects = [

@@ -1,9 +1,8 @@
 import { c as create_ssr_component, a as add_attribute, b as subscribe, v as validate_component, e as each, d as escape } from "../../chunks/ssr.js";
-import { w as writable } from "../../chunks/index2.js";
-import { I as Icon } from "../../chunks/Icon.js";
-/* empty css                                                   */const app = "";
+import { w as writable } from "../../chunks/index.js";
+import { I as Icon } from "../../chunks/Scroller.svelte_svelte_type_style_lang.js";
+const app = "";
 const keyframes = "";
-const prose = "";
 function mediaQueryStore(query) {
   const store = writable(false);
   return { subscribe: store.subscribe };

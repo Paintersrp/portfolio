@@ -1,7 +1,6 @@
 <script lang="ts">
   import '$lib/styles/app.css';
   import '$lib/styles/keyframes.css';
-  import '$lib/styles/prose.css';
 
   import { writable } from 'svelte/store';
   import { onMount } from 'svelte';

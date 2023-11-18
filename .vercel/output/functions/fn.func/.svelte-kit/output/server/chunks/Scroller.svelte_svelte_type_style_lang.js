@@ -239,6 +239,8 @@ const Icon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   icon = iconMap[type];
   return `<figure${add_attribute("class", `${iconClass}`, 0)}>${validate_component(icon || missing_component, "svelte:component").$$render($$result, { iconSize }, {}, {})}</figure>`;
 });
+const MenuIcon_svelte_svelte_type_style_lang = "";
+const Scroller_svelte_svelte_type_style_lang = "";
 export {
   Icon as I
 };
