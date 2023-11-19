@@ -24,7 +24,6 @@ declare global {
   type Skill = {
     text: string;
     icon: IconType;
-    progress: string;
     isExpanded: boolean;
     description: string;
   };

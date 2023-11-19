@@ -89,6 +89,12 @@
   animation: text-in-expand-blur 2s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
 }
 
+@media (max-width: 768px) {
+  .text-in-expand {
+    animation: none;
+  }
+}
+
 /* Blurs Text (Enter) */
 @keyframes text-in-blur {
   0% {

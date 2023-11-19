@@ -1,2 +1,2 @@
 export { projects } from './projects';
-export { backendSkills, frontendSkills, generalSkills } from './skills';
+export { generalSkills } from './skills';

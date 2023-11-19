@@ -11,10 +11,28 @@
   import { scrollToSection } from '$lib/utils';
   import { mediaQueryStore } from '$lib/stores';
   import { MenuIcon, Icon } from '$comp';
-  import { navItems } from '$lib/const/nav.js';
 
   // Preloaded data from +layout.server.ts
   export let data;
+
+  export const navItems: NavigationItems = [
+    {
+      title: 'Landing',
+      route: 'landing'
+    },
+    {
+      title: 'About',
+      route: 'about'
+    },
+    {
+      title: 'Projects',
+      route: 'projects'
+    }
+    // {
+    //   title: 'Blog',
+    //   route: '/blog'
+    // }
+  ];
 
   const socials: Socials = [
     { name: 'github', url: 'https://github.com/' },
@@ -42,7 +60,7 @@
     preloadCode(...navRoutes);
   });
 
-  $: iconSize = $small ? 'sm' : 'lg';
+  $: iconSize = $small ? 'sm' : 'md';
   $: pathname = data.url;
 </script>
 
@@ -58,7 +76,7 @@
 
   <!-- Social Aside -->
   <aside
-    class="fixed top-1/2 right-0 transform -translate-y-1/2 md:flex flex-col items-center space-y-3 md:space-y-4 p-2 md:p-4 bg-opacity-20 bg-white rounded-l-lg z-50 hidden"
+    class="fixed top-1/2 right-0 transform -translate-y-1/2 md:flex flex-col items-center space-y-3 md:space-y-4 p-2 md:p-3 bg-opacity-20 bg-white rounded-l-lg z-50 hidden"
   >
     {#each socials as social}
       <a href={social.url} class="" target="_blank" rel="noopener noreferrer" title={social.name}>
