@@ -26,7 +26,7 @@
   <div class="skills-grid">
     {#each combinedSkills as skill (skill.text)}
       <button
-        animate:flip={{ duration: 300, easing: sineOut }}
+        animate:flip={{ duration: 400, easing: sineOut }}
         class="skill-card bg-white bg-opacity-20 p-4 rounded-lg shadow-md flex flex-col items-center cursor-pointer transition duration-300 ease-in-out hover:shadow-xl hover:bg-opacity-30 relative"
         class:expanded={skill.isExpanded}
         on:click={() => toggleSkill(skill)}
@@ -55,8 +55,32 @@
     padding: 0 var(--_space) var(--_space);
     display: grid;
     gap: var(--_space);
-    grid-template-columns: repeat(auto-fill, minmax(14.28%, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(12.5%, 1fr));
     grid-auto-rows: minmax(100px, auto);
+  }
+
+  @media (max-width: 1200px) {
+    .skills-grid {
+      grid-template-columns: repeat(auto-fill, minmax(14.28%, 1fr));
+    }
+  }
+
+  @media (max-width: 980px) {
+    .skills-grid {
+      grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
+    }
+  }
+
+  @media (max-width: 768px) {
+    .skills-grid {
+      grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
+    }
+  }
+
+  @media (max-width: 600px) {
+    .skills-grid {
+      grid-template-columns: repeat(auto-fill, minmax(33%, 1fr));
+    }
   }
 
   .skill-card {

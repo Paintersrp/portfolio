@@ -11,28 +11,10 @@
   import { scrollToSection } from '$lib/utils';
   import { mediaQueryStore } from '$lib/stores';
   import { MenuIcon, Icon } from '$comp';
+  import { navItems } from '$lib/const/nav.js';
 
   // Preloaded data from +layout.server.ts
   export let data;
-
-  const navItems: NavigationItems = [
-    {
-      title: 'Landing',
-      route: 'landing'
-    },
-    {
-      title: 'About',
-      route: 'about'
-    },
-    {
-      title: 'Projects',
-      route: 'projects'
-    },
-    {
-      title: 'Blog',
-      route: '/blog'
-    }
-  ];
 
   const socials: Socials = [
     { name: 'github', url: 'https://github.com/' },
