@@ -10,28 +10,24 @@
   import { preloadCode } from '$app/navigation';
   import { scrollToSection } from '$lib/utils';
   import { mediaQueryStore } from '$lib/stores';
-  import { MenuIcon, Icon } from '$comp';
+  import { MenuIcon } from '$comp';
 
   // Preloaded data from +layout.server.ts
   export let data;
 
   export const navItems: NavigationItems = [
     {
-      title: 'Landing',
+      title: 'Nothing',
       route: 'landing'
     },
     {
-      title: 'About',
+      title: 'Here',
       route: 'about'
     },
     {
-      title: 'Projects',
+      title: 'Yet :)',
       route: 'projects'
     }
-    // {
-    //   title: 'Blog',
-    //   route: '/blog'
-    // }
   ];
 
   const socials: Socials = [
@@ -94,8 +90,13 @@
     <div
       in:blur={{ easing: sineOut, amount: 15, duration: 300 }}
       out:blur={{ easing: sineIn, amount: 15, duration: 300 }}
-      class="fixed inset-0 bg-gradient-to-l to-cyan-500 from-blue-600 flex items-center justify-center p-4 z-40"
+      class="fixed inset-0 flex items-center bg-[#1d1d20] justify-center p-4 z-40"
     >
+      <!-- <div
+      in:blur={{ easing: sineOut, amount: 15, duration: 300 }}
+      out:blur={{ easing: sineIn, amount: 15, duration: 300 }}
+      class="fixed inset-0 bg-gradient-to-l to-cyan-500 from-blue-600 flex items-center justify-center p-4 z-40"
+    > -->
       <div class="flex flex-col">
         {#each navItems as item}
           <button
