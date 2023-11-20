@@ -1,11 +1,10 @@
 <script lang="ts">
-  import {} from '$comp';
   import { flip } from 'svelte/animate';
   import { sineOut } from 'svelte/easing';
 
-  import { generalSkills, projects } from '$lib/const';
-  import { mediaQueryStore } from '$lib/stores';
-  import { AnimatedText, Icon } from '$comp';
+  import { _projects } from '$lib/const';
+  import { AnimatedText } from '$comp';
+  import Icon from '$comp/Icon.svelte';
 
   const messagesToAnimate = [
     'TypeScript',
@@ -22,20 +21,52 @@
     'Data Visualization'
   ];
 
-  const small = mediaQueryStore('(max-width: 600px)');
+  const skills: { id: number; title: string; items: { text: string; icon?: IconType }[] }[] = [
+    {
+      id: 1,
+      title: 'Languages',
+      items: [
+        { text: 'JavaScript', icon: 'javascript' },
+        { text: 'TypeScript', icon: 'typescript' },
+        { text: 'Python', icon: 'python' },
+        { text: 'Rust', icon: 'rust' },
+        { text: 'Java', icon: 'java' }
+      ]
+    },
+    {
+      id: 2,
+      title: 'Frameworks',
+      items: [
+        { text: 'React', icon: 'react' },
+        { text: 'Svelte', icon: 'svelte' },
+        { text: 'Vue', icon: 'vue' },
+        { text: 'Express', icon: 'express' },
+        { text: 'Koa', icon: 'koa' },
+        { text: 'Django', icon: 'django' },
+        { text: 'Flask', icon: 'flask' },
+        { text: 'Wordpress', icon: 'wordpress' }
+      ]
+    },
+    {
+      id: 3,
+      title: 'Machine Learning',
+      items: [
+        { text: 'Regression', icon: 'regression' },
+        { text: 'Forecasting', icon: 'forecasting' },
+        { text: 'Deep Learning', icon: 'deeplearning' }
+      ]
+    }
+  ];
 
-  let iconSize: IconSize;
-  let _projects = projects;
+  let projects = _projects;
 
   const toggleSkill = (toggledSkill: Project) => {
-    _projects = _projects.map((project) => {
+    projects = projects.map((project) => {
       return project.title === toggledSkill.title
         ? { ...project, isExpanded: !project.isExpanded }
         : project;
     });
   };
-
-  $: iconSize = $small ? 'md' : 'lg';
 </script>
 
 <div class="w-full">
@@ -59,37 +90,55 @@
 </div>
 
 <div class="w-full text-amber-300">
-  <section class="section background">
-    <div class="section__title">Background</div>
-    <div class="section__content">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, sint ex, similique facere
-      sequi accusamus assumenda tempore nulla dignissimos a facilis excepturi magni consequatur
-      necessitatibus deleniti vero odio earum praesentium. Natus repellendus deserunt laborum
-      dolores a unde ipsum neque nostrum voluptates sapiente, facilis in cum, provident veniam enim
-      corporis similique!
-      <br />
-      <br />
+  <section
+    class="w-full block justify-center text-white px-9 py-12 2xl:px-44 xl:px-24 xl:py-24 lg:py-12 lg:px-12 md:flex"
+  >
+    <div
+      class="flex-shrink-0 uppercase text-left md:text-right w-auto md:w-[150px] lg:w-[200px] xl:w-[200px] xl:mr-[70px] mr-[50px] font-bold tracking-widest accent-color"
+    >
+      Background
+    </div>
+    <div
+      class="font-light text-base max-w-[650px] w-full pt-7 sm:pt-7 md:pt-0 pl-7 sm:pl-7 md:pl-12 lg:pl-0"
+    >
+      <p class="mt-0 mb-6 text-gray-300">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, sint ex, similique facere
+        sequi accusamus assumenda tempore nulla dignissimos a facilis excepturi magni consequatur
+        necessitatibus deleniti vero odio earum praesentium. Natus repellendus deserunt laborum
+        dolores a unde ipsum neque nostrum voluptates sapiente, facilis in cum, provident veniam
+        enim corporis similique!
+      </p>
+      <p class="mt-0 mb-6 text-gray-300">
+        Lorem ipsum dolor sit amet <a href="/" class="underline-link text-white">consectetur</a>,
+        adipisicing elit. Repellendus veritatis optio odio eveniet vel, quia quod. Consectetur,
+        maiores cumque? Animi provident officiis veniam in minus natus assumenda veritatis incidunt
+        aliquid.
+      </p>
 
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus veritatis optio odio
-      eveniet vel, quia quod. Consectetur, maiores cumque? Animi provident officiis veniam in minus
-      natus assumenda veritatis incidunt aliquid.
-      <br />
-      <br />
-
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel ratione et consectetur rem
-      temporibus nulla?
+      <p class="mt-0 mb-6 text-gray-300">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel ratione et consectetur rem
+        temporibus nulla?
+      </p>
     </div>
   </section>
-  <section class="section background">
-    <div class="section__title">Projects</div>
-    <div class="section__content">
+  <section
+    class="w-full block justify-center text-white px-9 py-12 2xl:px-44 xl:px-24 xl:py-24 lg:py-12 lg:px-12 md:flex"
+  >
+    <div
+      class="flex-shrink-0 uppercase text-left md:text-right w-auto md:w-[150px] lg:w-[200px] xl:w-[200px] xl:mr-[70px] mr-[50px] font-bold tracking-widest accent-color"
+    >
+      Projects
+    </div>
+    <div
+      class="font-light text-base max-w-[650px] w-full pt-7 sm:pt-7 md:pt-0 pl-7 sm:pl-7 md:pl-12 lg:pl-0"
+    >
       <section id="skills" class="w-full text-white">
         <!-- Interactive Grid of Skills, animated by FLIP -->
         <div class="skills-grid">
-          {#each _projects as project (project.id)}
+          {#each projects as project (project.id)}
             <button
               animate:flip={{ duration: 400, easing: sineOut }}
-              class={`skill-card bg-white bg-opacity-20 rounded-lg shadow-md flex flex-col items-center cursor-pointer transition duration-300 ease-in-out hover:shadow-xl hover:bg-opacity-30 relative ${
+              class={`skill-card text-amber-50 bg-white bg-opacity-[5%] rounded-lg shadow-md flex flex-col items-center cursor-pointer transition duration-300 ease-in-out hover:shadow-xl hover:bg-opacity-[10%] relative ${
                 project.isExpanded ? 'justify-center p-6' : 'p-4'
               }`}
               class:expanded={project.isExpanded}
@@ -108,14 +157,14 @@
                 >{project.title}</span
               >
               {#if project.isExpanded}
-                <div class="skill-details faster-in-blur mt-3">
+                <div class="faster-in-blur mt-3 gap-4 !flex">
                   <a
                     on:click={(e) => {
                       e.stopPropagation();
                       console.log('test');
                     }}
                     href={project.repoUrl}
-                    class="px-2 md:px-4 my-auto py-2 text-sm rounded-md bg-amber-300 bg-opacity-80 hover:bg-opacity-70 shadow-md text-white font-semibold"
+                    class="px-2 md:px-4 my-auto py-2 text-sm rounded-md bg-amber-300 bg-opacity-90 hover:bg-opacity-70 shadow-md text-white font-extrabold"
                   >
                     GitHub
                   </a>
@@ -125,7 +174,7 @@
                       console.log('test');
                     }}
                     href={project.liveDemo}
-                    class="px-2 md:px-3 my-auto py-2 text-sm rounded-md bg-amber-300 bg-opacity-80 hover:bg-opacity-70 shadow-md text-white font-semibold"
+                    class="px-2 md:px-4 my-auto py-2 text-sm rounded-md bg-amber-300 bg-opacity-90 hover:bg-opacity-70 shadow-md text-white font-extrabold"
                   >
                     Live Demo
                   </a>
@@ -138,60 +187,113 @@
     </div>
   </section>
 
-  <section class="section background">
-    <div class="section__title">Skills</div>
-    <div class="section__content">
-      <div class="skillz">
-        <div class="skillz__category">
-          <div class="skillz__category__label">Languages</div>
-          <ul>
-            <li class="skillz__category__item">JavaScript</li>
-            <li class="skillz__category__item">TypeScript</li>
-            <li class="skillz__category__item">Python</li>
-            <li class="skillz__category__item">Rust</li>
-            <li class="skillz__category__item">JavaScript</li>
-          </ul>
-        </div>
-        <div class="skillz__category">
-          <div class="skillz__category__label">Frameworks</div>
-          <ul>
-            <li class="skillz__category__item">React</li>
-            <li class="skillz__category__item">Svelte</li>
-            <li class="skillz__category__item">Vue</li>
-            <li class="skillz__category__item">Django</li>
-            <li class="skillz__category__item">Express / Koa</li>
-            <li class="skillz__category__item">Flask</li>
-            <li class="skillz__category__item">Wordpress</li>
-          </ul>
-        </div>
-        <div class="skillz__category">
-          <div class="skillz__category__label">Machine Learning</div>
-          <ul>
-            <li class="skillz__category__item">Regression</li>
-            <li class="skillz__category__item">Forecasting</li>
-            <li class="skillz__category__item" />
-            <li class="skillz__category__item" />
-            <li class="skillz__category__item" />
-          </ul>
-        </div>
+  <section
+    class="w-full block justify-center text-white px-9 py-12 2xl:px-44 xl:px-24 xl:py-24 lg:py-12 lg:px-12 md:flex"
+  >
+    <div
+      class="flex-shrink-0 uppercase text-left md:text-right w-auto md:w-[150px] lg:w-[200px] xl:w-[200px] xl:mr-[70px] mr-[50px] font-bold tracking-widest accent-color"
+    >
+      Skills
+    </div>
+    <div
+      class="font-light text-base max-w-[650px] w-full pt-7 sm:pt-7 md:pt-0 pl-7 sm:pl-7 md:pl-12 lg:pl-0"
+    >
+      <div class="flex justify-between flex-wrap md:flex-nowrap">
+        {#each skills as skillset, index (index)}
+          <div class="mb-6 md:w-[47%]">
+            <div class="text-white font-extrabold uppercase">{skillset.title}</div>
+            <ul>
+              {#each skillset.items as item, index (index)}
+                <li class="my-[6px] text-sm text-gray-300">
+                  <div class="flex gap-3 items-center">
+                    {#if item.icon}
+                      <Icon type={item.icon} size="sm" iconClass="accent-color" />
+                    {/if}
+                    {item.text}
+                  </div>
+                </li>
+              {/each}
+            </ul>
+          </div>
+        {/each}
       </div>
     </div>
   </section>
 </div>
 
+<footer
+  class="block md:flex md:justify-between md:items-center py-12 px-7 md:px-20 bg-opacity-[1.5%] bg-white"
+>
+  <div class="font-bold w-auto text-center mb-6 md:w-[200px] md:text-left md:mb-0 text-gray-200">
+    <div>
+      <span>© Copyright 2023</span>
+    </div>
+    <div>
+      <span
+        >Made by <a href="/" class="underline-link accent-color !font-extrabold">Ryan Painter</a
+        ></span
+      >
+    </div>
+  </div>
+  <div class="flex justify-center">
+    <a
+      href="/"
+      class="uppercase font-bold mx-3 lg:mx-4"
+      target="_blank"
+      rel="noopener noreferrer"
+      title="Email"
+    >
+      <Icon
+        size="md"
+        type="email"
+        iconClass="accent-color hover:text-amber-400 transition-all duration-300 ease-in-out"
+      />
+    </a>
+    <a
+      href="/"
+      class="uppercase font-bold mx-3 lg:mx-4"
+      target="_blank"
+      rel="noopener noreferrer"
+      title="Email"
+    >
+      <Icon
+        size="md"
+        type="twitter"
+        iconClass="accent-color hover:text-amber-400 transition-all duration-300 ease-in-out"
+      />
+    </a>
+    <a
+      href="/"
+      class="uppercase font-bold mx-3 lg:mx-4"
+      target="_blank"
+      rel="noopener noreferrer"
+      title="Email"
+    >
+      <Icon
+        size="md"
+        type="github"
+        iconClass="accent-color hover:text-amber-400 transition-all duration-300 ease-in-out"
+      />
+    </a>
+    <a
+      href="/"
+      class="uppercase font-bold mx-3 lg:mx-4"
+      target="_blank"
+      rel="noopener noreferrer"
+      title="Email"
+    >
+      <Icon
+        size="md"
+        type="linkedin"
+        iconClass="accent-color hover:text-amber-400 transition-all duration-300 ease-in-out"
+      />
+    </a>
+  </div>
+</footer>
+
 <style>
-  :global(body) {
-    line-height: 1.5;
-  }
-
   :global(main) {
-    background: black !important;
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    background: #1d1d20 !important;
   }
 
   .skills-grid {
@@ -251,13 +353,30 @@
     display: block;
   }
 
-  .roadmap-list {
-    list-style-type: none;
-    padding: 0;
-    margin-top: 10px;
+  .underline-link {
+    position: relative;
+    display: inline-block;
+    font-weight: bold;
   }
 
-  .roadmap-list li {
-    margin-bottom: 5px;
+  .underline-link:after {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--accent);
+    content: '';
+    opacity: 0;
+    transition: height 0.3s, opacity 0.3s, transform 0.3s;
+    transform: translateY(-5px);
+  }
+
+  .underline-link:focus:after,
+  .underline-link:hover:after {
+    height: 2px;
+    border-radius: 3px;
+    opacity: 1;
+    transform: translateY(-2px);
   }
 </style>

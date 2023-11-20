@@ -75,7 +75,7 @@
   <!-- <Navigation {pathname} /> -->
 
   <!-- Social Aside -->
-  <aside
+  <!-- <aside
     class="fixed top-1/2 right-0 transform -translate-y-1/2 md:flex flex-col items-center space-y-3 md:space-y-4 p-2 md:p-3 bg-opacity-20 bg-white rounded-l-lg z-50 hidden"
   >
     {#each socials as social}
@@ -87,7 +87,7 @@
         />
       </a>
     {/each}
-  </aside>
+  </aside> -->
 
   <!-- Menu Overlay -->
   {#if $isMenuOpen}

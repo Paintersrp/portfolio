@@ -574,22 +574,185 @@ var init_layout_server_ts = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/Scroller.svelte_svelte_type_style_lang.js
+// .svelte-kit/output/server/chunks/mediaQueryStore.js
 function mediaQueryStore(query) {
   const store = writable(false);
   return { subscribe: store.subscribe };
 }
-var init_Scroller_svelte_svelte_type_style_lang = __esm({
-  ".svelte-kit/output/server/chunks/Scroller.svelte_svelte_type_style_lang.js"() {
+var init_mediaQueryStore = __esm({
+  ".svelte-kit/output/server/chunks/mediaQueryStore.js"() {
     init_chunks();
   }
 });
 
-// .svelte-kit/output/server/chunks/Icon.js
-var AnalysisIcon, CodeIcon, CssIcon, DatabaseIcon, DjangoIcon, DownIcon, EmailIcon, GithubIcon, HtmlIcon, JavascriptIcon, LandscapeIcon, LinkedinIcon, NodeIcon, PythonIcon, ReactIcon, RightIcon, SvelteIcon, TwitterIcon, UpIcon, BabelIcon, DockerIcon, EngineerIcon, ExpressIcon, FlaskIcon, KoaIcon, SassIcon, VueIcon, WebpackIcon, Icon;
-var init_Icon = __esm({
-  ".svelte-kit/output/server/chunks/Icon.js"() {
+// .svelte-kit/output/server/entries/pages/_layout.svelte.js
+var layout_svelte_exports = {};
+__export(layout_svelte_exports, {
+  default: () => Layout
+});
+var css, MenuIcon, Layout;
+var init_layout_svelte = __esm({
+  ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
     init_ssr();
+    init_chunks();
+    init_mediaQueryStore();
+    css = {
+      code: ":root{--transition-duration:600ms}button.svelte-rv88i1.svelte-rv88i1{cursor:pointer;display:flex;align-items:center;overflow:hidden}svg.svelte-rv88i1.svelte-rv88i1{transition:transform var(--transition-duration)}.top.svelte-rv88i1.svelte-rv88i1{stroke-dasharray:40 160;transition:stroke-dashoffset var(--transition-duration)}.middle.svelte-rv88i1.svelte-rv88i1{transform-origin:50%;transition:transform var(--transition-duration)}.bottom.svelte-rv88i1.svelte-rv88i1{stroke-dasharray:40 85;transition:stroke-dashoffset var(--transition-duration)}.open.svelte-rv88i1.svelte-rv88i1{transform:rotate(45deg)}.open.svelte-rv88i1 .top.svelte-rv88i1,.open.svelte-rv88i1 .bottom.svelte-rv88i1{stroke-dashoffset:-64px}.open.svelte-rv88i1 .middle.svelte-rv88i1{transform:rotate(90deg)}",
+      map: null
+    };
+    MenuIcon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { open = false } = $$props;
+      let { onClick = () => {
+        open = !open;
+      } } = $$props;
+      let { ariaLabel = "toggle menu" } = $$props;
+      let { width = 64 } = $$props;
+      if ($$props.open === void 0 && $$bindings.open && open !== void 0)
+        $$bindings.open(open);
+      if ($$props.onClick === void 0 && $$bindings.onClick && onClick !== void 0)
+        $$bindings.onClick(onClick);
+      if ($$props.ariaLabel === void 0 && $$bindings.ariaLabel && ariaLabel !== void 0)
+        $$bindings.ariaLabel(ariaLabel);
+      if ($$props.width === void 0 && $$bindings.width && width !== void 0)
+        $$bindings.width(width);
+      $$result.css.add(css);
+      return `<button${add_attribute("aria-expanded", open, 0)}${add_attribute("aria-label", ariaLabel, 0)} class="accent-color md:hidden svelte-rv88i1"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5"${add_attribute("width", width, 0)} class="${["svelte-rv88i1", open ? "open" : ""].join(" ").trim()}"><path class="top svelte-rv88i1" d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20"></path><path class="middle svelte-rv88i1" d="m 30,50 h 40"></path><path class="bottom svelte-rv88i1" d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20"></path></svg> </button>`;
+    });
+    Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $$unsubscribe_small;
+      let $isMenuOpen, $$unsubscribe_isMenuOpen;
+      let { data } = $$props;
+      const navItems = [
+        { title: "Landing", route: "landing" },
+        { title: "About", route: "about" },
+        { title: "Projects", route: "projects" }
+      ];
+      const isMenuOpen = writable(false);
+      $$unsubscribe_isMenuOpen = subscribe(isMenuOpen, (value) => $isMenuOpen = value);
+      const small = mediaQueryStore();
+      $$unsubscribe_small = subscribe(small, (value) => value);
+      const toggleMenu = () => {
+        isMenuOpen.update((n) => !n);
+      };
+      if ($$props.data === void 0 && $$bindings.data && data !== void 0)
+        $$bindings.data(data);
+      if ($$props.navItems === void 0 && $$bindings.navItems && navItems !== void 0)
+        $$bindings.navItems(navItems);
+      data.url;
+      $$unsubscribe_small();
+      $$unsubscribe_isMenuOpen();
+      return `<main class="flex flex-col bg-gradient-to-l from-cyan-500 to-blue-600 min-h-screen overflow-x-hidden overflow-y-hidden w-full"> <header class="p-1 fixed top-0 right-0 justify-end z-50">${validate_component(MenuIcon, "MenuIcon").$$render($$result, { open: $isMenuOpen, onClick: toggleMenu }, {}, {})}</header>     ${$isMenuOpen ? `<div class="fixed inset-0 bg-gradient-to-l to-cyan-500 from-blue-600 flex items-center justify-center p-4 z-40"><div class="flex flex-col">${each(navItems, (item) => {
+        return `<button class="text-5xl md:text-6xl font-bold accent-color hover:text-amber-300 text-center leading-tight mb-4 hover:underline">${escape(item.title)} </button>`;
+      })}</div></div>` : ``}  ${slots.default ? slots.default({}) : ``} </main>`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/0.js
+var __exports = {};
+__export(__exports, {
+  component: () => component,
+  fonts: () => fonts,
+  imports: () => imports,
+  index: () => index,
+  server: () => layout_server_ts_exports,
+  server_id: () => server_id,
+  stylesheets: () => stylesheets
+});
+var index, component_cache, component, server_id, imports, stylesheets, fonts;
+var init__ = __esm({
+  ".svelte-kit/output/server/nodes/0.js"() {
+    init_layout_server_ts();
+    index = 0;
+    component = async () => component_cache ?? (component_cache = (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default);
+    server_id = "src/routes/+layout.server.ts";
+    imports = ["_app/immutable/nodes/0.1965f7c5.js", "_app/immutable/chunks/scheduler.77b4cd31.js", "_app/immutable/chunks/index.21e71860.js", "_app/immutable/chunks/Scroller.svelte_svelte_type_style_lang.6525a868.js", "_app/immutable/chunks/index.84b6a3b0.js", "_app/immutable/chunks/singletons.09520d21.js", "_app/immutable/chunks/mediaQueryStore.c706bc8d.js"];
+    stylesheets = ["_app/immutable/assets/0.608e107e.css", "_app/immutable/assets/Scroller.32d83c67.css"];
+    fonts = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/fallbacks/error.svelte.js
+var error_svelte_exports = {};
+__export(error_svelte_exports, {
+  default: () => Error$1
+});
+var getStores, page, Error$1;
+var init_error_svelte = __esm({
+  ".svelte-kit/output/server/entries/fallbacks/error.svelte.js"() {
+    init_ssr();
+    getStores = () => {
+      const stores = getContext("__svelte__");
+      return {
+        /** @type {typeof page} */
+        page: {
+          subscribe: stores.page.subscribe
+        },
+        /** @type {typeof navigating} */
+        navigating: {
+          subscribe: stores.navigating.subscribe
+        },
+        /** @type {typeof updated} */
+        updated: stores.updated
+      };
+    };
+    page = {
+      subscribe(fn) {
+        const store = getStores().page;
+        return store.subscribe(fn);
+      }
+    };
+    Error$1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $page, $$unsubscribe_page;
+      $$unsubscribe_page = subscribe(page, (value) => $page = value);
+      $$unsubscribe_page();
+      return `<h1>${escape($page.status)}</h1> <p>${escape($page.error?.message)}</p>`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/1.js
+var __exports2 = {};
+__export(__exports2, {
+  component: () => component2,
+  fonts: () => fonts2,
+  imports: () => imports2,
+  index: () => index2,
+  stylesheets: () => stylesheets2
+});
+var index2, component_cache2, component2, imports2, stylesheets2, fonts2;
+var init__2 = __esm({
+  ".svelte-kit/output/server/nodes/1.js"() {
+    index2 = 1;
+    component2 = async () => component_cache2 ?? (component_cache2 = (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default);
+    imports2 = ["_app/immutable/nodes/1.4fead54c.js", "_app/immutable/chunks/scheduler.77b4cd31.js", "_app/immutable/chunks/index.21e71860.js", "_app/immutable/chunks/singletons.09520d21.js", "_app/immutable/chunks/index.84b6a3b0.js"];
+    stylesheets2 = [];
+    fonts2 = [];
+  }
+});
+
+// .svelte-kit/output/server/chunks/projects.js
+var AnimatedText, AnalysisIcon, CodeIcon, CssIcon, DatabaseIcon, DjangoIcon, DownIcon, EmailIcon, GithubIcon, HtmlIcon, JavascriptIcon, LandscapeIcon, LinkedinIcon, NodeIcon, PythonIcon, ReactIcon, RightIcon, SvelteIcon, TwitterIcon, UpIcon, BabelIcon, DockerIcon, EngineerIcon, ExpressIcon, FlaskIcon, KoaIcon, SassIcon, VueIcon, WebpackIcon, TypescriptIcon, RustIcon, JavaIcon, WordpressIcon, DeepLearningIcon, RegressionIcon, ForecastingIcon, InstagramIcon, Icon, _projects;
+var init_projects = __esm({
+  ".svelte-kit/output/server/chunks/projects.js"() {
+    init_ssr();
+    AnimatedText = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { messages } = $$props;
+      let { textClass = "" } = $$props;
+      let { duration = 2e3 } = $$props;
+      let index5 = 0;
+      let roller;
+      onDestroy(() => {
+        clearInterval(roller);
+      });
+      if ($$props.messages === void 0 && $$bindings.messages && messages !== void 0)
+        $$bindings.messages(messages);
+      if ($$props.textClass === void 0 && $$bindings.textClass && textClass !== void 0)
+        $$bindings.textClass(textClass);
+      if ($$props.duration === void 0 && $$bindings.duration && duration !== void 0)
+        $$bindings.duration(duration);
+      return `<h1${add_attribute("class", textClass, 0)}>${escape(messages[index5])}</h1>`;
+    });
     AnalysisIcon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let { iconSize } = $$props;
       if ($$props.iconSize === void 0 && $$bindings.iconSize && iconSize !== void 0)
@@ -773,6 +936,54 @@ c8.9-2.3,18.2,1.2,23.4,8.7c3.2,4.4,4.4,9.9,3.5,15.3c-0.9,5.2-4.1,9.9-8.6,12.7l-2
         $$bindings.iconSize(iconSize);
       return `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"${add_attribute("height", iconSize, 0)}${add_attribute("width", iconSize, 0)} viewBox="0 0 32 32"><path d="M29.54 24.663L16.57 32v-5.713l8.08-4.446zm.888-.803V8.52l-4.744 2.742v9.862zm-27.966.803L15.43 32v-5.713L7.345 21.84zm-.888-.803V8.52l4.744 2.742v9.862zM2.13 7.524L15.43 0v5.522L6.84 10.25zm27.74 0L16.57 0v5.522l8.59 4.723z"></path><path d="M15.43 25.237L7.456 20.85v-8.684l7.974 4.604zm1.14 0l7.975-4.383v-8.69L16.57 16.77zm-.57-8.8zm-8.004-5.275L16 6.763l8.004 4.4L16 15.783z"></path></svg>`;
     });
+    TypescriptIcon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { iconSize } = $$props;
+      if ($$props.iconSize === void 0 && $$bindings.iconSize && iconSize !== void 0)
+        $$bindings.iconSize(iconSize);
+      return `<svg fill="currentColor"${add_attribute("height", iconSize, 0)}${add_attribute("width", iconSize, 0)} viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M23.827,8.243A4.424,4.424,0,0,1,26.05,9.524a5.853,5.853,0,0,1,.852,1.143c.011.045-1.534,1.083-2.471,1.662-.034.023-.169-.124-.322-.35a2.014,2.014,0,0,0-1.67-1c-1.077-.074-1.771.49-1.766,1.433a1.3,1.3,0,0,0,.153.666c.237.49.677.784,2.059,1.383,2.544,1.095,3.636,1.817,4.31,2.843a5.158,5.158,0,0,1,.416,4.333,4.764,4.764,0,0,1-3.932,2.815,10.9,10.9,0,0,1-2.708-.028,6.531,6.531,0,0,1-3.616-1.884,6.278,6.278,0,0,1-.926-1.371,2.655,2.655,0,0,1,.327-.208c.158-.09.756-.434,1.32-.761L19.1,19.6l.214.312a4.771,4.771,0,0,0,1.35,1.292,3.3,3.3,0,0,0,3.458-.175,1.545,1.545,0,0,0,.2-1.974c-.276-.395-.84-.727-2.443-1.422a8.8,8.8,0,0,1-3.349-2.055,4.687,4.687,0,0,1-.976-1.777,7.116,7.116,0,0,1-.062-2.268,4.332,4.332,0,0,1,3.644-3.374A9,9,0,0,1,23.827,8.243ZM15.484,9.726l.011,1.454h-4.63V24.328H7.6V11.183H2.97V9.755A13.986,13.986,0,0,1,3.01,8.289c.017-.023,2.832-.034,6.245-.028l6.211.017Z"></path></svg>`;
+    });
+    RustIcon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { iconSize } = $$props;
+      if ($$props.iconSize === void 0 && $$bindings.iconSize && iconSize !== void 0)
+        $$bindings.iconSize(iconSize);
+      return `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"${add_attribute("height", iconSize, 0)}${add_attribute("width", iconSize, 0)} viewBox="0 0 512 512"><path d="M508.52,249.75,486.7,236.24c-.17-2-.34-3.93-.55-5.88l18.72-17.5a7.35,7.35,0,0,0-2.44-12.25l-24-9c-.54-1.88-1.08-3.78-1.67-5.64l15-20.83a7.35,7.35,0,0,0-4.79-11.54l-25.42-4.15c-.9-1.73-1.79-3.45-2.73-5.15l10.68-23.42a7.35,7.35,0,0,0-6.95-10.39l-25.82.91q-1.79-2.22-3.61-4.4L439,81.84A7.36,7.36,0,0,0,430.16,73L405,78.93q-2.17-1.83-4.4-3.61l.91-25.82a7.35,7.35,0,0,0-10.39-7L367.7,53.23c-1.7-.94-3.43-1.84-5.15-2.73L358.4,25.08a7.35,7.35,0,0,0-11.54-4.79L326,35.26c-1.86-.59-3.75-1.13-5.64-1.67l-9-24a7.35,7.35,0,0,0-12.25-2.44l-17.5,18.72c-1.95-.21-3.91-.38-5.88-.55L262.25,3.48a7.35,7.35,0,0,0-12.5,0L236.24,25.3c-2,.17-3.93.34-5.88.55L212.86,7.13a7.35,7.35,0,0,0-12.25,2.44l-9,24c-1.89.55-3.79,1.08-5.66,1.68l-20.82-15a7.35,7.35,0,0,0-11.54,4.79l-4.15,25.41c-1.73.9-3.45,1.79-5.16,2.73L120.88,42.55a7.35,7.35,0,0,0-10.39,7l.92,25.81c-1.49,1.19-3,2.39-4.42,3.61L81.84,73A7.36,7.36,0,0,0,73,81.84L78.93,107c-1.23,1.45-2.43,2.93-3.62,4.41l-25.81-.91a7.42,7.42,0,0,0-6.37,3.26,7.35,7.35,0,0,0-.57,7.13l10.66,23.41c-.94,1.7-1.83,3.43-2.73,5.16L25.08,153.6a7.35,7.35,0,0,0-4.79,11.54l15,20.82c-.59,1.87-1.13,3.77-1.68,5.66l-24,9a7.35,7.35,0,0,0-2.44,12.25l18.72,17.5c-.21,1.95-.38,3.91-.55,5.88L3.48,249.75a7.35,7.35,0,0,0,0,12.5L25.3,275.76c.17,2,.34,3.92.55,5.87L7.13,299.13a7.35,7.35,0,0,0,2.44,12.25l24,9c.55,1.89,1.08,3.78,1.68,5.65l-15,20.83a7.35,7.35,0,0,0,4.79,11.54l25.42,4.15c.9,1.72,1.79,3.45,2.73,5.14L42.56,391.12a7.35,7.35,0,0,0,.57,7.13,7.13,7.13,0,0,0,6.37,3.26l25.83-.91q1.77,2.22,3.6,4.4L73,430.16A7.36,7.36,0,0,0,81.84,439L107,433.07q2.18,1.83,4.41,3.61l-.92,25.82a7.35,7.35,0,0,0,10.39,6.95l23.43-10.68c1.69.94,3.42,1.83,5.14,2.73l4.15,25.42a7.34,7.34,0,0,0,11.54,4.78l20.83-15c1.86.6,3.76,1.13,5.65,1.68l9,24a7.36,7.36,0,0,0,12.25,2.44l17.5-18.72c1.95.21,3.92.38,5.88.55l13.51,21.82a7.35,7.35,0,0,0,12.5,0l13.51-21.82c2-.17,3.93-.34,5.88-.56l17.5,18.73a7.36,7.36,0,0,0,12.25-2.44l9-24c1.89-.55,3.78-1.08,5.65-1.68l20.82,15a7.34,7.34,0,0,0,11.54-4.78l4.15-25.42c1.72-.9,3.45-1.79,5.15-2.73l23.42,10.68a7.35,7.35,0,0,0,10.39-6.95l-.91-25.82q2.22-1.79,4.4-3.61L430.16,439a7.36,7.36,0,0,0,8.84-8.84L433.07,405q1.83-2.17,3.61-4.4l25.82.91a7.23,7.23,0,0,0,6.37-3.26,7.35,7.35,0,0,0,.58-7.13L458.77,367.7c.94-1.7,1.83-3.43,2.73-5.15l25.42-4.15a7.35,7.35,0,0,0,4.79-11.54l-15-20.83c.59-1.87,1.13-3.76,1.67-5.65l24-9a7.35,7.35,0,0,0,2.44-12.25l-18.72-17.5c.21-1.95.38-3.91.55-5.87l21.82-13.51a7.35,7.35,0,0,0,0-12.5Zm-151,129.08A13.91,13.91,0,0,0,341,389.51l-7.64,35.67A187.51,187.51,0,0,1,177,424.44l-7.64-35.66a13.87,13.87,0,0,0-16.46-10.68l-31.51,6.76a187.38,187.38,0,0,1-16.26-19.21H258.3c1.72,0,2.89-.29,2.89-1.91V309.55c0-1.57-1.17-1.91-2.89-1.91H213.47l.05-34.35H262c4.41,0,23.66,1.28,29.79,25.87,1.91,7.55,6.17,32.14,9.06,40,2.89,8.82,14.6,26.46,27.1,26.46H407a187.3,187.3,0,0,1-17.34,20.09Zm25.77,34.49A15.24,15.24,0,1,1,368,398.08h.44A15.23,15.23,0,0,1,383.24,413.32Zm-225.62-.68a15.24,15.24,0,1,1-15.25-15.25h.45A15.25,15.25,0,0,1,157.62,412.64ZM69.57,234.15l32.83-14.6a13.88,13.88,0,0,0,7.06-18.33L102.69,186h26.56V305.73H75.65A187.65,187.65,0,0,1,69.57,234.15ZM58.31,198.09a15.24,15.24,0,0,1,15.23-15.25H74a15.24,15.24,0,1,1-15.67,15.24Zm155.16,24.49.05-35.32h63.26c3.28,0,23.07,3.77,23.07,18.62,0,12.29-15.19,16.7-27.68,16.7ZM399,306.71c-9.8,1.13-20.63-4.12-22-10.09-5.78-32.49-15.39-39.4-30.57-51.4,18.86-11.95,38.46-29.64,38.46-53.26,0-25.52-17.49-41.59-29.4-49.48-16.76-11-35.28-13.23-40.27-13.23H116.32A187.49,187.49,0,0,1,221.21,70.06l23.47,24.6a13.82,13.82,0,0,0,19.6.44l26.26-25a187.51,187.51,0,0,1,128.37,91.43l-18,40.57A14,14,0,0,0,408,220.43l34.59,15.33a187.12,187.12,0,0,1,.4,32.54H423.71c-1.91,0-2.69,1.27-2.69,3.13v8.82C421,301,409.31,305.58,399,306.71ZM240,60.21A15.24,15.24,0,0,1,255.21,45h.45A15.24,15.24,0,1,1,240,60.21ZM436.84,214a15.24,15.24,0,1,1,0-30.48h.44a15.24,15.24,0,0,1-.44,30.48Z"></path></svg>`;
+    });
+    JavaIcon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { iconSize } = $$props;
+      if ($$props.iconSize === void 0 && $$bindings.iconSize && iconSize !== void 0)
+        $$bindings.iconSize(iconSize);
+      return `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"${add_attribute("height", iconSize, 0)}${add_attribute("width", iconSize, 0)} viewBox="0 0 384 512"><path d="M277.74 312.9c9.8-6.7 23.4-12.5 23.4-12.5s-38.7 7-77.2 10.2c-47.1 3.9-97.7 4.7-123.1 1.3-60.1-8 33-30.1 33-30.1s-36.1-2.4-80.6 19c-52.5 25.4 130 37 224.5 12.1zm-85.4-32.1c-19-42.7-83.1-80.2 0-145.8C296 53.2 242.84 0 242.84 0c21.5 84.5-75.6 110.1-110.7 162.6-23.9 35.9 11.7 74.4 60.2 118.2zm114.6-176.2c.1 0-175.2 43.8-91.5 140.2 24.7 28.4-6.5 54-6.5 54s62.7-32.4 33.9-72.9c-26.9-37.8-47.5-56.6 64.1-121.3zm-6.1 270.5a12.19 12.19 0 0 1-2 2.6c128.3-33.7 81.1-118.9 19.8-97.3a17.33 17.33 0 0 0-8.2 6.3 70.45 70.45 0 0 1 11-3c31-6.5 75.5 41.5-20.6 91.4zM348 437.4s14.5 11.9-15.9 21.2c-57.9 17.5-240.8 22.8-291.6.7-18.3-7.9 16-19 26.8-21.3 11.2-2.4 17.7-2 17.7-2-20.3-14.3-131.3 28.1-56.4 40.2C232.84 509.4 401 461.3 348 437.4zM124.44 396c-78.7 22 47.9 67.4 148.1 24.5a185.89 185.89 0 0 1-28.2-13.8c-44.7 8.5-65.4 9.1-106 4.5-33.5-3.8-13.9-15.2-13.9-15.2zm179.8 97.2c-78.7 14.8-175.8 13.1-233.3 3.6 0-.1 11.8 9.7 72.4 13.6 92.2 5.9 233.8-3.3 237.1-46.9 0 0-6.4 16.5-76.2 29.7zM260.64 353c-59.2 11.4-93.5 11.1-136.8 6.6-33.5-3.5-11.6-19.7-11.6-19.7-86.8 28.8 48.2 61.4 169.5 25.9a60.37 60.37 0 0 1-21.1-12.8z"></path></svg>`;
+    });
+    WordpressIcon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { iconSize } = $$props;
+      if ($$props.iconSize === void 0 && $$bindings.iconSize && iconSize !== void 0)
+        $$bindings.iconSize(iconSize);
+      return `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"${add_attribute("height", iconSize, 0)}${add_attribute("width", iconSize, 0)} viewBox="0 0 512 512"><path d="M61.7 169.4l101.5 278C92.2 413 43.3 340.2 43.3 256c0-30.9 6.6-60.1 18.4-86.6zm337.9 75.9c0-26.3-9.4-44.5-17.5-58.7-10.8-17.5-20.9-32.4-20.9-49.9 0-19.6 14.8-37.8 35.7-37.8.9 0 1.8.1 2.8.2-37.9-34.7-88.3-55.9-143.7-55.9-74.3 0-139.7 38.1-177.8 95.9 5 .2 9.7.3 13.7.3 22.2 0 56.7-2.7 56.7-2.7 11.5-.7 12.8 16.2 1.4 17.5 0 0-11.5 1.3-24.3 2l77.5 230.4L249.8 247l-33.1-90.8c-11.5-.7-22.3-2-22.3-2-11.5-.7-10.1-18.2 1.3-17.5 0 0 35.1 2.7 56 2.7 22.2 0 56.7-2.7 56.7-2.7 11.5-.7 12.8 16.2 1.4 17.5 0 0-11.5 1.3-24.3 2l76.9 228.7 21.2-70.9c9-29.4 16-50.5 16-68.7zm-139.9 29.3l-63.8 185.5c19.1 5.6 39.2 8.7 60.1 8.7 24.8 0 48.5-4.3 70.6-12.1-.6-.9-1.1-1.9-1.5-2.9l-65.4-179.2zm183-120.7c.9 6.8 1.4 14 1.4 21.9 0 21.6-4 45.8-16.2 76.2l-65 187.9C426.2 403 468.7 334.5 468.7 256c0-37-9.4-71.8-26-102.1zM504 256c0 136.8-111.3 248-248 248C119.2 504 8 392.7 8 256 8 119.2 119.2 8 256 8c136.7 0 248 111.2 248 248zm-11.4 0c0-130.5-106.2-236.6-236.6-236.6C125.5 19.4 19.4 125.5 19.4 256S125.6 492.6 256 492.6c130.5 0 236.6-106.1 236.6-236.6z"></path></svg>`;
+    });
+    DeepLearningIcon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { iconSize } = $$props;
+      if ($$props.iconSize === void 0 && $$bindings.iconSize && iconSize !== void 0)
+        $$bindings.iconSize(iconSize);
+      return `<svg fill="currentColor"${add_attribute("height", iconSize, 0)}${add_attribute("width", iconSize, 0)} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.5 9a3.49 3.49 0 0 0-3.45 3h-1.1a2.49 2.49 0 0 0-4.396-1.052L8.878 9.731l3.143-4.225a2.458 2.458 0 0 0 2.98-.019L17.339 8H16v1h3V6h-1v1.243l-2.336-2.512A2.473 2.473 0 0 0 16 3.5a2.5 2.5 0 0 0-5 0 2.474 2.474 0 0 0 .343 1.243L7.947 9.308 4.955 7.947a2.404 2.404 0 0 0-.161-1.438l3.704-1.385-.44 1.371.942.333L10 4 7.172 3l-.334.943 1.01.357-3.659 1.368a2.498 2.498 0 1 0-.682 4.117l2.085 2.688-2.053 2.76a2.5 2.5 0 1 0 .87 3.864l3.484 1.587-1.055.373.334.943L10 21l-1-2.828-.943.333.435 1.354-3.608-1.645A2.471 2.471 0 0 0 5 17.5a2.5 2.5 0 0 0-.058-.527l3.053-1.405 3.476 4.48a2.498 2.498 0 1 0 4.113.075L18 17.707V19h1v-3h-3v1h1.293l-2.416 2.416a2.466 2.466 0 0 0-2.667-.047l-3.283-4.23 2.554-1.176A2.494 2.494 0 0 0 15.95 13h1.1a3.493 3.493 0 1 0 3.45-4zm-7-7A1.5 1.5 0 1 1 12 3.5 1.502 1.502 0 0 1 13.5 2zm0 18a1.5 1.5 0 1 1-1.5 1.5 1.502 1.502 0 0 1 1.5-1.5zM1 7.5a1.5 1.5 0 1 1 2.457 1.145l-.144.112A1.496 1.496 0 0 1 1 7.5zm3.32 1.703a2.507 2.507 0 0 0 .264-.326l2.752 1.251-1.124 1.512zM2.5 19A1.5 1.5 0 1 1 4 17.5 1.502 1.502 0 0 1 2.5 19zm2.037-2.941a2.518 2.518 0 0 0-.193-.234l1.885-2.532 1.136 1.464zm3.76-1.731L6.849 12.46l1.42-1.908L11.1 11.84a2.29 2.29 0 0 0-.033 1.213zM13.5 14a1.5 1.5 0 1 1 1.5-1.5 1.502 1.502 0 0 1-1.5 1.5zm7 1a2.5 2.5 0 1 1 2.5-2.5 2.502 2.502 0 0 1-2.5 2.5zm1.5-2.5a1.5 1.5 0 1 1-1.5-1.5 1.502 1.502 0 0 1 1.5 1.5z"></path><path fill="none" d="M0 0h24v24H0z"></path></svg>`;
+    });
+    RegressionIcon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { iconSize } = $$props;
+      if ($$props.iconSize === void 0 && $$bindings.iconSize && iconSize !== void 0)
+        $$bindings.iconSize(iconSize);
+      return `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 1024 1024"${add_attribute("height", iconSize, 0)}${add_attribute("width", iconSize, 0)}><path d="M229 815c-9.2 0-18.4-3.5-25.5-10.5-14.1-14.1-14.1-36.9 0-50.9l566-566c14.1-14.1 36.9-14.1 50.9 0 14.1 14.1 14.1 36.9 0 50.9l-566 566c-7 7-16.2 10.5-25.4 10.5z"></path><path d="M212 675m-31 0a31 31 0 1 0 62 0 31 31 0 1 0-62 0Z"></path><path d="M241 610m-31 0a31 31 0 1 0 62 0 31 31 0 1 0-62 0Z"></path><path d="M309 605m-31 0a31 31 0 1 0 62 0 31 31 0 1 0-62 0Z"></path><path d="M360 482m-31 0a31 31 0 1 0 62 0 31 31 0 1 0-62 0Z"></path><path d="M456 473m-31 0a31 31 0 1 0 62 0 31 31 0 1 0-62 0Z"></path><path d="M516 391m-31 0a31 31 0 1 0 62 0 31 31 0 1 0-62 0Z"></path><path d="M607 516m-31 0a31 31 0 1 0 62 0 31 31 0 1 0-62 0Z"></path><path d="M680 413m-31 0a31 31 0 1 0 62 0 31 31 0 1 0-62 0Z"></path><path d="M794 383m-31 0a31 31 0 1 0 62 0 31 31 0 1 0-62 0Z"></path><path d="M399 733m-31 0a31 31 0 1 0 62 0 31 31 0 1 0-62 0Z"></path><path d="M478 596m-31 0a31 31 0 1 0 62 0 31 31 0 1 0-62 0Z"></path><path d="M703 231m-31 0a31 31 0 1 0 62 0 31 31 0 1 0-62 0Z"></path></svg>`;
+    });
+    ForecastingIcon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { iconSize } = $$props;
+      if ($$props.iconSize === void 0 && $$bindings.iconSize && iconSize !== void 0)
+        $$bindings.iconSize(iconSize);
+      return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 125" fill="currentColor"${add_attribute("height", iconSize, 0)}${add_attribute("width", iconSize, 0)}><path d="M18,75.526c0.828,0,1.5-0.672,1.5-1.5v-0.1c0-0.828-0.672-1.45-1.5-1.45s-1.5,0.722-1.5,1.55S17.172,75.526,18,75.526z"></path><path d="M18,70.578c0.828,0,1.5-0.671,1.5-1.5v-0.1c0-0.828-0.672-1.45-1.5-1.45s-1.5,0.722-1.5,1.55  C16.5,69.907,17.172,70.578,18,70.578z"></path><path d="M23.418,70.56c0.791-0.041,1.42-0.695,1.42-1.497l-0.001-0.101c-0.011-0.79-0.633-1.397-1.415-1.436l-0.104-0.004  c-0.829,0-1.5,0.712-1.5,1.54s0.671,1.5,1.5,1.5L23.418,70.56z"></path><path d="M28.738,67.52l-0.104-0.002c-0.828,0-1.5,0.701-1.5,1.529s0.672,1.5,1.5,1.5l0.101-0.002  c0.801-0.031,1.439-0.689,1.439-1.498l-0.001-0.102C30.151,68.158,29.523,67.549,28.738,67.52z"></path><path d="M34.055,67.514l-0.102-0.002c-0.829,0-1.501,0.691-1.501,1.521c0,0.827,0.672,1.5,1.501,1.5l0.1-0.003  c0.81-0.02,1.46-0.684,1.46-1.497l-0.002-0.104C35.478,68.145,34.843,67.533,34.055,67.514z"></path><path d="M39.371,67.507l-0.102-0.001c-0.828,0-1.5,0.682-1.5,1.51s0.672,1.5,1.5,1.5l0.101-0.001  c0.819-0.011,1.479-0.678,1.479-1.499l-0.002-0.104C40.804,68.131,40.162,67.518,39.371,67.507z"></path><path d="M44.688,70.5c0.828,0,1.5-0.672,1.5-1.5s-0.672-1.5-1.5-1.5h-0.1c-0.829,0-1.5,0.672-1.5,1.5s0.671,1.5,1.5,1.5H44.688z"></path><path d="M82,75.526c0.828,0,1.5-0.672,1.5-1.5s-0.672-1.55-1.5-1.55s-1.5,0.622-1.5,1.45v0.1C80.5,74.854,81.172,75.526,82,75.526z"></path><path d="M82,70.578c0.828,0,1.5-0.671,1.5-1.5c0-0.828-0.672-1.55-1.5-1.55s-1.5,0.622-1.5,1.45v0.1  C80.5,69.907,81.172,70.578,82,70.578z"></path><path d="M76.683,67.522l-0.104,0.004c-0.782,0.038-1.404,0.646-1.415,1.436l-0.001,0.101c0,0.802,0.629,1.456,1.42,1.497  l0.101,0.003c0.829,0,1.5-0.672,1.5-1.5S77.512,67.522,76.683,67.522z"></path><path d="M71.365,67.518l-0.104,0.002c-0.785,0.029-1.413,0.639-1.436,1.426l-0.001,0.102c0,0.809,0.639,1.467,1.439,1.498  l0.101,0.002c0.828,0,1.5-0.672,1.5-1.5S72.193,67.518,71.365,67.518z"></path><path d="M66.047,67.512l-0.102,0.002c-0.788,0.02-1.423,0.631-1.456,1.415l-0.002,0.104c0,0.813,0.65,1.478,1.46,1.497l0.1,0.003  c0.829,0,1.501-0.673,1.501-1.5C67.548,68.203,66.876,67.512,66.047,67.512z"></path><path d="M60.73,67.506l-0.102,0.001c-0.791,0.011-1.433,0.624-1.477,1.405l-0.002,0.104c0,0.821,0.66,1.488,1.479,1.499l0.101,0.001  c0.828,0,1.5-0.672,1.5-1.5S61.559,67.506,60.73,67.506z"></path><path d="M55.412,70.5c0.829,0,1.5-0.672,1.5-1.5s-0.671-1.5-1.5-1.5h-0.1c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5H55.412z"></path><path d="M48.5,74c0,0.828,0.672,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-0.05c0-0.828-0.672-1.5-1.5-1.5s-1.5,0.672-1.5,1.5V74z"></path><path d="M48.5,69.045c0,0.828,0.672,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-0.089c0-0.829-0.672-1.5-1.5-1.5s-1.5,0.671-1.5,1.5V69.045z"></path><path d="M50,65.55c0.828,0,1.5-0.672,1.5-1.5V64c0-0.829-0.672-1.5-1.5-1.5s-1.5,0.671-1.5,1.5v0.05  C48.5,64.878,49.172,65.55,50,65.55z"></path><path d="M18,77c-4.971,0-9,4.029-9,9s4.029,9,9,9s9-4.029,9-9S22.971,77,18,77z M18,92c-3.309,0-6-2.691-6-6s2.691-6,6-6  s6,2.691,6,6S21.309,92,18,92z"></path><path d="M50,77c-4.971,0-9,4.029-9,9s4.029,9,9,9s9-4.029,9-9S54.971,77,50,77z M50,92c-3.309,0-6-2.691-6-6s2.691-6,6-6  s6,2.691,6,6S53.309,92,50,92z"></path><path d="M82,77c-4.971,0-9,4.029-9,9s4.029,9,9,9s9-4.029,9-9S86.971,77,82,77z M82,92c-3.309,0-6-2.691-6-6s2.691-6,6-6  s6,2.691,6,6S85.309,92,82,92z"></path><path d="M50,5C34.533,5,22,17.535,22,33s12.533,28,28,28c15.465,0,28-12.535,28-28S65.465,5,50,5z M50,58c-13.785,0-25-11.215-25-25  S36.215,8,50,8s25,11.215,25,25S63.785,58,50,58z"></path><path d="M65,44.442L65,44.442l-26.058-0.001c0.128-0.341,0.328-0.872,0.586-1.558c0.458-1.219,1.091-2.9,1.786-4.75  c0.541-1.462,1.857-2.996,3.551-4.133c1.688-1.144,3.726-1.883,5.563-1.953c2.398-0.104,4.7-0.711,6.58-1.652  c0.94-0.475,1.777-1.033,2.468-1.692c0.687-0.659,1.244-1.429,1.519-2.352c0.218-0.735,0.419-1.421,0.599-2.026l1.195,2.229  c0.393,0.73,1.301,1.004,2.031,0.613c0.73-0.393,1.004-1.301,0.613-2.031l-2.924-5.451c-0.189-0.354-0.506-0.611-0.89-0.727  s-0.79-0.074-1.144,0.115l-5.447,2.93c-0.729,0.393-1.003,1.302-0.61,2.031c0.393,0.73,1.302,1.004,2.032,0.611l2.282-1.229  c-0.183,0.621-0.392,1.326-0.615,2.086c-0.073,0.258-0.294,0.633-0.715,1.033c-0.624,0.602-1.663,1.227-2.916,1.686  c-1.251,0.461-2.713,0.768-4.184,0.828c-2.521,0.11-5.014,1.051-7.116,2.465c-2.097,1.422-3.829,3.324-4.68,5.563  c-0.817,2.17-1.545,4.104-2.008,5.335V20.788c0-0.828-0.672-1.5-1.5-1.5s-1.5,0.672-1.5,1.5v25.153c0,0.4,0.156,0.777,0.439,1.061  S34.6,47.44,35,47.44h30c0.828,0,1.5-0.671,1.5-1.499C66.5,45.112,65.828,44.442,65,44.442z"></path><path d="M49,40.611c0,1.382,1.119,2.5,2.5,2.5s2.5-1.118,2.5-2.5c0-1.378-1.119-2.5-2.5-2.5S49,39.233,49,40.611z"></path><path d="M43.499,26.11c1.38,0,2.501-1.118,2.501-2.499c0-1.384-1.121-2.5-2.501-2.5c-1.381,0-2.499,1.116-2.499,2.5  C41,24.992,42.118,26.11,43.499,26.11z"></path></svg>`;
+    });
+    InstagramIcon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { iconSize } = $$props;
+      if ($$props.iconSize === void 0 && $$bindings.iconSize && iconSize !== void 0)
+        $$bindings.iconSize(iconSize);
+      return `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"${add_attribute("height", iconSize, 0)}${add_attribute("width", iconSize, 0)} viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path></svg>`;
+    });
     Icon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let iconSize;
       let icon;
@@ -818,7 +1029,15 @@ c8.9-2.3,18.2,1.2,23.4,8.7c3.2,4.4,4.4,9.9,3.5,15.3c-0.9,5.2-4.1,9.9-8.6,12.7l-2
         down: DownIcon,
         up: UpIcon,
         vue: VueIcon,
-        webpack: WebpackIcon
+        webpack: WebpackIcon,
+        typescript: TypescriptIcon,
+        rust: RustIcon,
+        java: JavaIcon,
+        wordpress: WordpressIcon,
+        deeplearning: DeepLearningIcon,
+        regression: RegressionIcon,
+        forecasting: ForecastingIcon,
+        instagram: InstagramIcon
       };
       if ($$props.iconClass === void 0 && $$bindings.iconClass && iconClass !== void 0)
         $$bindings.iconClass(iconClass);
@@ -830,210 +1049,7 @@ c8.9-2.3,18.2,1.2,23.4,8.7c3.2,4.4,4.4,9.9,3.5,15.3c-0.9,5.2-4.1,9.9-8.6,12.7l-2
       icon = iconMap[type];
       return `<figure${add_attribute("class", `${iconClass}`, 0)}>${validate_component(icon || missing_component, "svelte:component").$$render($$result, { iconSize }, {}, {})}</figure>`;
     });
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/_layout.svelte.js
-var layout_svelte_exports = {};
-__export(layout_svelte_exports, {
-  default: () => Layout
-});
-var css, MenuIcon, Layout;
-var init_layout_svelte = __esm({
-  ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
-    init_ssr();
-    init_chunks();
-    init_Scroller_svelte_svelte_type_style_lang();
-    init_Icon();
-    css = {
-      code: ":root{--transition-duration:600ms}button.svelte-rv88i1.svelte-rv88i1{cursor:pointer;display:flex;align-items:center;overflow:hidden}svg.svelte-rv88i1.svelte-rv88i1{transition:transform var(--transition-duration)}.top.svelte-rv88i1.svelte-rv88i1{stroke-dasharray:40 160;transition:stroke-dashoffset var(--transition-duration)}.middle.svelte-rv88i1.svelte-rv88i1{transform-origin:50%;transition:transform var(--transition-duration)}.bottom.svelte-rv88i1.svelte-rv88i1{stroke-dasharray:40 85;transition:stroke-dashoffset var(--transition-duration)}.open.svelte-rv88i1.svelte-rv88i1{transform:rotate(45deg)}.open.svelte-rv88i1 .top.svelte-rv88i1,.open.svelte-rv88i1 .bottom.svelte-rv88i1{stroke-dashoffset:-64px}.open.svelte-rv88i1 .middle.svelte-rv88i1{transform:rotate(90deg)}",
-      map: null
-    };
-    MenuIcon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let { open = false } = $$props;
-      let { onClick = () => {
-        open = !open;
-      } } = $$props;
-      let { ariaLabel = "toggle menu" } = $$props;
-      let { width = 64 } = $$props;
-      if ($$props.open === void 0 && $$bindings.open && open !== void 0)
-        $$bindings.open(open);
-      if ($$props.onClick === void 0 && $$bindings.onClick && onClick !== void 0)
-        $$bindings.onClick(onClick);
-      if ($$props.ariaLabel === void 0 && $$bindings.ariaLabel && ariaLabel !== void 0)
-        $$bindings.ariaLabel(ariaLabel);
-      if ($$props.width === void 0 && $$bindings.width && width !== void 0)
-        $$bindings.width(width);
-      $$result.css.add(css);
-      return `<button${add_attribute("aria-expanded", open, 0)}${add_attribute("aria-label", ariaLabel, 0)} class="accent-color md:hidden svelte-rv88i1"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5"${add_attribute("width", width, 0)} class="${["svelte-rv88i1", open ? "open" : ""].join(" ").trim()}"><path class="top svelte-rv88i1" d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20"></path><path class="middle svelte-rv88i1" d="m 30,50 h 40"></path><path class="bottom svelte-rv88i1" d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20"></path></svg> </button>`;
-    });
-    Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $small, $$unsubscribe_small;
-      let $isMenuOpen, $$unsubscribe_isMenuOpen;
-      let { data } = $$props;
-      const navItems = [
-        { title: "Landing", route: "landing" },
-        { title: "About", route: "about" },
-        { title: "Projects", route: "projects" }
-      ];
-      const socials = [
-        {
-          name: "github",
-          url: "https://github.com/"
-        },
-        {
-          name: "linkedin",
-          url: "https://linkedin.com/"
-        },
-        {
-          name: "twitter",
-          url: "https://twitter.com/"
-        },
-        {
-          name: "email",
-          url: "paintersrp@gmail.com"
-        }
-      ];
-      const isMenuOpen = writable(false);
-      $$unsubscribe_isMenuOpen = subscribe(isMenuOpen, (value) => $isMenuOpen = value);
-      const small = mediaQueryStore();
-      $$unsubscribe_small = subscribe(small, (value) => $small = value);
-      let iconSize;
-      const toggleMenu = () => {
-        isMenuOpen.update((n) => !n);
-      };
-      if ($$props.data === void 0 && $$bindings.data && data !== void 0)
-        $$bindings.data(data);
-      if ($$props.navItems === void 0 && $$bindings.navItems && navItems !== void 0)
-        $$bindings.navItems(navItems);
-      iconSize = $small ? "sm" : "md";
-      data.url;
-      $$unsubscribe_small();
-      $$unsubscribe_isMenuOpen();
-      return `<main class="flex flex-col bg-gradient-to-l from-cyan-500 to-blue-600 min-h-screen overflow-x-hidden overflow-y-hidden w-full"> <header class="p-1 fixed top-0 right-0 justify-end z-50">${validate_component(MenuIcon, "MenuIcon").$$render($$result, { open: $isMenuOpen, onClick: toggleMenu }, {}, {})}</header>   <aside class="fixed top-1/2 right-0 transform -translate-y-1/2 md:flex flex-col items-center space-y-3 md:space-y-4 p-2 md:p-3 bg-opacity-20 bg-white rounded-l-lg z-50 hidden">${each(socials, (social) => {
-        return `<a${add_attribute("href", social.url, 0)} class="" target="_blank" rel="noopener noreferrer"${add_attribute("title", social.name, 0)}>${validate_component(Icon, "Icon").$$render(
-          $$result,
-          {
-            size: iconSize,
-            type: social.name,
-            iconClass: "accent-color hover:text-amber-400 transition-all duration-300 ease-in-out"
-          },
-          {},
-          {}
-        )} </a>`;
-      })}</aside>  ${$isMenuOpen ? `<div class="fixed inset-0 bg-gradient-to-l to-cyan-500 from-blue-600 flex items-center justify-center p-4 z-40"><div class="flex flex-col">${each(navItems, (item) => {
-        return `<button class="text-5xl md:text-6xl font-bold accent-color hover:text-amber-300 text-center leading-tight mb-4 hover:underline">${escape(item.title)} </button>`;
-      })}</div></div>` : ``}  ${slots.default ? slots.default({}) : ``} </main>`;
-    });
-  }
-});
-
-// .svelte-kit/output/server/nodes/0.js
-var __exports = {};
-__export(__exports, {
-  component: () => component,
-  fonts: () => fonts,
-  imports: () => imports,
-  index: () => index,
-  server: () => layout_server_ts_exports,
-  server_id: () => server_id,
-  stylesheets: () => stylesheets
-});
-var index, component_cache, component, server_id, imports, stylesheets, fonts;
-var init__ = __esm({
-  ".svelte-kit/output/server/nodes/0.js"() {
-    init_layout_server_ts();
-    index = 0;
-    component = async () => component_cache ?? (component_cache = (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default);
-    server_id = "src/routes/+layout.server.ts";
-    imports = ["_app/immutable/nodes/0.6b2e6312.js", "_app/immutable/chunks/scheduler.77b4cd31.js", "_app/immutable/chunks/index.197a950c.js", "_app/immutable/chunks/Scroller.svelte_svelte_type_style_lang.80216b15.js", "_app/immutable/chunks/index.84b6a3b0.js", "_app/immutable/chunks/singletons.96bbb52c.js", "_app/immutable/chunks/Icon.717733d3.js"];
-    stylesheets = ["_app/immutable/assets/0.c38ed215.css", "_app/immutable/assets/Scroller.32d83c67.css"];
-    fonts = [];
-  }
-});
-
-// .svelte-kit/output/server/entries/fallbacks/error.svelte.js
-var error_svelte_exports = {};
-__export(error_svelte_exports, {
-  default: () => Error$1
-});
-var getStores, page, Error$1;
-var init_error_svelte = __esm({
-  ".svelte-kit/output/server/entries/fallbacks/error.svelte.js"() {
-    init_ssr();
-    getStores = () => {
-      const stores = getContext("__svelte__");
-      return {
-        /** @type {typeof page} */
-        page: {
-          subscribe: stores.page.subscribe
-        },
-        /** @type {typeof navigating} */
-        navigating: {
-          subscribe: stores.navigating.subscribe
-        },
-        /** @type {typeof updated} */
-        updated: stores.updated
-      };
-    };
-    page = {
-      subscribe(fn) {
-        const store = getStores().page;
-        return store.subscribe(fn);
-      }
-    };
-    Error$1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $page, $$unsubscribe_page;
-      $$unsubscribe_page = subscribe(page, (value) => $page = value);
-      $$unsubscribe_page();
-      return `<h1>${escape($page.status)}</h1> <p>${escape($page.error?.message)}</p>`;
-    });
-  }
-});
-
-// .svelte-kit/output/server/nodes/1.js
-var __exports2 = {};
-__export(__exports2, {
-  component: () => component2,
-  fonts: () => fonts2,
-  imports: () => imports2,
-  index: () => index2,
-  stylesheets: () => stylesheets2
-});
-var index2, component_cache2, component2, imports2, stylesheets2, fonts2;
-var init__2 = __esm({
-  ".svelte-kit/output/server/nodes/1.js"() {
-    index2 = 1;
-    component2 = async () => component_cache2 ?? (component_cache2 = (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default);
-    imports2 = ["_app/immutable/nodes/1.f24a4be4.js", "_app/immutable/chunks/scheduler.77b4cd31.js", "_app/immutable/chunks/index.197a950c.js", "_app/immutable/chunks/singletons.96bbb52c.js", "_app/immutable/chunks/index.84b6a3b0.js"];
-    stylesheets2 = [];
-    fonts2 = [];
-  }
-});
-
-// .svelte-kit/output/server/chunks/projects.js
-var AnimatedText, projects;
-var init_projects = __esm({
-  ".svelte-kit/output/server/chunks/projects.js"() {
-    init_ssr();
-    AnimatedText = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let { messages } = $$props;
-      let { textClass = "" } = $$props;
-      let { duration = 2e3 } = $$props;
-      let index5 = 0;
-      let roller;
-      onDestroy(() => {
-        clearInterval(roller);
-      });
-      if ($$props.messages === void 0 && $$bindings.messages && messages !== void 0)
-        $$bindings.messages(messages);
-      if ($$props.textClass === void 0 && $$bindings.textClass && textClass !== void 0)
-        $$bindings.textClass(textClass);
-      if ($$props.duration === void 0 && $$bindings.duration && duration !== void 0)
-        $$bindings.duration(duration);
-      return `<h1${add_attribute("class", textClass, 0)}>${escape(messages[index5])}</h1>`;
-    });
-    projects = [
+    _projects = [
       {
         id: 1,
         date: "11/10/2021",
@@ -1102,9 +1118,8 @@ var ChevronArrow, Content, generalSkills, css$1, Projects, css2, Skills, About, 
 var init_page_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_page.svelte.js"() {
     init_ssr();
-    init_Scroller_svelte_svelte_type_style_lang();
     init_projects();
-    init_Icon();
+    init_mediaQueryStore();
     ChevronArrow = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let { point = "down" } = $$props;
       if ($$props.point === void 0 && $$bindings.point && point !== void 0)
@@ -1268,7 +1283,7 @@ var init_page_svelte = __esm({
       map: null
     };
     Projects = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let projectsData = projects.map((project) => ({ ...project, isVisible: false }));
+      let projectsData = _projects.map((project) => ({ ...project, isVisible: false }));
       $$result.css.add(css$1);
       return `<section id="projects" class="container mx-20 px-4 py-10"><div class="text-center mb-10" data-svelte-h="svelte-ldme5o"><h2 class="text-3xl md:text-4xl font-bold text-white mb-4">My Projects</h2> <p class="text-lg text-white">Here&#39;s a selection of some recent work. For more details, click on each project.</p></div> <div class="relative"><div class="absolute left-1/2 transform -translate-x-1/2 w-[3px] bg-cyan-100 h-full hidden lg:block"></div> ${each(projectsData, (project, index5) => {
         return `<div class="w-full"><div class="${[
@@ -1394,7 +1409,7 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => component_cache3 ?? (component_cache3 = (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default);
-    imports3 = ["_app/immutable/nodes/2.f2bbd1c0.js", "_app/immutable/chunks/scheduler.77b4cd31.js", "_app/immutable/chunks/index.197a950c.js", "_app/immutable/chunks/Scroller.svelte_svelte_type_style_lang.80216b15.js", "_app/immutable/chunks/index.84b6a3b0.js", "_app/immutable/chunks/Icon.717733d3.js", "_app/immutable/chunks/index.510114a9.js"];
+    imports3 = ["_app/immutable/nodes/2.3041c5f8.js", "_app/immutable/chunks/scheduler.77b4cd31.js", "_app/immutable/chunks/index.21e71860.js", "_app/immutable/chunks/Scroller.svelte_svelte_type_style_lang.6525a868.js", "_app/immutable/chunks/mediaQueryStore.c706bc8d.js", "_app/immutable/chunks/index.84b6a3b0.js", "_app/immutable/chunks/index.b3e0b250.js"];
     stylesheets3 = ["_app/immutable/assets/2.adaf958c.css", "_app/immutable/assets/Scroller.32d83c67.css"];
     fonts3 = [];
   }
@@ -1410,13 +1425,11 @@ var init_page_svelte2 = __esm({
   ".svelte-kit/output/server/entries/pages/skills/_page.svelte.js"() {
     init_ssr();
     init_projects();
-    init_Scroller_svelte_svelte_type_style_lang();
     css3 = {
-      code: "body{line-height:1.5}main{background:black !important}ul.svelte-2l6qvy.svelte-2l6qvy{list-style:none;padding:0;margin:0}.skills-grid.svelte-2l6qvy.svelte-2l6qvy{--_space:1rem;padding:0;display:grid;gap:var(--_space);grid-template-columns:repeat(auto-fill, minmax(25%, 1fr));grid-auto-rows:minmax(100px, auto)}@media(max-width: 1200px){.skills-grid.svelte-2l6qvy.svelte-2l6qvy{grid-template-columns:repeat(auto-fill, minmax(25%, 1fr))}}@media(max-width: 980px){.skills-grid.svelte-2l6qvy.svelte-2l6qvy{grid-template-columns:repeat(auto-fill, minmax(20%, 1fr))}}@media(max-width: 768px){.skills-grid.svelte-2l6qvy.svelte-2l6qvy{grid-template-columns:repeat(auto-fill, minmax(20%, 1fr))}}@media(max-width: 600px){.skills-grid.svelte-2l6qvy.svelte-2l6qvy{grid-template-columns:repeat(auto-fill, minmax(33%, 1fr))}}.skill-card.svelte-2l6qvy.svelte-2l6qvy{position:relative}.expanded.svelte-2l6qvy.svelte-2l6qvy{grid-column:span 2;grid-row:span 2}@media(max-width: 600px){.expanded.svelte-2l6qvy.svelte-2l6qvy{grid-column:span 2;grid-row:span 2}}.skill-details.svelte-2l6qvy.svelte-2l6qvy{display:none}.expanded.svelte-2l6qvy .skill-details.svelte-2l6qvy{display:block}.roadmap-list.svelte-2l6qvy.svelte-2l6qvy{list-style-type:none;padding:0;margin-top:10px}",
+      code: "main{background:#1d1d20 !important}.skills-grid.svelte-cy6ddi.svelte-cy6ddi{--_space:1rem;padding:0;display:grid;gap:var(--_space);grid-template-columns:repeat(auto-fill, minmax(25%, 1fr));grid-auto-rows:minmax(100px, auto)}@media(max-width: 1200px){.skills-grid.svelte-cy6ddi.svelte-cy6ddi{grid-template-columns:repeat(auto-fill, minmax(25%, 1fr))}}@media(max-width: 980px){.skills-grid.svelte-cy6ddi.svelte-cy6ddi{grid-template-columns:repeat(auto-fill, minmax(20%, 1fr))}}@media(max-width: 768px){.skills-grid.svelte-cy6ddi.svelte-cy6ddi{grid-template-columns:repeat(auto-fill, minmax(20%, 1fr))}}@media(max-width: 600px){.skills-grid.svelte-cy6ddi.svelte-cy6ddi{grid-template-columns:repeat(auto-fill, minmax(33%, 1fr))}}.skill-card.svelte-cy6ddi.svelte-cy6ddi{position:relative}.expanded.svelte-cy6ddi.svelte-cy6ddi{grid-column:span 2;grid-row:span 2}@media(max-width: 600px){.expanded.svelte-cy6ddi.svelte-cy6ddi{grid-column:span 2;grid-row:span 2}}.skill-details.svelte-cy6ddi.svelte-cy6ddi{display:none}.expanded.svelte-cy6ddi .skill-details.svelte-cy6ddi{display:block}.underline-link.svelte-cy6ddi.svelte-cy6ddi{position:relative;display:inline-block;font-weight:bold}.underline-link.svelte-cy6ddi.svelte-cy6ddi:after{position:absolute;top:100%;left:0;width:100%;height:1px;background:var(--accent);content:'';opacity:0;transition:height 0.3s, opacity 0.3s, transform 0.3s;transform:translateY(-5px)}.underline-link.svelte-cy6ddi.svelte-cy6ddi:focus:after,.underline-link.svelte-cy6ddi.svelte-cy6ddi:hover:after{height:2px;border-radius:3px;opacity:1;transform:translateY(-2px)}",
       map: null
     };
     Page2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $$unsubscribe_small;
       const messagesToAnimate = [
         "TypeScript",
         "Python",
@@ -1431,11 +1444,47 @@ var init_page_svelte2 = __esm({
         "Data Engineering",
         "Data Visualization"
       ];
-      const small = mediaQueryStore();
-      $$unsubscribe_small = subscribe(small, (value) => value);
-      let _projects = projects;
+      const skills = [
+        {
+          id: 1,
+          title: "Languages",
+          items: [
+            { text: "JavaScript", icon: "javascript" },
+            { text: "TypeScript", icon: "typescript" },
+            { text: "Python", icon: "python" },
+            { text: "Rust", icon: "rust" },
+            { text: "Java", icon: "java" }
+          ]
+        },
+        {
+          id: 2,
+          title: "Frameworks",
+          items: [
+            { text: "React", icon: "react" },
+            { text: "Svelte", icon: "svelte" },
+            { text: "Vue", icon: "vue" },
+            { text: "Express", icon: "express" },
+            { text: "Koa", icon: "koa" },
+            { text: "Django", icon: "django" },
+            { text: "Flask", icon: "flask" },
+            { text: "Wordpress", icon: "wordpress" }
+          ]
+        },
+        {
+          id: 3,
+          title: "Machine Learning",
+          items: [
+            { text: "Regression", icon: "regression" },
+            { text: "Forecasting", icon: "forecasting" },
+            {
+              text: "Deep Learning",
+              icon: "deeplearning"
+            }
+          ]
+        }
+      ];
+      let projects = _projects;
       $$result.css.add(css3);
-      $$unsubscribe_small();
       return `<div class="w-full"><header class="intro text-in-blur"><h2 class="intro__tagline" data-svelte-h="svelte-g5utry">I&#39;m <span class="name">Ryan Painter</span>, Lorem ipsum dolor sit amet consectetur adipisicing
       elit. Necessitatibus eos dolores modi quisquam voluptatum eum magni quod nostrum obcaecati
       blanditiis.</h2> <div class="container text-in-blur min-h-[70px]">${validate_component(AnimatedText, "AnimatedText").$$render(
@@ -1447,25 +1496,69 @@ var init_page_svelte2 = __esm({
         {},
         {}
       )}</div> <h3 class="intro__contact" data-svelte-h="svelte-zrznfz">Contact me at:
-      <a href="matilto:paintersrp@gmail.com" class="highlight-link">paintersrp@gmail.com</a></h3></header></div> <div class="w-full text-amber-300"><section class="section background" data-svelte-h="svelte-668euj"><div class="section__title">Background</div> <div class="section__content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, sint ex, similique facere
-      sequi accusamus assumenda tempore nulla dignissimos a facilis excepturi magni consequatur
-      necessitatibus deleniti vero odio earum praesentium. Natus repellendus deserunt laborum
-      dolores a unde ipsum neque nostrum voluptates sapiente, facilis in cum, provident veniam enim
-      corporis similique!
-      <br> <br>
-
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus veritatis optio odio
-      eveniet vel, quia quod. Consectetur, maiores cumque? Animi provident officiis veniam in minus
-      natus assumenda veritatis incidunt aliquid.
-      <br> <br>
-
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel ratione et consectetur rem
-      temporibus nulla?</div></section> <section class="section background"><div class="section__title" data-svelte-h="svelte-1s8ares">Projects</div> <div class="section__content"><section id="skills" class="w-full text-white"> <div class="skills-grid svelte-2l6qvy">${each(_projects, (project) => {
+      <a href="matilto:paintersrp@gmail.com" class="highlight-link">paintersrp@gmail.com</a></h3></header></div> <div class="w-full text-amber-300"><section class="w-full block justify-center text-white px-9 py-12 2xl:px-44 xl:px-24 xl:py-24 lg:py-12 lg:px-12 md:flex" data-svelte-h="svelte-7ntvq3"><div class="flex-shrink-0 uppercase text-left md:text-right w-auto md:w-[150px] lg:w-[200px] xl:w-[200px] xl:mr-[70px] mr-[50px] font-bold tracking-widest accent-color">Background</div> <div class="font-light text-base max-w-[650px] w-full pt-7 sm:pt-7 md:pt-0 pl-7 sm:pl-7 md:pl-12 lg:pl-0"><p class="mt-0 mb-6 text-gray-300">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, sint ex, similique facere
+        sequi accusamus assumenda tempore nulla dignissimos a facilis excepturi magni consequatur
+        necessitatibus deleniti vero odio earum praesentium. Natus repellendus deserunt laborum
+        dolores a unde ipsum neque nostrum voluptates sapiente, facilis in cum, provident veniam
+        enim corporis similique!</p> <p class="mt-0 mb-6 text-gray-300">Lorem ipsum dolor sit amet <a href="/" class="underline-link text-white svelte-cy6ddi">consectetur</a>,
+        adipisicing elit. Repellendus veritatis optio odio eveniet vel, quia quod. Consectetur,
+        maiores cumque? Animi provident officiis veniam in minus natus assumenda veritatis incidunt
+        aliquid.</p> <p class="mt-0 mb-6 text-gray-300">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel ratione et consectetur rem
+        temporibus nulla?</p></div></section> <section class="w-full block justify-center text-white px-9 py-12 2xl:px-44 xl:px-24 xl:py-24 lg:py-12 lg:px-12 md:flex"><div class="flex-shrink-0 uppercase text-left md:text-right w-auto md:w-[150px] lg:w-[200px] xl:w-[200px] xl:mr-[70px] mr-[50px] font-bold tracking-widest accent-color" data-svelte-h="svelte-1cexakp">Projects</div> <div class="font-light text-base max-w-[650px] w-full pt-7 sm:pt-7 md:pt-0 pl-7 sm:pl-7 md:pl-12 lg:pl-0"><section id="skills" class="w-full text-white"> <div class="skills-grid svelte-cy6ddi">${each(projects, (project) => {
         return `<button class="${[
-          escape(null_to_empty(`skill-card bg-white bg-opacity-20 rounded-lg shadow-md flex flex-col items-center cursor-pointer transition duration-300 ease-in-out hover:shadow-xl hover:bg-opacity-30 relative ${project.isExpanded ? "justify-center p-6" : "p-4"}`), true) + " svelte-2l6qvy",
+          escape(null_to_empty(`skill-card text-amber-50 bg-white bg-opacity-[5%] rounded-lg shadow-md flex flex-col items-center cursor-pointer transition duration-300 ease-in-out hover:shadow-xl hover:bg-opacity-[10%] relative ${project.isExpanded ? "justify-center p-6" : "p-4"}`), true) + " svelte-cy6ddi",
           project.isExpanded ? "expanded" : ""
-        ].join(" ").trim()}"><figure class="flex justify-center mb-4"><img class="${escape(null_to_empty(`object-cover rounded shadow mx-auto  ${project.isExpanded ? "w-full" : "w-full"}`), true) + " svelte-2l6qvy"}"${add_attribute("src", project.imgUrl, 0)}${add_attribute("alt", project.title, 0)}></figure> <span class="${escape(null_to_empty(`font-semibold ${project.isExpanded ? "text-xl" : " text-sm"}`), true) + " svelte-2l6qvy"}">${escape(project.title)}</span> ${project.isExpanded ? `<div class="skill-details faster-in-blur mt-3 svelte-2l6qvy"><a${add_attribute("href", project.repoUrl, 0)} class="px-2 md:px-4 my-auto py-2 text-sm rounded-md bg-amber-300 bg-opacity-80 hover:bg-opacity-70 shadow-md text-white font-semibold">GitHub</a> <a${add_attribute("href", project.liveDemo, 0)} class="px-2 md:px-3 my-auto py-2 text-sm rounded-md bg-amber-300 bg-opacity-80 hover:bg-opacity-70 shadow-md text-white font-semibold">Live Demo</a> </div>` : ``} </button>`;
-      })}</div></section></div></section> <section class="section background" data-svelte-h="svelte-3tywit"><div class="section__title">Skills</div> <div class="section__content"><div class="skillz"><div class="skillz__category"><div class="skillz__category__label">Languages</div> <ul class="svelte-2l6qvy"><li class="skillz__category__item">JavaScript</li> <li class="skillz__category__item">TypeScript</li> <li class="skillz__category__item">Python</li> <li class="skillz__category__item">Rust</li> <li class="skillz__category__item">JavaScript</li></ul></div> <div class="skillz__category"><div class="skillz__category__label">Frameworks</div> <ul class="svelte-2l6qvy"><li class="skillz__category__item">React</li> <li class="skillz__category__item">Svelte</li> <li class="skillz__category__item">Vue</li> <li class="skillz__category__item">Django</li> <li class="skillz__category__item">Express / Koa</li> <li class="skillz__category__item">Flask</li> <li class="skillz__category__item">Wordpress</li></ul></div> <div class="skillz__category"><div class="skillz__category__label">Machine Learning</div> <ul class="svelte-2l6qvy"><li class="skillz__category__item">Regression</li> <li class="skillz__category__item">Forecasting</li> <li class="skillz__category__item"></li> <li class="skillz__category__item"></li> <li class="skillz__category__item"></li></ul></div></div></div></section> </div>`;
+        ].join(" ").trim()}"><figure class="flex justify-center mb-4"><img class="${escape(null_to_empty(`object-cover rounded shadow mx-auto  ${project.isExpanded ? "w-full" : "w-full"}`), true) + " svelte-cy6ddi"}"${add_attribute("src", project.imgUrl, 0)}${add_attribute("alt", project.title, 0)}></figure> <span class="${escape(null_to_empty(`font-semibold ${project.isExpanded ? "text-xl" : " text-sm"}`), true) + " svelte-cy6ddi"}">${escape(project.title)}</span> ${project.isExpanded ? `<div class="faster-in-blur mt-3 gap-4 !flex"><a${add_attribute("href", project.repoUrl, 0)} class="px-2 md:px-4 my-auto py-2 text-sm rounded-md bg-amber-300 bg-opacity-90 hover:bg-opacity-70 shadow-md text-white font-extrabold">GitHub</a> <a${add_attribute("href", project.liveDemo, 0)} class="px-2 md:px-4 my-auto py-2 text-sm rounded-md bg-amber-300 bg-opacity-90 hover:bg-opacity-70 shadow-md text-white font-extrabold">Live Demo</a> </div>` : ``} </button>`;
+      })}</div></section></div></section> <section class="w-full block justify-center text-white px-9 py-12 2xl:px-44 xl:px-24 xl:py-24 lg:py-12 lg:px-12 md:flex"><div class="flex-shrink-0 uppercase text-left md:text-right w-auto md:w-[150px] lg:w-[200px] xl:w-[200px] xl:mr-[70px] mr-[50px] font-bold tracking-widest accent-color" data-svelte-h="svelte-1xrlpmp">Skills</div> <div class="font-light text-base max-w-[650px] w-full pt-7 sm:pt-7 md:pt-0 pl-7 sm:pl-7 md:pl-12 lg:pl-0"><div class="flex justify-between flex-wrap md:flex-nowrap">${each(skills, (skillset, index5) => {
+        return `<div class="mb-6 md:w-[47%]"><div class="text-white font-extrabold uppercase">${escape(skillset.title)}</div> <ul>${each(skillset.items, (item, index22) => {
+          return `<li class="my-[6px] text-sm text-gray-300"><div class="flex gap-3 items-center">${item.icon ? `${validate_component(Icon, "Icon").$$render(
+            $$result,
+            {
+              type: item.icon,
+              size: "sm",
+              iconClass: "accent-color"
+            },
+            {},
+            {}
+          )}` : ``} ${escape(item.text)}</div> </li>`;
+        })}</ul> </div>`;
+      })}</div></div></section></div> <footer class="block md:flex md:justify-between md:items-center py-12 px-7 md:px-20 bg-opacity-[1.5%] bg-white"><div class="font-bold w-auto text-center mb-6 md:w-[200px] md:text-left md:mb-0 text-gray-200" data-svelte-h="svelte-1ga1j82"><div><span>\xA9 Copyright 2023</span></div> <div><span>Made by <a href="/" class="underline-link accent-color !font-extrabold svelte-cy6ddi">Ryan Painter</a></span></div></div> <div class="flex justify-center"><a href="/" class="uppercase font-bold mx-3 lg:mx-4" target="_blank" rel="noopener noreferrer" title="Email">${validate_component(Icon, "Icon").$$render(
+        $$result,
+        {
+          size: "md",
+          type: "email",
+          iconClass: "accent-color hover:text-amber-400 transition-all duration-300 ease-in-out"
+        },
+        {},
+        {}
+      )}</a> <a href="/" class="uppercase font-bold mx-3 lg:mx-4" target="_blank" rel="noopener noreferrer" title="Email">${validate_component(Icon, "Icon").$$render(
+        $$result,
+        {
+          size: "md",
+          type: "twitter",
+          iconClass: "accent-color hover:text-amber-400 transition-all duration-300 ease-in-out"
+        },
+        {},
+        {}
+      )}</a> <a href="/" class="uppercase font-bold mx-3 lg:mx-4" target="_blank" rel="noopener noreferrer" title="Email">${validate_component(Icon, "Icon").$$render(
+        $$result,
+        {
+          size: "md",
+          type: "github",
+          iconClass: "accent-color hover:text-amber-400 transition-all duration-300 ease-in-out"
+        },
+        {},
+        {}
+      )}</a> <a href="/" class="uppercase font-bold mx-3 lg:mx-4" target="_blank" rel="noopener noreferrer" title="Email">${validate_component(Icon, "Icon").$$render(
+        $$result,
+        {
+          size: "md",
+          type: "linkedin",
+          iconClass: "accent-color hover:text-amber-400 transition-all duration-300 ease-in-out"
+        },
+        {},
+        {}
+      )}</a></div> </footer>`;
     });
   }
 });
@@ -1484,8 +1577,8 @@ var init__4 = __esm({
   ".svelte-kit/output/server/nodes/3.js"() {
     index4 = 3;
     component4 = async () => component_cache4 ?? (component_cache4 = (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default);
-    imports4 = ["_app/immutable/nodes/3.1dcbfbda.js", "_app/immutable/chunks/index.510114a9.js", "_app/immutable/chunks/scheduler.77b4cd31.js", "_app/immutable/chunks/index.197a950c.js", "_app/immutable/chunks/Scroller.svelte_svelte_type_style_lang.80216b15.js", "_app/immutable/chunks/index.84b6a3b0.js"];
-    stylesheets4 = ["_app/immutable/assets/3.ad1b384d.css", "_app/immutable/assets/Scroller.32d83c67.css"];
+    imports4 = ["_app/immutable/nodes/3.e2924660.js", "_app/immutable/chunks/index.b3e0b250.js", "_app/immutable/chunks/scheduler.77b4cd31.js", "_app/immutable/chunks/index.21e71860.js", "_app/immutable/chunks/Scroller.svelte_svelte_type_style_lang.6525a868.js"];
+    stylesheets4 = ["_app/immutable/assets/3.349377bf.css", "_app/immutable/assets/Scroller.32d83c67.css"];
     fonts4 = [];
   }
 });
@@ -1666,7 +1759,7 @@ var options = {
 		<div class="error">
 			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n"
   },
-  version_hash: "bi0ou6"
+  version_hash: "u1p3p9"
 };
 function get_hooks() {
   return {};
@@ -5037,7 +5130,7 @@ var manifest = (() => {
     assets: /* @__PURE__ */ new Set(["favicon.png", "images/jefferson-santos-fCEJGBzAkrU-unsplash.jpg", "images/jerry-zhang-ePpaQC2c1xA-unsplash.jpg", "images/linus-nylund-Q5QspluNZmM-unsplash.jpg"]),
     mimeTypes: { ".png": "image/png", ".jpg": "image/jpeg" },
     _: {
-      client: { "start": "_app/immutable/entry/start.2027fa20.js", "app": "_app/immutable/entry/app.fc36325c.js", "imports": ["_app/immutable/entry/start.2027fa20.js", "_app/immutable/chunks/scheduler.77b4cd31.js", "_app/immutable/chunks/singletons.96bbb52c.js", "_app/immutable/chunks/index.84b6a3b0.js", "_app/immutable/entry/app.fc36325c.js", "_app/immutable/chunks/scheduler.77b4cd31.js", "_app/immutable/chunks/index.197a950c.js"], "stylesheets": [], "fonts": [] },
+      client: { "start": "_app/immutable/entry/start.f44ec92a.js", "app": "_app/immutable/entry/app.017f3bf7.js", "imports": ["_app/immutable/entry/start.f44ec92a.js", "_app/immutable/chunks/scheduler.77b4cd31.js", "_app/immutable/chunks/singletons.09520d21.js", "_app/immutable/chunks/index.84b6a3b0.js", "_app/immutable/entry/app.017f3bf7.js", "_app/immutable/chunks/scheduler.77b4cd31.js", "_app/immutable/chunks/index.21e71860.js"], "stylesheets": [], "fonts": [] },
       nodes: [
         __memo(() => Promise.resolve().then(() => (init__(), __exports))),
         __memo(() => Promise.resolve().then(() => (init__2(), __exports2))),

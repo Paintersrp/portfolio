@@ -19,6 +19,7 @@ declare global {
     imgUrl: string;
     repoUrl: string;
     liveDemo: string;
+    isExpanded: boolean;
   };
 
   type Skill = {
@@ -58,7 +59,15 @@ declare global {
     | 'twitter'
     | 'up'
     | 'vue'
-    | 'webpack';
+    | 'webpack'
+    | 'typescript'
+    | 'rust'
+    | 'java'
+    | 'wordpress'
+    | 'regression'
+    | 'forecasting'
+    | 'deeplearning'
+    | 'instagram';
 
   interface Social {
     name: IconType;

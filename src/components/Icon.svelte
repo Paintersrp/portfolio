@@ -46,7 +46,15 @@
     down: Icons.DownIcon,
     up: Icons.UpIcon,
     vue: Icons.VueIcon,
-    webpack: Icons.WebpackIcon
+    webpack: Icons.WebpackIcon,
+    typescript: Icons.TypescriptIcon,
+    rust: Icons.RustIcon,
+    java: Icons.JavaIcon,
+    wordpress: Icons.WordpressIcon,
+    deeplearning: Icons.DeepLearningIcon,
+    regression: Icons.RegressionIcon,
+    forecasting: Icons.ForecastingIcon,
+    instagram: Icons.InstagramIcon
   };
 
   $: iconSize = sizeMap[size];

@@ -1,8 +1,8 @@
 <script lang="ts">
   import { inview } from 'svelte-inview';
-  import { projects } from '$lib/const';
+  import { _projects } from '$lib/const';
 
-  let projectsData = projects.map((project) => ({ ...project, isVisible: false }));
+  let projectsData = _projects.map((project) => ({ ...project, isVisible: false }));
 
   // Flips the marker position based on whether the index is even or odd
   function markerClass(index: number) {
