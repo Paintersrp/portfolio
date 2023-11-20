@@ -33,7 +33,9 @@
     {#each skills as skill (skill.text)}
       <button
         animate:flip={{ duration: 400, easing: sineOut }}
-        class="skill-card bg-white bg-opacity-20 p-4 rounded-lg shadow-md flex flex-col items-center cursor-pointer transition duration-300 ease-in-out hover:shadow-xl hover:bg-opacity-30 relative"
+        class={`skill-card bg-white bg-opacity-20 p-4 rounded-lg shadow-md flex flex-col items-center cursor-pointer transition duration-300 ease-in-out hover:shadow-xl hover:bg-opacity-30 relative ${
+          skill.isExpanded ? 'justify-center' : ''
+        }`}
         class:expanded={skill.isExpanded}
         on:click={() => toggleSkill(skill)}
       >
@@ -45,11 +47,18 @@
         <span class={`font-semibold ${skill.isExpanded ? 'text-xl' : ' text-sm'}`}
           >{skill.text}</span
         >
-        {#if skill.isExpanded}
-          <div transition:blur={{ delay: 0 }} class="skill-details m-auto">
-            <p class="text-sm">{skill.description}</p>
+        <!-- {#if skill.isExpanded}
+          <div class="skill-details faster-in-blur">
+            <ul class="roadmap-list flex flex-col justify-start items-start">
+              {#each skill.roadmap as point}
+                <li class="text-xs">
+                  <strong>{point.date}:</strong>
+                  {point.milestone}
+                </li>
+              {/each}
+            </ul>
           </div>
-        {/if}
+        {/if} -->
       </button>
     {/each}
   </div>
@@ -111,5 +120,15 @@
 
   .expanded .skill-details {
     display: block;
+  }
+
+  .roadmap-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+  }
+
+  .roadmap-list li {
+    margin-bottom: 5px;
   }
 </style>

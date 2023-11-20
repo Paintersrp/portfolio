@@ -10,6 +10,7 @@ export const projects = [
     technologies: ['SvelteKit', 'TailwindCSS', 'SEO Auditing Tools'],
     imgUrl: 'https://source.unsplash.com/random/600x400/?website',
     repoUrl: 'https://github.com/yourusername/personal-blog',
+    isExpanded: false,
     liveDemo: 'https://yourpersonalblog.com'
   },
   {
@@ -24,6 +25,7 @@ export const projects = [
     technologies: ['Python', 'Scikit-learn', 'Pandas'],
     imgUrl: 'https://source.unsplash.com/random/600x400/?predictor',
     repoUrl: 'https://github.com/yourusername/sports-predictor',
+    isExpanded: false,
     liveDemo: 'https://yoursportspredictor.com'
   },
   {
@@ -37,6 +39,7 @@ export const projects = [
     technologies: ['TensorFlow', 'Keras', 'NumPy', 'Matplotlib'],
     imgUrl: 'https://source.unsplash.com/random/600x400/?forecast',
     repoUrl: 'https://github.com/yourusername/sales-forecaster',
+    isExpanded: false,
     liveDemo: 'https://yoursalesforecaster.com'
   },
   {
@@ -50,6 +53,7 @@ export const projects = [
     technologies: ['Node.js', 'Express', 'Elasticsearch'],
     imgUrl: 'https://source.unsplash.com/random/600x400/?api',
     repoUrl: 'https://github.com/yourusername/api-gateway',
+    isExpanded: false,
     liveDemo: 'https://yourapigateway.com'
   }
 ];

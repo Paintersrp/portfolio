@@ -25,7 +25,8 @@ declare global {
     text: string;
     icon: IconType;
     isExpanded: boolean;
-    description: string;
+
+    roadmap: { date: string; milestone: string }[];
   };
 
   type IconSize = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
@@ -65,6 +66,20 @@ declare global {
   }
 
   type Socials = Social[];
+
+  interface Project {
+    id: number;
+    date: string;
+    title: string;
+    description: string;
+    details: string;
+    features: string[];
+    technologies: string[];
+    imgUrl: string;
+    repoUrl: string;
+    isExpanded: boolean;
+    liveDemo: string;
+  }
 
   interface NavigationItem {
     title: string;
