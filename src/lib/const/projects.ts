@@ -1,4 +1,4 @@
-export const _projects = [
+export const projects = [
   {
     id: 1,
     date: '11/10/2021',

@@ -1,2 +1,3 @@
-export { _projects } from './projects';
-export { generalSkills } from './skills';
+export { navItems } from './nav';
+export { projects } from './projects';
+export { skills } from './skills';

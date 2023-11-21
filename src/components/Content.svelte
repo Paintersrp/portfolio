@@ -5,12 +5,6 @@
   export let yOut: number;
 </script>
 
-<!-- class="flex-grow flex flex-col items-center justify-center py-3 md:py-12 space-y-3 md:space-y-6 max-w-full lg:p-4 mx-auto overflow-x-hidden overflow-y-hidden w-full" -->
-
-<div
-  class="flex-grow flex flex-col items-center justify-center max-w-full mx-auto overflow-x-hidden overflow-y-hidden w-full"
-  in:fly={{ y: yIn, duration: 500, delay: 700 }}
-  out:fly={{ y: yOut, duration: 500 }}
->
+<div in:fly={{ x: yIn, duration: 500, delay: 700 }} out:fly={{ x: yOut, duration: 500 }}>
   <slot />
 </div>

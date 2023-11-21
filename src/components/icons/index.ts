@@ -34,3 +34,5 @@ export { default as DeepLearningIcon } from './DeepLearningIcon.svelte';
 export { default as RegressionIcon } from './RegressionIcon.svelte';
 export { default as ForecastingIcon } from './ForecastingIcon.svelte';
 export { default as InstagramIcon } from './InstagramIcon.svelte';
+export { default as ExpandIcon } from './ExpandIcon.svelte';
+export { default as CollapseIcon } from './CollapseIcon.svelte';

@@ -11,6 +11,7 @@ declare global {
 
   type Project = {
     id: number;
+    date: string;
     title: string;
     description: string;
     details: string;
@@ -67,7 +68,9 @@ declare global {
     | 'regression'
     | 'forecasting'
     | 'deeplearning'
-    | 'instagram';
+    | 'instagram'
+    | 'expand'
+    | 'collapse';
 
   interface Social {
     name: IconType;

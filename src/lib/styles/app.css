@@ -26,18 +26,27 @@ p {
 :root {
   font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
   --accent: rgb(252 211 77 / 1);
+  --cyan: #22d3ee;
+  --indigo: #6366f1;
+  --red: #f43f5e;
   --tertiary: #272727;
+  --bg-color: #1d1d20;
 }
 
 .accent-color {
   color: var(--accent);
 }
+
 .accent-color-hover:hover {
   color: var(--accent);
 }
 
 .accent-bg {
-  color: var(--accent);
+  background-color: var(--accent);
+}
+
+.bg-color {
+  background-color: var(--bg-color);
 }
 
 .tertiary-color {
@@ -52,14 +61,8 @@ p {
 .intro {
   padding: 120px 100px;
   height: 100vh;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
   flex-direction: column;
-  -ms-flex-pack: distribute;
   justify-content: space-around;
   max-width: 1440px;
   margin: 0 auto;
@@ -181,4 +184,31 @@ p {
   .footer__links img {
     display: inline-block;
   }
+}
+
+.underline-link {
+  position: relative;
+  display: inline-block;
+  font-weight: bold;
+}
+
+.underline-link:after {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--accent);
+  content: '';
+  opacity: 0;
+  transition: height 0.3s, opacity 0.3s, transform 0.3s;
+  transform: translateY(-5px);
+}
+
+.underline-link:focus:after,
+.underline-link:hover:after {
+  height: 2px;
+  border-radius: 3px;
+  opacity: 1;
+  transform: translateY(-2px);
 }

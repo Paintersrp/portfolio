@@ -21,7 +21,7 @@
       fill: inherit;
     }
     .st1 {
-      fill: #ffffff;
+      fill: #1d1d20;
     }
   </style>
   <path

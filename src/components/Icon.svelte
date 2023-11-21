@@ -54,7 +54,9 @@
     deeplearning: Icons.DeepLearningIcon,
     regression: Icons.RegressionIcon,
     forecasting: Icons.ForecastingIcon,
-    instagram: Icons.InstagramIcon
+    instagram: Icons.InstagramIcon,
+    expand: Icons.ExpandIcon,
+    collapse: Icons.CollapseIcon
   };
 
   $: iconSize = sizeMap[size];

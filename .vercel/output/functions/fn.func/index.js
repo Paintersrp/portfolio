@@ -80,19 +80,13 @@ function subscribe(store, ...callbacks) {
   const unsub = store.subscribe(...callbacks);
   return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
 }
-function null_to_empty(value) {
-  return value == null ? "" : value;
-}
-function set_current_component(component5) {
-  current_component = component5;
+function set_current_component(component3) {
+  current_component = component3;
 }
 function get_current_component() {
   if (!current_component)
     throw new Error("Function called outside component initialization");
   return current_component;
-}
-function onDestroy(fn) {
-  get_current_component().$$.on_destroy.push(fn);
 }
 function setContext(key2, context) {
   get_current_component().$$.context.set(key2, context);
@@ -126,15 +120,15 @@ function each(items, fn) {
   }
   return str;
 }
-function validate_component(component5, name) {
-  if (!component5 || !component5.$$render) {
+function validate_component(component3, name) {
+  if (!component3 || !component3.$$render) {
     if (name === "svelte:component")
       name += " this={...}";
     throw new Error(
       `<${name}> is not a valid SSR component. You may need to review your build config to ensure that dependencies are compiled, rather than imported as pre-compiled modules. Otherwise you may need to fix a <${name}>.`
     );
   }
-  return component5;
+  return component3;
 }
 function create_ssr_component(fn) {
   function $$render(result, props, bindings, slots, context) {
@@ -162,7 +156,7 @@ function create_ssr_component(fn) {
       return {
         html,
         css: {
-          code: Array.from(result.css).map((css4) => css4.code).join("\n"),
+          code: Array.from(result.css).map((css2) => css2.code).join("\n"),
           map: null
           // TODO
         },
@@ -259,20 +253,20 @@ var require_cookie = __commonJS({
       var obj = {};
       var opt = options2 || {};
       var dec = opt.decode || decode;
-      var index5 = 0;
-      while (index5 < str.length) {
-        var eqIdx = str.indexOf("=", index5);
+      var index3 = 0;
+      while (index3 < str.length) {
+        var eqIdx = str.indexOf("=", index3);
         if (eqIdx === -1) {
           break;
         }
-        var endIdx = str.indexOf(";", index5);
+        var endIdx = str.indexOf(";", index3);
         if (endIdx === -1) {
           endIdx = str.length;
         } else if (endIdx < eqIdx) {
-          index5 = str.lastIndexOf(";", eqIdx - 1) + 1;
+          index3 = str.lastIndexOf(";", eqIdx - 1) + 1;
           continue;
         }
-        var key2 = str.slice(index5, eqIdx).trim();
+        var key2 = str.slice(index3, eqIdx).trim();
         if (void 0 === obj[key2]) {
           var val = str.slice(eqIdx + 1, endIdx).trim();
           if (val.charCodeAt(0) === 34) {
@@ -280,7 +274,7 @@ var require_cookie = __commonJS({
           }
           obj[key2] = tryDecode(val, dec);
         }
-        index5 = endIdx + 1;
+        index3 = endIdx + 1;
       }
       return obj;
     }
@@ -574,185 +568,11 @@ var init_layout_server_ts = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/mediaQueryStore.js
-function mediaQueryStore(query) {
-  const store = writable(false);
-  return { subscribe: store.subscribe };
-}
-var init_mediaQueryStore = __esm({
-  ".svelte-kit/output/server/chunks/mediaQueryStore.js"() {
-    init_chunks();
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/_layout.svelte.js
-var layout_svelte_exports = {};
-__export(layout_svelte_exports, {
-  default: () => Layout
-});
-var css, MenuIcon, Layout;
-var init_layout_svelte = __esm({
-  ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
+// .svelte-kit/output/server/chunks/Icon.js
+var AnalysisIcon, CodeIcon, CssIcon, DatabaseIcon, DjangoIcon, DownIcon, EmailIcon, GithubIcon, HtmlIcon, JavascriptIcon, LandscapeIcon, LinkedinIcon, NodeIcon, PythonIcon, ReactIcon, RightIcon, SvelteIcon, TwitterIcon, UpIcon, BabelIcon, DockerIcon, EngineerIcon, ExpressIcon, FlaskIcon, KoaIcon, SassIcon, VueIcon, WebpackIcon, TypescriptIcon, RustIcon, JavaIcon, WordpressIcon, DeepLearningIcon, RegressionIcon, ForecastingIcon, InstagramIcon, ExpandIcon, CollapseIcon, Icon;
+var init_Icon = __esm({
+  ".svelte-kit/output/server/chunks/Icon.js"() {
     init_ssr();
-    init_chunks();
-    init_mediaQueryStore();
-    css = {
-      code: ":root{--transition-duration:600ms}button.svelte-rv88i1.svelte-rv88i1{cursor:pointer;display:flex;align-items:center;overflow:hidden}svg.svelte-rv88i1.svelte-rv88i1{transition:transform var(--transition-duration)}.top.svelte-rv88i1.svelte-rv88i1{stroke-dasharray:40 160;transition:stroke-dashoffset var(--transition-duration)}.middle.svelte-rv88i1.svelte-rv88i1{transform-origin:50%;transition:transform var(--transition-duration)}.bottom.svelte-rv88i1.svelte-rv88i1{stroke-dasharray:40 85;transition:stroke-dashoffset var(--transition-duration)}.open.svelte-rv88i1.svelte-rv88i1{transform:rotate(45deg)}.open.svelte-rv88i1 .top.svelte-rv88i1,.open.svelte-rv88i1 .bottom.svelte-rv88i1{stroke-dashoffset:-64px}.open.svelte-rv88i1 .middle.svelte-rv88i1{transform:rotate(90deg)}",
-      map: null
-    };
-    MenuIcon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let { open = false } = $$props;
-      let { onClick = () => {
-        open = !open;
-      } } = $$props;
-      let { ariaLabel = "toggle menu" } = $$props;
-      let { width = 64 } = $$props;
-      if ($$props.open === void 0 && $$bindings.open && open !== void 0)
-        $$bindings.open(open);
-      if ($$props.onClick === void 0 && $$bindings.onClick && onClick !== void 0)
-        $$bindings.onClick(onClick);
-      if ($$props.ariaLabel === void 0 && $$bindings.ariaLabel && ariaLabel !== void 0)
-        $$bindings.ariaLabel(ariaLabel);
-      if ($$props.width === void 0 && $$bindings.width && width !== void 0)
-        $$bindings.width(width);
-      $$result.css.add(css);
-      return `<button${add_attribute("aria-expanded", open, 0)}${add_attribute("aria-label", ariaLabel, 0)} class="accent-color md:hidden svelte-rv88i1"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5"${add_attribute("width", width, 0)} class="${["svelte-rv88i1", open ? "open" : ""].join(" ").trim()}"><path class="top svelte-rv88i1" d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20"></path><path class="middle svelte-rv88i1" d="m 30,50 h 40"></path><path class="bottom svelte-rv88i1" d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20"></path></svg> </button>`;
-    });
-    Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $$unsubscribe_small;
-      let $isMenuOpen, $$unsubscribe_isMenuOpen;
-      let { data } = $$props;
-      const navItems = [
-        { title: "Nothing", route: "landing" },
-        { title: "Here", route: "about" },
-        { title: "Yet :)", route: "projects" }
-      ];
-      const isMenuOpen = writable(false);
-      $$unsubscribe_isMenuOpen = subscribe(isMenuOpen, (value) => $isMenuOpen = value);
-      const small = mediaQueryStore();
-      $$unsubscribe_small = subscribe(small, (value) => value);
-      const toggleMenu = () => {
-        isMenuOpen.update((n) => !n);
-      };
-      if ($$props.data === void 0 && $$bindings.data && data !== void 0)
-        $$bindings.data(data);
-      if ($$props.navItems === void 0 && $$bindings.navItems && navItems !== void 0)
-        $$bindings.navItems(navItems);
-      data.url;
-      $$unsubscribe_small();
-      $$unsubscribe_isMenuOpen();
-      return `<main class="flex flex-col bg-gradient-to-l from-cyan-500 to-blue-600 min-h-screen overflow-x-hidden overflow-y-hidden w-full"> <header class="p-1 fixed top-0 right-0 justify-end z-50">${validate_component(MenuIcon, "MenuIcon").$$render($$result, { open: $isMenuOpen, onClick: toggleMenu }, {}, {})}</header>     ${$isMenuOpen ? `<div class="fixed inset-0 flex items-center bg-[#1d1d20] justify-center p-4 z-40"> <div class="flex flex-col">${each(navItems, (item) => {
-        return `<button class="text-5xl md:text-6xl font-bold accent-color hover:text-amber-300 text-center leading-tight mb-4 hover:underline">${escape(item.title)} </button>`;
-      })}</div></div>` : ``}  ${slots.default ? slots.default({}) : ``} </main>`;
-    });
-  }
-});
-
-// .svelte-kit/output/server/nodes/0.js
-var __exports = {};
-__export(__exports, {
-  component: () => component,
-  fonts: () => fonts,
-  imports: () => imports,
-  index: () => index,
-  server: () => layout_server_ts_exports,
-  server_id: () => server_id,
-  stylesheets: () => stylesheets
-});
-var index, component_cache, component, server_id, imports, stylesheets, fonts;
-var init__ = __esm({
-  ".svelte-kit/output/server/nodes/0.js"() {
-    init_layout_server_ts();
-    index = 0;
-    component = async () => component_cache ?? (component_cache = (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default);
-    server_id = "src/routes/+layout.server.ts";
-    imports = ["_app/immutable/nodes/0.ad5048b3.js", "_app/immutable/chunks/scheduler.77b4cd31.js", "_app/immutable/chunks/index.21e71860.js", "_app/immutable/chunks/Scroller.svelte_svelte_type_style_lang.6525a868.js", "_app/immutable/chunks/index.84b6a3b0.js", "_app/immutable/chunks/singletons.07f371de.js", "_app/immutable/chunks/mediaQueryStore.c706bc8d.js"];
-    stylesheets = ["_app/immutable/assets/0.88d79b14.css", "_app/immutable/assets/Scroller.32d83c67.css"];
-    fonts = [];
-  }
-});
-
-// .svelte-kit/output/server/entries/fallbacks/error.svelte.js
-var error_svelte_exports = {};
-__export(error_svelte_exports, {
-  default: () => Error$1
-});
-var getStores, page, Error$1;
-var init_error_svelte = __esm({
-  ".svelte-kit/output/server/entries/fallbacks/error.svelte.js"() {
-    init_ssr();
-    getStores = () => {
-      const stores = getContext("__svelte__");
-      return {
-        /** @type {typeof page} */
-        page: {
-          subscribe: stores.page.subscribe
-        },
-        /** @type {typeof navigating} */
-        navigating: {
-          subscribe: stores.navigating.subscribe
-        },
-        /** @type {typeof updated} */
-        updated: stores.updated
-      };
-    };
-    page = {
-      subscribe(fn) {
-        const store = getStores().page;
-        return store.subscribe(fn);
-      }
-    };
-    Error$1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $page, $$unsubscribe_page;
-      $$unsubscribe_page = subscribe(page, (value) => $page = value);
-      $$unsubscribe_page();
-      return `<h1>${escape($page.status)}</h1> <p>${escape($page.error?.message)}</p>`;
-    });
-  }
-});
-
-// .svelte-kit/output/server/nodes/1.js
-var __exports2 = {};
-__export(__exports2, {
-  component: () => component2,
-  fonts: () => fonts2,
-  imports: () => imports2,
-  index: () => index2,
-  stylesheets: () => stylesheets2
-});
-var index2, component_cache2, component2, imports2, stylesheets2, fonts2;
-var init__2 = __esm({
-  ".svelte-kit/output/server/nodes/1.js"() {
-    index2 = 1;
-    component2 = async () => component_cache2 ?? (component_cache2 = (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default);
-    imports2 = ["_app/immutable/nodes/1.02117d1f.js", "_app/immutable/chunks/scheduler.77b4cd31.js", "_app/immutable/chunks/index.21e71860.js", "_app/immutable/chunks/singletons.07f371de.js", "_app/immutable/chunks/index.84b6a3b0.js"];
-    stylesheets2 = [];
-    fonts2 = [];
-  }
-});
-
-// .svelte-kit/output/server/chunks/projects.js
-var AnimatedText, AnalysisIcon, CodeIcon, CssIcon, DatabaseIcon, DjangoIcon, DownIcon, EmailIcon, GithubIcon, HtmlIcon, JavascriptIcon, LandscapeIcon, LinkedinIcon, NodeIcon, PythonIcon, ReactIcon, RightIcon, SvelteIcon, TwitterIcon, UpIcon, BabelIcon, DockerIcon, EngineerIcon, ExpressIcon, FlaskIcon, KoaIcon, SassIcon, VueIcon, WebpackIcon, TypescriptIcon, RustIcon, JavaIcon, WordpressIcon, DeepLearningIcon, RegressionIcon, ForecastingIcon, InstagramIcon, Icon, _projects;
-var init_projects = __esm({
-  ".svelte-kit/output/server/chunks/projects.js"() {
-    init_ssr();
-    AnimatedText = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let { messages } = $$props;
-      let { textClass = "" } = $$props;
-      let { duration = 2e3 } = $$props;
-      let index5 = 0;
-      let roller;
-      onDestroy(() => {
-        clearInterval(roller);
-      });
-      if ($$props.messages === void 0 && $$bindings.messages && messages !== void 0)
-        $$bindings.messages(messages);
-      if ($$props.textClass === void 0 && $$bindings.textClass && textClass !== void 0)
-        $$bindings.textClass(textClass);
-      if ($$props.duration === void 0 && $$bindings.duration && duration !== void 0)
-        $$bindings.duration(duration);
-      return `<h1${add_attribute("class", textClass, 0)}>${escape(messages[index5])}</h1>`;
-    });
     AnalysisIcon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let { iconSize } = $$props;
       if ($$props.iconSize === void 0 && $$bindings.iconSize && iconSize !== void 0)
@@ -857,7 +677,7 @@ var init_projects = __esm({
       fill: inherit;
     }
     .st1 {
-      fill: #ffffff;
+      fill: #1d1d20;
     }
   </style><path class="st0" d="M91.8,15.6C80.9-0.1,59.2-4.7,43.6,5.2L16.1,22.8C8.6,27.5,3.4,35.2,1.9,43.9c-1.3,7.3-0.2,14.8,3.3,21.3
 c-2.4,3.6-4,7.6-4.7,11.8c-1.6,8.9,0.5,18.1,5.7,25.4c11,15.7,32.6,20.3,48.2,10.4l27.5-17.5c7.5-4.7,12.7-12.4,14.2-21.1
@@ -984,6 +804,18 @@ c8.9-2.3,18.2,1.2,23.4,8.7c3.2,4.4,4.4,9.9,3.5,15.3c-0.9,5.2-4.1,9.9-8.6,12.7l-2
         $$bindings.iconSize(iconSize);
       return `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"${add_attribute("height", iconSize, 0)}${add_attribute("width", iconSize, 0)} viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path></svg>`;
     });
+    ExpandIcon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { iconSize } = $$props;
+      if ($$props.iconSize === void 0 && $$bindings.iconSize && iconSize !== void 0)
+        $$bindings.iconSize(iconSize);
+      return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"${add_attribute("height", iconSize, 0)}${add_attribute("width", iconSize, 0)}><path d="M480-120 300-300l58-58 122 122 122-122 58 58-180 180ZM358-598l-58-58 180-180 180 180-58 58-122-122-122 122Z"></path></svg>`;
+    });
+    CollapseIcon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { iconSize } = $$props;
+      if ($$props.iconSize === void 0 && $$bindings.iconSize && iconSize !== void 0)
+        $$bindings.iconSize(iconSize);
+      return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"${add_attribute("height", iconSize, 0)}${add_attribute("width", iconSize, 0)}><path d="m356-160-56-56 180-180 180 180-56 56-124-124-124 124Zm124-404L300-744l56-56 124 124 124-124 56 56-180 180Z"></path></svg>`;
+    });
     Icon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let iconSize;
       let icon;
@@ -1037,7 +869,9 @@ c8.9-2.3,18.2,1.2,23.4,8.7c3.2,4.4,4.4,9.9,3.5,15.3c-0.9,5.2-4.1,9.9-8.6,12.7l-2
         deeplearning: DeepLearningIcon,
         regression: RegressionIcon,
         forecasting: ForecastingIcon,
-        instagram: InstagramIcon
+        instagram: InstagramIcon,
+        expand: ExpandIcon,
+        collapse: CollapseIcon
       };
       if ($$props.iconClass === void 0 && $$bindings.iconClass && iconClass !== void 0)
         $$bindings.iconClass(iconClass);
@@ -1049,537 +883,228 @@ c8.9-2.3,18.2,1.2,23.4,8.7c3.2,4.4,4.4,9.9,3.5,15.3c-0.9,5.2-4.1,9.9-8.6,12.7l-2
       icon = iconMap[type];
       return `<figure${add_attribute("class", `${iconClass}`, 0)}>${validate_component(icon || missing_component, "svelte:component").$$render($$result, { iconSize }, {}, {})}</figure>`;
     });
-    _projects = [
-      {
-        id: 1,
-        date: "11/10/2021",
-        title: "Personal Blog",
-        description: "Dive into my personal musings on life, technology, and continuous learning.",
-        details: "This blog is a testament to my journey as a developer and thinker. Built with the sleek SvelteKit for a reactive experience and styled by TailwindCSS for visual appeal. SEO optimizations ensure my voice is heard far and wide.",
-        features: ["Responsive Design", "SEO-Friendly", "Light/Dark Mode"],
-        technologies: ["SvelteKit", "TailwindCSS", "SEO Auditing Tools"],
-        imgUrl: "https://source.unsplash.com/random/600x400/?website",
-        repoUrl: "https://github.com/yourusername/personal-blog",
-        isExpanded: false,
-        liveDemo: "https://yourpersonalblog.com"
-      },
-      {
-        id: 2,
-        date: "11/11/2021",
-        title: "Basketball Predictor",
-        description: "Harnessing the power of machine learning to forecast sports event results with enhanced accuracy.",
-        details: "A sophisticated machine learning model trained on a rich dataset of historical sports statistics. It combines Scikit-learn\u2019s robust algorithms with Python\u2019s computing power to predict game outcomes, providing insights to sports enthusiasts and bettors.",
-        features: ["Data Visualization", "Statistical Analysis", "Predictive Modeling"],
-        technologies: ["Python", "Scikit-learn", "Pandas"],
-        imgUrl: "https://source.unsplash.com/random/600x400/?predictor",
-        repoUrl: "https://github.com/yourusername/sports-predictor",
-        isExpanded: false,
-        liveDemo: "https://yoursportspredictor.com"
-      },
-      {
-        id: 3,
-        date: "11/12/2021",
-        title: "Sales Forecaster",
-        description: "Optimize your inventory with our AI-powered sales forecasting tool.",
-        details: "Designed to assist businesses in predicting future sales, managing inventory, and optimizing supply chain operations. It leverages state-of-the-art machine learning algorithms to analyze sales data and make precise demand forecasts.",
-        features: ["Inventory Management", "Trend Analysis", "Machine Learning Predictions"],
-        technologies: ["TensorFlow", "Keras", "NumPy", "Matplotlib"],
-        imgUrl: "https://source.unsplash.com/random/600x400/?forecast",
-        repoUrl: "https://github.com/yourusername/sales-forecaster",
-        isExpanded: false,
-        liveDemo: "https://yoursalesforecaster.com"
-      },
-      {
-        id: 4,
-        date: "11/13/2021",
-        title: "API Gateway",
-        description: "A robust API gateway to streamline your services and data flow.",
-        details: "Central hub for managing, routing, and scaling microservices. It includes advanced anomaly detection to safeguard against unexpected traffic spikes and potential threats, ensuring reliable and secure service operations.",
-        features: ["Load Balancing", "Anomaly Detection", "Rate Limiting"],
-        technologies: ["Node.js", "Express", "Elasticsearch"],
-        imgUrl: "https://source.unsplash.com/random/600x400/?api",
-        repoUrl: "https://github.com/yourusername/api-gateway",
-        isExpanded: false,
-        liveDemo: "https://yourapigateway.com"
-      }
-    ];
   }
 });
 
-// .svelte-kit/output/server/entries/pages/_page.svelte.js
-var page_svelte_exports = {};
-__export(page_svelte_exports, {
-  default: () => Page
+// .svelte-kit/output/server/entries/pages/_layout.svelte.js
+var layout_svelte_exports = {};
+__export(layout_svelte_exports, {
+  default: () => Layout
 });
-function markerClass(index5) {
-  return index5 % 2 === 0 ? "right-[-30px] lg:right-[-40px]" : "left-[-30px] lg:left-[-40px]";
+function client_method(key2) {
+  {
+    if (key2 === "before_navigate" || key2 === "after_navigate" || key2 === "on_navigate") {
+      return () => {
+      };
+    } else {
+      const name_lookup = {
+        disable_scroll_handling: "disableScrollHandling",
+        preload_data: "preloadData",
+        preload_code: "preloadCode",
+        invalidate_all: "invalidateAll"
+      };
+      return () => {
+        throw new Error(`Cannot call ${name_lookup[key2] ?? key2}(...) on the server`);
+      };
+    }
+  }
 }
-var ChevronArrow, Content, generalSkills, css$1, Projects, css2, Skills, About, Landing, Page;
-var init_page_svelte = __esm({
-  ".svelte-kit/output/server/entries/pages/_page.svelte.js"() {
+function mediaQueryStore(query) {
+  const store = writable(false);
+  return { subscribe: store.subscribe };
+}
+var disableScrollHandling, afterNavigate, navItems, css, MenuIcon, Layout;
+var init_layout_svelte = __esm({
+  ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
     init_ssr();
-    init_projects();
-    init_mediaQueryStore();
-    ChevronArrow = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let { point = "down" } = $$props;
-      if ($$props.point === void 0 && $$bindings.point && point !== void 0)
-        $$bindings.point(point);
-      return `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"${add_attribute("class", `w-10 h-10 accent-color-hover ${point === "up" ? "rotate-180" : ""}`, 0)}><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>`;
-    });
-    Content = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let { yIn } = $$props;
-      let { yOut } = $$props;
-      if ($$props.yIn === void 0 && $$bindings.yIn && yIn !== void 0)
-        $$bindings.yIn(yIn);
-      if ($$props.yOut === void 0 && $$bindings.yOut && yOut !== void 0)
-        $$bindings.yOut(yOut);
-      return ` <div class="flex-grow flex flex-col items-center justify-center max-w-full mx-auto overflow-x-hidden overflow-y-hidden w-full">${slots.default ? slots.default({}) : ``}</div>`;
-    });
-    Promise.resolve();
-    generalSkills = [
+    init_chunks();
+    init_Icon();
+    disableScrollHandling = /* @__PURE__ */ client_method("disable_scroll_handling");
+    afterNavigate = /* @__PURE__ */ client_method("after_navigate");
+    navItems = [
       {
-        text: "NodeJS",
-        icon: "node",
-        isExpanded: true,
-        roadmap: [
-          { date: "Jan 2020", milestone: "Initiated NodeJS learning" },
-          { date: "Jun 2020", milestone: "Completed first NodeJS project" },
-          { date: "Dec 2021", milestone: "Developed complex APIs" }
-        ]
+        title: "Nothing",
+        route: "/"
       },
       {
-        text: "Machine Learning",
-        icon: "database",
-        isExpanded: false,
-        roadmap: [
-          { date: "Jan 2020", milestone: "Initiated NodeJS learning" },
-          { date: "Jun 2020", milestone: "Completed first NodeJS project" },
-          { date: "Dec 2021", milestone: "Developed complex APIs" }
-        ]
+        title: "Here",
+        route: "/skills"
       },
       {
-        text: "Git",
-        icon: "github",
-        isExpanded: false,
-        roadmap: [
-          { date: "Mar 2019", milestone: "Began using Git for version control" },
-          { date: "Aug 2019", milestone: "Mastered branching and merging" },
-          { date: "Apr 2021", milestone: "Automated workflows with Git hooks" }
-        ]
-      },
-      {
-        text: "JavaScript",
-        icon: "javascript",
-        isExpanded: true,
-        roadmap: [
-          { date: "Jan 2020", milestone: "Initiated NodeJS learning" },
-          { date: "Jun 2020", milestone: "Completed first NodeJS project" },
-          { date: "Dec 2021", milestone: "Developed complex APIs" }
-        ]
-      },
-      {
-        text: "Python",
-        icon: "python",
-        isExpanded: false,
-        roadmap: [
-          { date: "Feb 2019", milestone: "Started Python for scripting" },
-          { date: "Nov 2019", milestone: "Applied Python in data analysis" },
-          { date: "Jul 2021", milestone: "Advanced to machine learning models" }
-        ]
-      },
-      {
-        text: "Django",
-        icon: "django",
-        isExpanded: false,
-        roadmap: [
-          { date: "Jan 2020", milestone: "Initiated NodeJS learning" },
-          { date: "Jun 2020", milestone: "Completed first NodeJS project" },
-          { date: "Dec 2021", milestone: "Developed complex APIs" }
-        ]
-      },
-      {
-        text: "SQL / NoSQL",
-        icon: "database",
-        isExpanded: true,
-        roadmap: [
-          { date: "Jan 2020", milestone: "Initiated NodeJS learning" },
-          { date: "Jun 2020", milestone: "Completed first NodeJS project" },
-          { date: "Dec 2021", milestone: "Developed complex APIs" }
-        ]
-      },
-      {
-        text: "Express / Koa",
-        icon: "express",
-        isExpanded: false,
-        roadmap: [
-          { date: "Jan 2020", milestone: "Initiated NodeJS learning" },
-          { date: "Jun 2020", milestone: "Completed first NodeJS project" },
-          { date: "Dec 2021", milestone: "Developed complex APIs" }
-        ]
-      },
-      {
-        text: "Docker",
-        icon: "docker",
-        isExpanded: false,
-        roadmap: [
-          { date: "Jan 2020", milestone: "Initiated NodeJS learning" },
-          { date: "Jun 2020", milestone: "Completed first NodeJS project" },
-          { date: "Dec 2021", milestone: "Developed complex APIs" }
-        ]
-      },
-      {
-        text: "React",
-        icon: "react",
-        isExpanded: true,
-        roadmap: [
-          { date: "Feb 2020", milestone: "Started learning React" },
-          { date: "Jul 2020", milestone: "Developed first SPA with React" },
-          { date: "Jan 2022", milestone: "Implemented Redux for state management" }
-        ]
-      },
-      {
-        text: "Svelte",
-        icon: "svelte",
-        isExpanded: false,
-        roadmap: [
-          { date: "Jan 2020", milestone: "Initiated NodeJS learning" },
-          { date: "Jun 2020", milestone: "Completed first NodeJS project" },
-          { date: "Dec 2021", milestone: "Developed complex APIs" }
-        ]
-      },
-      {
-        text: "Vue",
-        icon: "vue",
-        isExpanded: false,
-        roadmap: [
-          { date: "Jan 2020", milestone: "Initiated NodeJS learning" },
-          { date: "Jun 2020", milestone: "Completed first NodeJS project" },
-          { date: "Dec 2021", milestone: "Developed complex APIs" }
-        ]
-      },
-      {
-        text: "HTML",
-        icon: "html",
-        isExpanded: false,
-        roadmap: [
-          { date: "Jan 2020", milestone: "Initiated NodeJS learning" },
-          { date: "Jun 2020", milestone: "Completed first NodeJS project" },
-          { date: "Dec 2021", milestone: "Developed complex APIs" }
-        ]
-      },
-      {
-        text: "CSS",
-        icon: "css",
-        isExpanded: false,
-        roadmap: [
-          { date: "Feb 2019", milestone: "Started Python for scripting" },
-          { date: "Nov 2019", milestone: "Applied Python in data analysis" },
-          { date: "Jul 2021", milestone: "Advanced to machine learning models" }
-        ]
+        title: "Yet :)",
+        route: "projects"
       }
     ];
-    css$1 = {
-      code: ".timeline.svelte-9llim8{position:relative;padding:0}.timeline-item.svelte-9llim8{position:relative;margin-bottom:80px;width:calc(50% - 20px);transition:transform 0.3s ease, box-shadow 0.3s ease;&.left {\r\n      left: calc(0% - 35px);\r\n    };&.right {\r\n      left: calc(50% + 55px);\r\n    };&:last-child {\r\n      margin-bottom: 0;\r\n    }}.timeline-item.svelte-9llim8:hover{transform:translateY(-5px);box-shadow:0 6px 12px rgba(0, 0, 0, 0.2)}.content.svelte-9llim8{background-color:rgba(255, 255, 255, 0.15);color:#fff;box-shadow:0 4px 8px rgba(0, 0, 0, 0.1);border-radius:12px;padding:25px;transition:transform 0.3s ease, box-shadow 0.3s ease}@media(max-width: 768px){.timeline-item.svelte-9llim8{width:100%;left:0 !important}.timeline.svelte-9llim8:before{left:20px}}",
+    css = {
+      code: ":root{--transition-duration:600ms}button.svelte-rv88i1.svelte-rv88i1{cursor:pointer;display:flex;align-items:center;overflow:hidden}svg.svelte-rv88i1.svelte-rv88i1{transition:transform var(--transition-duration)}.top.svelte-rv88i1.svelte-rv88i1{stroke-dasharray:40 160;transition:stroke-dashoffset var(--transition-duration)}.middle.svelte-rv88i1.svelte-rv88i1{transform-origin:50%;transition:transform var(--transition-duration)}.bottom.svelte-rv88i1.svelte-rv88i1{stroke-dasharray:40 85;transition:stroke-dashoffset var(--transition-duration)}.open.svelte-rv88i1.svelte-rv88i1{transform:rotate(45deg)}.open.svelte-rv88i1 .top.svelte-rv88i1,.open.svelte-rv88i1 .bottom.svelte-rv88i1{stroke-dashoffset:-64px}.open.svelte-rv88i1 .middle.svelte-rv88i1{transform:rotate(90deg)}",
       map: null
     };
-    Projects = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let projectsData = _projects.map((project) => ({ ...project, isVisible: false }));
-      $$result.css.add(css$1);
-      return `<section id="projects" class="container mx-20 px-4 py-10"><div class="text-center mb-10" data-svelte-h="svelte-ldme5o"><h2 class="text-3xl md:text-4xl font-bold text-white mb-4">My Projects</h2> <p class="text-lg text-white">Here&#39;s a selection of some recent work. For more details, click on each project.</p></div> <div class="relative"><div class="absolute left-1/2 transform -translate-x-1/2 w-[3px] bg-cyan-100 h-full hidden lg:block"></div> ${each(projectsData, (project, index5) => {
-        return `<div class="w-full"><div class="${[
-          escape(null_to_empty(`timeline-item rounded-lg shadow-lg ${index5 % 2 === 0 ? "left" : "right"} `), true) + " svelte-9llim8",
-          (project.isVisible && index5 % 2 === 0 ? "left-in" : "") + " " + (!project.isVisible && index5 % 2 === 0 ? "left-out" : "") + " " + (project.isVisible && index5 % 2 === 1 ? "right-in" : "") + " " + (!project.isVisible && index5 % 2 === 1 ? "right-out" : "")
-        ].join(" ").trim()}"><div class="${escape(null_to_empty(`absolute top-0 w-20 h-10 bg-cyan-700 text-white flex items-center justify-center text-xs rounded-lg font-bold ${markerClass(index5)}`), true) + " svelte-9llim8"}" style="transform: translateY(-50%);"><time>${escape(project.date)}</time></div> <div class="content bg-white bg-opacity-20 text-white shadow-lg rounded-lg p-4 transform transition duration-500 svelte-9llim8"><div class="flex justify-center mb-4"><img class="w-3/4 h-32 md:h-64 object-cover rounded shadow mx-auto"${add_attribute("src", project.imgUrl, 0)}${add_attribute("alt", project.title, 0)}></div> <h3 class="text-lg font-bold mb-3">${escape(project.title)}</h3> <p class="mb-4">${escape(project.description)}</p> <div class="flex justify-evenly w-full gap-4"><div class="tech-features mb-4"><h4 class="text-md font-semibold text-center mb-1" data-svelte-h="svelte-1tompzy">Features</h4> <ul class="list-disc list-inside">${each(project.features, (feature) => {
-          return `<li>${escape(feature)}</li>`;
-        })} </ul></div> <div class="tech-features mb-4"><h4 class="text-md font-semibold text-center mb-1" data-svelte-h="svelte-1mqtj3d">Technologies</h4> <ul class="list-disc list-inside">${each(project.technologies, (tech) => {
-          return `<li>${escape(tech)}</li>`;
-        })}</ul> </div></div> <div class="flex justify-between"><a${add_attribute("href", project.repoUrl, 0)} class="px-2 md:px-4 my-auto py-2 text-xs md:text-sm font-bold rounded-md bg-cyan-700 bg-opacity-75 hover:bg-cyan-900 hover:bg-opacity-75 shadow-md">GitHub</a> <a${add_attribute("href", project.liveDemo, 0)} class="px-2 md:px-4 my-auto py-2 text-xs md:text-sm font-bold rounded-md bg-cyan-700 bg-opacity-75 hover:bg-cyan-900 hover:bg-opacity-75 shadow-md">Live Demo</a></div> </div></div> </div>`;
-      })}</div> </section>`;
+    MenuIcon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { open = false } = $$props;
+      let { onClick = () => {
+        open = !open;
+      } } = $$props;
+      let { ariaLabel = "toggle menu" } = $$props;
+      let { width = 64 } = $$props;
+      if ($$props.open === void 0 && $$bindings.open && open !== void 0)
+        $$bindings.open(open);
+      if ($$props.onClick === void 0 && $$bindings.onClick && onClick !== void 0)
+        $$bindings.onClick(onClick);
+      if ($$props.ariaLabel === void 0 && $$bindings.ariaLabel && ariaLabel !== void 0)
+        $$bindings.ariaLabel(ariaLabel);
+      if ($$props.width === void 0 && $$bindings.width && width !== void 0)
+        $$bindings.width(width);
+      $$result.css.add(css);
+      return `<button${add_attribute("aria-expanded", open, 0)}${add_attribute("aria-label", ariaLabel, 0)} class="accent-color md:hidden svelte-rv88i1"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5"${add_attribute("width", width, 0)} class="${["svelte-rv88i1", open ? "open" : ""].join(" ").trim()}"><path class="top svelte-rv88i1" d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20"></path><path class="middle svelte-rv88i1" d="m 30,50 h 40"></path><path class="bottom svelte-rv88i1" d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20"></path></svg> </button>`;
     });
-    css2 = {
-      code: ".skills-grid.svelte-1ph36ro.svelte-1ph36ro{--_space:1rem;padding:0 var(--_space) var(--_space);display:grid;gap:var(--_space);grid-template-columns:repeat(auto-fill, minmax(14.28%, 1fr));grid-auto-rows:minmax(100px, auto)}@media(max-width: 1200px){.skills-grid.svelte-1ph36ro.svelte-1ph36ro{grid-template-columns:repeat(auto-fill, minmax(14.28%, 1fr))}}@media(max-width: 980px){.skills-grid.svelte-1ph36ro.svelte-1ph36ro{grid-template-columns:repeat(auto-fill, minmax(20%, 1fr))}}@media(max-width: 768px){.skills-grid.svelte-1ph36ro.svelte-1ph36ro{grid-template-columns:repeat(auto-fill, minmax(20%, 1fr))}}@media(max-width: 600px){.skills-grid.svelte-1ph36ro.svelte-1ph36ro{grid-template-columns:repeat(auto-fill, minmax(33%, 1fr))}}.skill-card.svelte-1ph36ro.svelte-1ph36ro{position:relative}.expanded.svelte-1ph36ro.svelte-1ph36ro{grid-column:span 2;grid-row:span 2}@media(max-width: 600px){.expanded.svelte-1ph36ro.svelte-1ph36ro{grid-column:span 2;grid-row:span 2}}.skill-details.svelte-1ph36ro.svelte-1ph36ro{display:none}.expanded.svelte-1ph36ro .skill-details.svelte-1ph36ro{display:block}.roadmap-list.svelte-1ph36ro.svelte-1ph36ro{list-style-type:none;padding:0;margin-top:10px}",
-      map: null
-    };
-    Skills = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $small, $$unsubscribe_small;
+    Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let pathname;
+      let $$unsubscribe_small;
+      let $isMenuOpen, $$unsubscribe_isMenuOpen;
+      let { data } = $$props;
+      const socials = [
+        {
+          name: "github",
+          url: "https://github.com/"
+        },
+        {
+          name: "linkedin",
+          url: "https://linkedin.com/"
+        },
+        {
+          name: "twitter",
+          url: "https://twitter.com/"
+        },
+        {
+          name: "email",
+          url: "paintersrp@gmail.com"
+        }
+      ];
+      const isMenuOpen = writable(false);
+      $$unsubscribe_isMenuOpen = subscribe(isMenuOpen, (value) => $isMenuOpen = value);
       const small = mediaQueryStore();
-      $$unsubscribe_small = subscribe(small, (value) => $small = value);
-      let iconSize;
-      let skills = generalSkills;
-      $$result.css.add(css2);
-      iconSize = $small ? "md" : "lg";
+      $$unsubscribe_small = subscribe(small, (value) => value);
+      const toggleMenu = () => {
+        isMenuOpen.update((n) => !n);
+      };
+      afterNavigate(() => {
+        disableScrollHandling();
+        setTimeout(
+          () => {
+            scrollTo({ top: 0, behavior: "instant" });
+          },
+          400
+        );
+      });
+      if ($$props.data === void 0 && $$bindings.data && data !== void 0)
+        $$bindings.data(data);
+      pathname = data.url;
+      {
+        console.log(pathname);
+      }
       $$unsubscribe_small();
-      return `<section id="skills" class="w-screen pt-16 px-4 md:px-16 text-white py-10"> <div class="text-center mb-12" data-svelte-h="svelte-mau96"><h2 class="text-4xl md:text-5xl font-bold mb-4">My Skills</h2> <p class="text-xl font-light accent-color">Click on a skill to see more details</p></div>  <div class="skills-grid svelte-1ph36ro">${each(skills, (skill) => {
-        return `<button class="${[
-          escape(null_to_empty(`skill-card bg-white bg-opacity-20 p-4 rounded-lg shadow-md flex flex-col items-center cursor-pointer transition duration-300 ease-in-out hover:shadow-xl hover:bg-opacity-30 relative ${skill.isExpanded ? "justify-center" : ""}`), true) + " svelte-1ph36ro",
-          skill.isExpanded ? "expanded" : ""
-        ].join(" ").trim()}">${validate_component(Icon, "Icon").$$render(
+      $$unsubscribe_isMenuOpen();
+      return `<main class="flex flex-col bg-[#1d1d20] min-h-screen overflow-x-hidden overflow-y-hidden w-full"> <header class="p-1 fixed top-0 right-0 justify-end z-50">${validate_component(MenuIcon, "MenuIcon").$$render($$result, { open: $isMenuOpen, onClick: toggleMenu }, {}, {})}</header>  ${$isMenuOpen ? `<div class="fixed inset-0 flex items-center bg-[#1d1d20] justify-center p-4 z-40"><div class="flex flex-col">${each(navItems, (item) => {
+        return `<a${add_attribute("href", item.route, 0)} class="text-5xl md:text-6xl font-bold accent-color hover:text-amber-300 text-center leading-tight mb-4 hover:underline">${escape(item.title)} </a>`;
+      })}</div></div>` : ``}  <div>${slots.default ? slots.default({}) : ``}</div>  <footer class="block md:flex md:justify-between md:items-center py-12 px-7 md:px-20 bg-opacity-[1.5%] bg-white"><div class="font-bold w-auto text-center mb-6 md:w-[200px] md:text-left md:mb-0 text-gray-200" data-svelte-h="svelte-1h9ai9t"><div class="text-sm"><span class="accent-color">\xA9</span>
+        Copyright
+        <span class="">2023</span></div> <div class="text-sm"><span>Made by
+          <a href="/" class="underline-link accent-color !font-extrabold">Ryan Painter</a></span></div></div> <div class="flex justify-center">${each(socials, (social, index3) => {
+        return `<a${add_attribute("href", social.url, 0)} class="uppercase font-bold mx-3 lg:mx-4" target="_blank" rel="noopener noreferrer"${add_attribute("title", social.name, 0)}>${validate_component(Icon, "Icon").$$render(
           $$result,
           {
-            size: skill.isExpanded ? "3xl" : iconSize,
-            type: skill.icon,
-            iconClass: "accent-color mb-3"
+            type: social.name,
+            size: "md",
+            iconClass: "accent-color hover:text-amber-400 transition-all duration-300 ease-in-out"
           },
           {},
           {}
-        )} <span class="${escape(null_to_empty(`font-semibold ${skill.isExpanded ? "text-xl" : " text-sm"}`), true) + " svelte-1ph36ro"}">${escape(skill.text)}</span>  </button>`;
-      })}</div> </section>`;
-    });
-    About = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let { handleAboutInView } = $$props;
-      if ($$props.handleAboutInView === void 0 && $$bindings.handleAboutInView && handleAboutInView !== void 0)
-        $$bindings.handleAboutInView(handleAboutInView);
-      return `<section id="about" class="text-white py-10 px-2 md:px-0"><div class="container mx-auto px-4 sm:px-6 lg:px-8"> <div class="text-center mb-12" data-svelte-h="svelte-1f60zs1"><h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">More About Me</h2> <p class="text-lg sm:text-xl font-light accent-color mb-8">Discover my journey, interests, and achievements</p></div>  <div class="flex flex-col lg:flex-row justify-center mb-10 gap-6 md:gap-8 items-center md:items-start"><div class="flex-1 px-4 pt-2 rounded-lg shadow-lg bg-white bg-opacity-20 max-w-[550px] mb-4 md:mb-0">${validate_component(Icon, "Icon").$$render(
-        $$result,
-        {
-          size: "lg",
-          type: "code",
-          iconClass: "accent-color mb-3 mt-3"
-        },
-        {},
-        {}
-      )} <figure class="px-0 sm:px-6" data-svelte-h="svelte-7maof0"><img src="https://source.unsplash.com/random/600x400/?code" alt="Project" class="w-full lg:w-full h-64 object-fit rounded shadow mx-auto"></figure> <h3 class="text-lg lg:text-xl font-semibold mt-3 mb-3 accent-color" data-svelte-h="svelte-1hpxqur">Professional Background</h3> <p class="text-sm lg:text-base text-white mb-4 font-light" data-svelte-h="svelte-1dnsil9">With a strong foundation in TypeScript, Python, and React, I&#39;ve contributed to numerous
-          projects ranging from web applications to data-driven platforms.</p></div>  <div class="flex-1 px-4 pt-2 rounded-lg shadow-lg bg-white bg-opacity-20 max-w-[550px]">${validate_component(Icon, "Icon").$$render(
-        $$result,
-        {
-          size: "lg",
-          type: "landscape",
-          iconClass: "accent-color mb-3"
-        },
-        {},
-        {}
-      )} <figure class="px-0 sm:px-6" data-svelte-h="svelte-14crj29"><img src="https://source.unsplash.com/random/600x400/?hiking" alt="Project" class="w-full h-64 object-cover rounded shadow mx-auto"></figure> <h3 class="text-lg lg:text-xl font-semibold mt-3 mb-3 accent-color" data-svelte-h="svelte-kc27y3">Personal Interests</h3> <p class="text-sm lg:text-base text-white mb-4 font-light" data-svelte-h="svelte-7edlow">Outside of coding, I&#39;m passionate about hiking, open-source contribution, and exploring
-          new technologies.</p></div></div></div></section>`;
-    });
-    Landing = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      const messagesToAnimate = [
-        "TypeScript",
-        "Python",
-        "React",
-        "Svelte",
-        "Backend Systems",
-        "Cloud Services",
-        "Database Management",
-        "RESTful & GraphQL APIs",
-        "Progressive Web Apps",
-        "Machine Learning",
-        "Data Engineering",
-        "Data Visualization"
-      ];
-      if ($$props.messagesToAnimate === void 0 && $$bindings.messagesToAnimate && messagesToAnimate !== void 0)
-        $$bindings.messagesToAnimate(messagesToAnimate);
-      return `<section id="landing" class="min-h-screen flex flex-col justify-center items-center space-y-4 w-full"><div class="text-center space-y-2 md:space-y-4 accent-color mb-5 w-full flex flex-col justify-center items-center"><h1 class="text-7xl md:text-8xl font-bold text-white leading-none shadow-text w-full text-center whitespace-nowrap text-in-expand mb-5" data-svelte-h="svelte-1o6ayxk">Steven <br class="block lg:hidden"> Painter</h1> <div class="w-full md:w-1/2 flex flex-row md:justify-evenly justify-center items-center md:space-x-8" data-svelte-h="svelte-w8hewp"><p class="accent-color text-xl lg:text-2xl w-1/3 mb-5 text-in-blur">Fullstack <br> Developer</p> <p class="accent-color text-xl lg:text-2xl w-1/3 mb-5 text-in-blur">Data <br> Enthusiast</p> <p class="hidden md:block accent-color text-xl lg:text-2xl w-1/3 mb-5 text-in-blur">Tech <br> Explorer</p></div> <div class="container text-in-blur min-h-[50px]">${validate_component(AnimatedText, "AnimatedText").$$render(
-        $$result,
-        {
-          messages: messagesToAnimate,
-          textClass: "text-3xl md:text-4xl lg:text-5xl font-bold"
-        },
-        {},
-        {}
-      )}</div></div></section>`;
-    });
-    Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let aboutInView = false;
-      function handleAboutInView(event) {
-        aboutInView = event.detail.inView;
-      }
-      return `${validate_component(Content, "Content").$$render($$result, { yIn: -750, yOut: -750 }, {}, {
-        default: () => {
-          return `${validate_component(Landing, "Landing").$$render($$result, {}, {}, {})}  <button class="${[
-            "animate-bounce absolute bottom-5 transform -translate-x-1/2 text-white hover:accent-color",
-            aboutInView ? "hidden" : ""
-          ].join(" ").trim()}">${validate_component(ChevronArrow, "ChevronArrow").$$render($$result, {}, {}, {})}</button> ${validate_component(About, "About").$$render($$result, { handleAboutInView }, {}, {})} ${validate_component(Skills, "Skills").$$render($$result, {}, {}, {})} ${validate_component(Projects, "Projects").$$render($$result, {}, {}, {})}  <button class="animate-bounce transform text-white hover:accent-color">${validate_component(ChevronArrow, "ChevronArrow").$$render($$result, { point: "up" }, {}, {})}</button>`;
-        }
-      })}`;
+        )} </a>`;
+      })}</div></footer></main>`;
     });
   }
 });
 
-// .svelte-kit/output/server/nodes/2.js
-var __exports3 = {};
-__export(__exports3, {
-  component: () => component3,
-  fonts: () => fonts3,
-  imports: () => imports3,
-  index: () => index3,
-  stylesheets: () => stylesheets3
+// .svelte-kit/output/server/nodes/0.js
+var __exports = {};
+__export(__exports, {
+  component: () => component,
+  fonts: () => fonts,
+  imports: () => imports,
+  index: () => index,
+  server: () => layout_server_ts_exports,
+  server_id: () => server_id,
+  stylesheets: () => stylesheets
 });
-var index3, component_cache3, component3, imports3, stylesheets3, fonts3;
-var init__3 = __esm({
-  ".svelte-kit/output/server/nodes/2.js"() {
-    index3 = 2;
-    component3 = async () => component_cache3 ?? (component_cache3 = (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default);
-    imports3 = ["_app/immutable/nodes/2.3041c5f8.js", "_app/immutable/chunks/scheduler.77b4cd31.js", "_app/immutable/chunks/index.21e71860.js", "_app/immutable/chunks/Scroller.svelte_svelte_type_style_lang.6525a868.js", "_app/immutable/chunks/mediaQueryStore.c706bc8d.js", "_app/immutable/chunks/index.84b6a3b0.js", "_app/immutable/chunks/index.b3e0b250.js"];
-    stylesheets3 = ["_app/immutable/assets/2.adaf958c.css", "_app/immutable/assets/Scroller.32d83c67.css"];
-    fonts3 = [];
+var index, component_cache, component, server_id, imports, stylesheets, fonts;
+var init__ = __esm({
+  ".svelte-kit/output/server/nodes/0.js"() {
+    init_layout_server_ts();
+    index = 0;
+    component = async () => component_cache ?? (component_cache = (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default);
+    server_id = "src/routes/+layout.server.ts";
+    imports = ["_app/immutable/nodes/0.8e6824c5.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/MenuIcon.svelte_svelte_type_style_lang.8c767792.js", "_app/immutable/chunks/singletons.810c9b17.js", "_app/immutable/chunks/Icon.16eea15c.js"];
+    stylesheets = ["_app/immutable/assets/0.6a799a7c.css", "_app/immutable/assets/MenuIcon.0056b528.css"];
+    fonts = [];
   }
 });
 
-// .svelte-kit/output/server/entries/pages/skills/_page.svelte.js
-var page_svelte_exports2 = {};
-__export(page_svelte_exports2, {
-  default: () => Page2
+// .svelte-kit/output/server/entries/fallbacks/error.svelte.js
+var error_svelte_exports = {};
+__export(error_svelte_exports, {
+  default: () => Error$1
 });
-var css3, Page2;
-var init_page_svelte2 = __esm({
-  ".svelte-kit/output/server/entries/pages/skills/_page.svelte.js"() {
+var getStores, page, Error$1;
+var init_error_svelte = __esm({
+  ".svelte-kit/output/server/entries/fallbacks/error.svelte.js"() {
     init_ssr();
-    init_projects();
-    css3 = {
-      code: "main{background:#1d1d20 !important}.skills-grid.svelte-cy6ddi.svelte-cy6ddi{--_space:1rem;padding:0;display:grid;gap:var(--_space);grid-template-columns:repeat(auto-fill, minmax(25%, 1fr));grid-auto-rows:minmax(100px, auto)}@media(max-width: 1200px){.skills-grid.svelte-cy6ddi.svelte-cy6ddi{grid-template-columns:repeat(auto-fill, minmax(25%, 1fr))}}@media(max-width: 980px){.skills-grid.svelte-cy6ddi.svelte-cy6ddi{grid-template-columns:repeat(auto-fill, minmax(20%, 1fr))}}@media(max-width: 768px){.skills-grid.svelte-cy6ddi.svelte-cy6ddi{grid-template-columns:repeat(auto-fill, minmax(20%, 1fr))}}@media(max-width: 600px){.skills-grid.svelte-cy6ddi.svelte-cy6ddi{grid-template-columns:repeat(auto-fill, minmax(33%, 1fr))}}.skill-card.svelte-cy6ddi.svelte-cy6ddi{position:relative}.expanded.svelte-cy6ddi.svelte-cy6ddi{grid-column:span 2;grid-row:span 2}@media(max-width: 600px){.expanded.svelte-cy6ddi.svelte-cy6ddi{grid-column:span 2;grid-row:span 2}}.skill-details.svelte-cy6ddi.svelte-cy6ddi{display:none}.expanded.svelte-cy6ddi .skill-details.svelte-cy6ddi{display:block}.underline-link.svelte-cy6ddi.svelte-cy6ddi{position:relative;display:inline-block;font-weight:bold}.underline-link.svelte-cy6ddi.svelte-cy6ddi:after{position:absolute;top:100%;left:0;width:100%;height:1px;background:var(--accent);content:'';opacity:0;transition:height 0.3s, opacity 0.3s, transform 0.3s;transform:translateY(-5px)}.underline-link.svelte-cy6ddi.svelte-cy6ddi:focus:after,.underline-link.svelte-cy6ddi.svelte-cy6ddi:hover:after{height:2px;border-radius:3px;opacity:1;transform:translateY(-2px)}",
-      map: null
+    getStores = () => {
+      const stores = getContext("__svelte__");
+      return {
+        /** @type {typeof page} */
+        page: {
+          subscribe: stores.page.subscribe
+        },
+        /** @type {typeof navigating} */
+        navigating: {
+          subscribe: stores.navigating.subscribe
+        },
+        /** @type {typeof updated} */
+        updated: stores.updated
+      };
     };
-    Page2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      const messagesToAnimate = [
-        "TypeScript",
-        "Python",
-        "React",
-        "Svelte",
-        "Backend Systems",
-        "Cloud Services",
-        "Database Management",
-        "RESTful & GraphQL APIs",
-        "Progressive Web Apps",
-        "Machine Learning",
-        "Data Engineering",
-        "Data Visualization"
-      ];
-      const skills = [
-        {
-          id: 1,
-          title: "Languages",
-          items: [
-            { text: "JavaScript", icon: "javascript" },
-            { text: "TypeScript", icon: "typescript" },
-            { text: "Python", icon: "python" },
-            { text: "Rust", icon: "rust" },
-            { text: "Java", icon: "java" }
-          ]
-        },
-        {
-          id: 2,
-          title: "Frameworks",
-          items: [
-            { text: "React", icon: "react" },
-            { text: "Svelte", icon: "svelte" },
-            { text: "Vue", icon: "vue" },
-            { text: "Express", icon: "express" },
-            { text: "Koa", icon: "koa" },
-            { text: "Django", icon: "django" },
-            { text: "Flask", icon: "flask" },
-            { text: "Wordpress", icon: "wordpress" }
-          ]
-        },
-        {
-          id: 3,
-          title: "Machine Learning",
-          items: [
-            { text: "Regression", icon: "regression" },
-            { text: "Forecasting", icon: "forecasting" },
-            {
-              text: "Deep Learning",
-              icon: "deeplearning"
-            }
-          ]
-        }
-      ];
-      let projects = _projects;
-      $$result.css.add(css3);
-      return `<div class="w-full"><header class="intro text-in-blur"><h2 class="intro__tagline" data-svelte-h="svelte-g5utry">I&#39;m <span class="name">Ryan Painter</span>, Lorem ipsum dolor sit amet consectetur adipisicing
-      elit. Necessitatibus eos dolores modi quisquam voluptatum eum magni quod nostrum obcaecati
-      blanditiis.</h2> <div class="container text-in-blur min-h-[70px]">${validate_component(AnimatedText, "AnimatedText").$$render(
-        $$result,
-        {
-          messages: messagesToAnimate,
-          textClass: "intro__tagline !font-bold accent-color"
-        },
-        {},
-        {}
-      )}</div> <h3 class="intro__contact" data-svelte-h="svelte-zrznfz">Contact me at:
-      <a href="matilto:paintersrp@gmail.com" class="highlight-link">paintersrp@gmail.com</a></h3></header></div> <div class="w-full text-amber-300"><section class="w-full block justify-center text-white px-9 py-12 2xl:px-44 xl:px-24 xl:py-24 lg:py-12 lg:px-12 md:flex" data-svelte-h="svelte-7ntvq3"><div class="flex-shrink-0 uppercase text-left md:text-right w-auto md:w-[150px] lg:w-[200px] xl:w-[200px] xl:mr-[70px] mr-[50px] font-bold tracking-widest accent-color">Background</div> <div class="font-light text-base max-w-[650px] w-full pt-7 sm:pt-7 md:pt-0 pl-7 sm:pl-7 md:pl-12 lg:pl-0"><p class="mt-0 mb-6 text-gray-300">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, sint ex, similique facere
-        sequi accusamus assumenda tempore nulla dignissimos a facilis excepturi magni consequatur
-        necessitatibus deleniti vero odio earum praesentium. Natus repellendus deserunt laborum
-        dolores a unde ipsum neque nostrum voluptates sapiente, facilis in cum, provident veniam
-        enim corporis similique!</p> <p class="mt-0 mb-6 text-gray-300">Lorem ipsum dolor sit amet <a href="/" class="underline-link text-white svelte-cy6ddi">consectetur</a>,
-        adipisicing elit. Repellendus veritatis optio odio eveniet vel, quia quod. Consectetur,
-        maiores cumque? Animi provident officiis veniam in minus natus assumenda veritatis incidunt
-        aliquid.</p> <p class="mt-0 mb-6 text-gray-300">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel ratione et consectetur rem
-        temporibus nulla?</p></div></section> <section class="w-full block justify-center text-white px-9 py-12 2xl:px-44 xl:px-24 xl:py-24 lg:py-12 lg:px-12 md:flex"><div class="flex-shrink-0 uppercase text-left md:text-right w-auto md:w-[150px] lg:w-[200px] xl:w-[200px] xl:mr-[70px] mr-[50px] font-bold tracking-widest accent-color" data-svelte-h="svelte-1cexakp">Projects</div> <div class="font-light text-base max-w-[650px] w-full pt-7 sm:pt-7 md:pt-0 pl-7 sm:pl-7 md:pl-12 lg:pl-0"><section id="skills" class="w-full text-white"> <div class="skills-grid svelte-cy6ddi">${each(projects, (project) => {
-        return `<button class="${[
-          escape(null_to_empty(`skill-card text-amber-50 bg-white bg-opacity-[5%] rounded-lg shadow-md flex flex-col items-center cursor-pointer transition duration-300 ease-in-out hover:shadow-xl hover:bg-opacity-[10%] relative ${project.isExpanded ? "justify-center p-6" : "p-4"}`), true) + " svelte-cy6ddi",
-          project.isExpanded ? "expanded" : ""
-        ].join(" ").trim()}"><figure class="flex justify-center mb-4"><img class="${escape(null_to_empty(`object-cover rounded shadow mx-auto  ${project.isExpanded ? "w-full" : "w-full"}`), true) + " svelte-cy6ddi"}"${add_attribute("src", project.imgUrl, 0)}${add_attribute("alt", project.title, 0)}></figure> <span class="${escape(null_to_empty(`font-semibold ${project.isExpanded ? "text-xl" : " text-sm"}`), true) + " svelte-cy6ddi"}">${escape(project.title)}</span> ${project.isExpanded ? `<div class="faster-in-blur mt-3 gap-4 !flex"><a${add_attribute("href", project.repoUrl, 0)} class="px-2 md:px-4 my-auto py-2 text-sm rounded-md bg-amber-300 bg-opacity-90 hover:bg-opacity-70 shadow-md text-white font-extrabold">GitHub</a> <a${add_attribute("href", project.liveDemo, 0)} class="px-2 md:px-4 my-auto py-2 text-sm rounded-md bg-amber-300 bg-opacity-90 hover:bg-opacity-70 shadow-md text-white font-extrabold">Live Demo</a> </div>` : ``} </button>`;
-      })}</div></section></div></section> <section class="w-full block justify-center text-white px-9 py-12 2xl:px-44 xl:px-24 xl:py-24 lg:py-12 lg:px-12 md:flex"><div class="flex-shrink-0 uppercase text-left md:text-right w-auto md:w-[150px] lg:w-[200px] xl:w-[200px] xl:mr-[70px] mr-[50px] font-bold tracking-widest accent-color" data-svelte-h="svelte-1xrlpmp">Skills</div> <div class="font-light text-base max-w-[650px] w-full pt-7 sm:pt-7 md:pt-0 pl-7 sm:pl-7 md:pl-12 lg:pl-0"><div class="flex justify-between flex-wrap md:flex-nowrap">${each(skills, (skillset, index5) => {
-        return `<div class="mb-6 md:w-[47%]"><div class="text-white font-extrabold uppercase">${escape(skillset.title)}</div> <ul>${each(skillset.items, (item, index22) => {
-          return `<li class="my-[6px] text-sm text-gray-300"><div class="flex gap-3 items-center">${item.icon ? `${validate_component(Icon, "Icon").$$render(
-            $$result,
-            {
-              type: item.icon,
-              size: "sm",
-              iconClass: "accent-color"
-            },
-            {},
-            {}
-          )}` : ``} ${escape(item.text)}</div> </li>`;
-        })}</ul> </div>`;
-      })}</div></div></section></div> <footer class="block md:flex md:justify-between md:items-center py-12 px-7 md:px-20 bg-opacity-[1.5%] bg-white"><div class="font-bold w-auto text-center mb-6 md:w-[200px] md:text-left md:mb-0 text-gray-200" data-svelte-h="svelte-1ga1j82"><div><span>\xA9 Copyright 2023</span></div> <div><span>Made by <a href="/" class="underline-link accent-color !font-extrabold svelte-cy6ddi">Ryan Painter</a></span></div></div> <div class="flex justify-center"><a href="/" class="uppercase font-bold mx-3 lg:mx-4" target="_blank" rel="noopener noreferrer" title="Email">${validate_component(Icon, "Icon").$$render(
-        $$result,
-        {
-          size: "md",
-          type: "email",
-          iconClass: "accent-color hover:text-amber-400 transition-all duration-300 ease-in-out"
-        },
-        {},
-        {}
-      )}</a> <a href="/" class="uppercase font-bold mx-3 lg:mx-4" target="_blank" rel="noopener noreferrer" title="Email">${validate_component(Icon, "Icon").$$render(
-        $$result,
-        {
-          size: "md",
-          type: "twitter",
-          iconClass: "accent-color hover:text-amber-400 transition-all duration-300 ease-in-out"
-        },
-        {},
-        {}
-      )}</a> <a href="/" class="uppercase font-bold mx-3 lg:mx-4" target="_blank" rel="noopener noreferrer" title="Email">${validate_component(Icon, "Icon").$$render(
-        $$result,
-        {
-          size: "md",
-          type: "github",
-          iconClass: "accent-color hover:text-amber-400 transition-all duration-300 ease-in-out"
-        },
-        {},
-        {}
-      )}</a> <a href="/" class="uppercase font-bold mx-3 lg:mx-4" target="_blank" rel="noopener noreferrer" title="Email">${validate_component(Icon, "Icon").$$render(
-        $$result,
-        {
-          size: "md",
-          type: "linkedin",
-          iconClass: "accent-color hover:text-amber-400 transition-all duration-300 ease-in-out"
-        },
-        {},
-        {}
-      )}</a></div> </footer>`;
+    page = {
+      subscribe(fn) {
+        const store = getStores().page;
+        return store.subscribe(fn);
+      }
+    };
+    Error$1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $page, $$unsubscribe_page;
+      $$unsubscribe_page = subscribe(page, (value) => $page = value);
+      $$unsubscribe_page();
+      return `<h1>${escape($page.status)}</h1> <p>${escape($page.error?.message)}</p>`;
     });
   }
 });
 
-// .svelte-kit/output/server/nodes/3.js
-var __exports4 = {};
-__export(__exports4, {
-  component: () => component4,
-  fonts: () => fonts4,
-  imports: () => imports4,
-  index: () => index4,
-  stylesheets: () => stylesheets4
+// .svelte-kit/output/server/nodes/1.js
+var __exports2 = {};
+__export(__exports2, {
+  component: () => component2,
+  fonts: () => fonts2,
+  imports: () => imports2,
+  index: () => index2,
+  stylesheets: () => stylesheets2
 });
-var index4, component_cache4, component4, imports4, stylesheets4, fonts4;
-var init__4 = __esm({
-  ".svelte-kit/output/server/nodes/3.js"() {
-    index4 = 3;
-    component4 = async () => component_cache4 ?? (component_cache4 = (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default);
-    imports4 = ["_app/immutable/nodes/3.e2924660.js", "_app/immutable/chunks/index.b3e0b250.js", "_app/immutable/chunks/scheduler.77b4cd31.js", "_app/immutable/chunks/index.21e71860.js", "_app/immutable/chunks/Scroller.svelte_svelte_type_style_lang.6525a868.js"];
-    stylesheets4 = ["_app/immutable/assets/3.349377bf.css", "_app/immutable/assets/Scroller.32d83c67.css"];
-    fonts4 = [];
+var index2, component_cache2, component2, imports2, stylesheets2, fonts2;
+var init__2 = __esm({
+  ".svelte-kit/output/server/nodes/1.js"() {
+    index2 = 1;
+    component2 = async () => component_cache2 ?? (component_cache2 = (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default);
+    imports2 = ["_app/immutable/nodes/1.578b4910.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/singletons.810c9b17.js"];
+    stylesheets2 = [];
+    fonts2 = [];
   }
 });
 
@@ -1759,7 +1284,7 @@ var options = {
 		<div class="error">
 			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n"
   },
-  version_hash: "1qswb16"
+  version_hash: "13y0nso"
 };
 function get_hooks() {
   return {};
@@ -2099,13 +1624,13 @@ function stringify(value, reducers) {
       return NEGATIVE_INFINITY;
     if (thing === 0 && 1 / thing < 0)
       return NEGATIVE_ZERO;
-    const index6 = p++;
-    indexes.set(thing, index6);
+    const index4 = p++;
+    indexes.set(thing, index4);
     for (const { key: key2, fn } of custom) {
       const value2 = fn(thing);
       if (value2) {
-        stringified[index6] = `["${key2}",${flatten(value2)}]`;
-        return index6;
+        stringified[index4] = `["${key2}",${flatten(value2)}]`;
+        return index4;
       }
     }
     let str = "";
@@ -2197,12 +1722,12 @@ function stringify(value, reducers) {
           }
       }
     }
-    stringified[index6] = str;
-    return index6;
+    stringified[index4] = str;
+    return index4;
   }
-  const index5 = flatten(value);
-  if (index5 < 0)
-    return `${index5}`;
+  const index3 = flatten(value);
+  if (index3 < 0)
+    return `${index3}`;
   return `[${stringified.join(",")}]`;
 }
 function stringify_primitive2(thing) {
@@ -3514,8 +3039,8 @@ async function render_response({
   }
   const { client } = manifest2._;
   const modulepreloads = new Set(client.imports);
-  const stylesheets5 = new Set(client.stylesheets);
-  const fonts5 = new Set(client.fonts);
+  const stylesheets3 = new Set(client.stylesheets);
+  const fonts3 = new Set(client.fonts);
   const link_header_preloads = /* @__PURE__ */ new Set();
   const inline_styles = /* @__PURE__ */ new Map();
   let rendered;
@@ -3569,9 +3094,9 @@ async function render_response({
       for (const url of node.imports)
         modulepreloads.add(url);
       for (const url of node.stylesheets)
-        stylesheets5.add(url);
+        stylesheets3.add(url);
       for (const url of node.fonts)
-        fonts5.add(url);
+        fonts3.add(url);
       if (node.inline_styles) {
         Object.entries(await node.inline_styles()).forEach(([k, v]) => inline_styles.set(k, v));
       }
@@ -3599,7 +3124,7 @@ async function render_response({
     head += `
 	<style${attributes.join("")}>${content}</style>`;
   }
-  for (const dep of stylesheets5) {
+  for (const dep of stylesheets3) {
     const path = prefixed(dep);
     const attributes = ['rel="stylesheet"'];
     if (inline_styles.has(dep)) {
@@ -3613,7 +3138,7 @@ async function render_response({
     head += `
 		<link href="${path}" ${attributes.join(" ")}>`;
   }
-  for (const dep of fonts5) {
+  for (const dep of fonts3) {
     const path = prefixed(dep);
     if (resolve_opts.preload({ type: "font", path })) {
       const ext = dep.slice(dep.lastIndexOf(".") + 1);
@@ -4330,11 +3855,11 @@ async function render_page(event, page2, options2, manifest2, state, resolve_opt
           const error2 = await handle_error_and_jsonify(event, options2, err);
           while (i--) {
             if (page2.errors[i]) {
-              const index5 = (
+              const index3 = (
                 /** @type {number} */
                 page2.errors[i]
               );
-              const node2 = await manifest2._.nodes[index5]();
+              const node2 = await manifest2._.nodes[index3]();
               let j = i;
               while (!branch[j])
                 j -= 1;
@@ -5130,29 +4655,12 @@ var manifest = (() => {
     assets: /* @__PURE__ */ new Set(["favicon.png", "images/jefferson-santos-fCEJGBzAkrU-unsplash.jpg", "images/jerry-zhang-ePpaQC2c1xA-unsplash.jpg", "images/linus-nylund-Q5QspluNZmM-unsplash.jpg"]),
     mimeTypes: { ".png": "image/png", ".jpg": "image/jpeg" },
     _: {
-      client: { "start": "_app/immutable/entry/start.7079fd95.js", "app": "_app/immutable/entry/app.fa2522c3.js", "imports": ["_app/immutable/entry/start.7079fd95.js", "_app/immutable/chunks/scheduler.77b4cd31.js", "_app/immutable/chunks/singletons.07f371de.js", "_app/immutable/chunks/index.84b6a3b0.js", "_app/immutable/entry/app.fa2522c3.js", "_app/immutable/chunks/scheduler.77b4cd31.js", "_app/immutable/chunks/index.21e71860.js"], "stylesheets": [], "fonts": [] },
+      client: { "start": "_app/immutable/entry/start.2d1a526c.js", "app": "_app/immutable/entry/app.817fe1ec.js", "imports": ["_app/immutable/entry/start.2d1a526c.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/singletons.810c9b17.js", "_app/immutable/entry/app.817fe1ec.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js"], "stylesheets": [], "fonts": [] },
       nodes: [
         __memo(() => Promise.resolve().then(() => (init__(), __exports))),
-        __memo(() => Promise.resolve().then(() => (init__2(), __exports2))),
-        __memo(() => Promise.resolve().then(() => (init__3(), __exports3))),
-        __memo(() => Promise.resolve().then(() => (init__4(), __exports4)))
+        __memo(() => Promise.resolve().then(() => (init__2(), __exports2)))
       ],
-      routes: [
-        {
-          id: "/",
-          pattern: /^\/$/,
-          params: [],
-          page: { layouts: [0], errors: [1], leaf: 2 },
-          endpoint: null
-        },
-        {
-          id: "/skills",
-          pattern: /^\/skills\/?$/,
-          params: [],
-          page: { layouts: [0], errors: [1], leaf: 3 },
-          endpoint: null
-        }
-      ],
+      routes: [],
       matchers: async () => {
         return {};
       }
