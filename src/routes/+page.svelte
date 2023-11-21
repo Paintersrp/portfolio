@@ -98,6 +98,7 @@
           {#if project.isExpanded}
             <div class="faster-in-blur mt-3 !flex">
               <a
+                on:click|stopPropagation
                 href={`/${project.id}`}
                 class="min-w-[75px] px-2 md:px-4 my-auto py-2 text-sm bg-amber-300 bg-opacity-90 hover:bg-opacity-80 shadow-md text-white font-extrabold"
               >

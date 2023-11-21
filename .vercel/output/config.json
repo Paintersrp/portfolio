@@ -2,17 +2,6 @@
 	"version": 3,
 	"routes": [
 		{
-			"src": "/paintersrp@gmail.com",
-			"dest": "/paintersrp@gmail.com/"
-		},
-		{
-			"src": "/paintersrp@gmail.com/",
-			"status": 308,
-			"headers": {
-				"Location": "/paintersrp@gmail.com"
-			}
-		},
-		{
 			"src": "/_app/immutable/.+",
 			"headers": {
 				"cache-control": "public, immutable, max-age=31536000"
@@ -29,9 +18,6 @@
 	"overrides": {
 		"index.html": {
 			"path": ""
-		},
-		"paintersrp@gmail.com.html": {
-			"path": "paintersrp@gmail.com"
 		}
 	}
 }

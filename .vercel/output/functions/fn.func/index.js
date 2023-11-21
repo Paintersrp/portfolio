@@ -80,8 +80,8 @@ function subscribe(store, ...callbacks) {
   const unsub = store.subscribe(...callbacks);
   return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
 }
-function set_current_component(component3) {
-  current_component = component3;
+function set_current_component(component4) {
+  current_component = component4;
 }
 function get_current_component() {
   if (!current_component)
@@ -120,15 +120,15 @@ function each(items, fn) {
   }
   return str;
 }
-function validate_component(component3, name) {
-  if (!component3 || !component3.$$render) {
+function validate_component(component4, name) {
+  if (!component4 || !component4.$$render) {
     if (name === "svelte:component")
       name += " this={...}";
     throw new Error(
       `<${name}> is not a valid SSR component. You may need to review your build config to ensure that dependencies are compiled, rather than imported as pre-compiled modules. Otherwise you may need to fix a <${name}>.`
     );
   }
-  return component3;
+  return component4;
 }
 function create_ssr_component(fn) {
   function $$render(result, props, bindings, slots, context) {
@@ -253,20 +253,20 @@ var require_cookie = __commonJS({
       var obj = {};
       var opt = options2 || {};
       var dec = opt.decode || decode;
-      var index3 = 0;
-      while (index3 < str.length) {
-        var eqIdx = str.indexOf("=", index3);
+      var index4 = 0;
+      while (index4 < str.length) {
+        var eqIdx = str.indexOf("=", index4);
         if (eqIdx === -1) {
           break;
         }
-        var endIdx = str.indexOf(";", index3);
+        var endIdx = str.indexOf(";", index4);
         if (endIdx === -1) {
           endIdx = str.length;
         } else if (endIdx < eqIdx) {
-          index3 = str.lastIndexOf(";", eqIdx - 1) + 1;
+          index4 = str.lastIndexOf(";", eqIdx - 1) + 1;
           continue;
         }
-        var key2 = str.slice(index3, eqIdx).trim();
+        var key2 = str.slice(index4, eqIdx).trim();
         if (void 0 === obj[key2]) {
           var val = str.slice(eqIdx + 1, endIdx).trim();
           if (val.charCodeAt(0) === 34) {
@@ -274,7 +274,7 @@ var require_cookie = __commonJS({
           }
           obj[key2] = tryDecode(val, dec);
         }
-        index3 = endIdx + 1;
+        index4 = endIdx + 1;
       }
       return obj;
     }
@@ -1009,7 +1009,7 @@ var init_layout_svelte = __esm({
       })}</div></div>` : ``}  <div>${slots.default ? slots.default({}) : ``}</div>  <footer class="block md:flex md:justify-between md:items-center py-12 px-7 md:px-20 bg-opacity-[1.5%] bg-white"><div class="font-bold w-auto text-center mb-6 md:w-[200px] md:text-left md:mb-0 text-gray-200" data-svelte-h="svelte-1h9ai9t"><div class="text-sm"><span class="accent-color">\xA9</span>
         Copyright
         <span class="">2023</span></div> <div class="text-sm"><span>Made by
-          <a href="/" class="underline-link accent-color !font-extrabold">Ryan Painter</a></span></div></div> <div class="flex justify-center">${each(socials, (social, index3) => {
+          <a href="/" class="underline-link accent-color !font-extrabold">Ryan Painter</a></span></div></div> <div class="flex justify-center">${each(socials, (social, index4) => {
         return `<a${add_attribute("href", social.url, 0)} class="uppercase font-bold mx-3 lg:mx-4" target="_blank" rel="noopener noreferrer"${add_attribute("title", social.name, 0)}>${validate_component(Icon, "Icon").$$render(
           $$result,
           {
@@ -1043,7 +1043,7 @@ var init__ = __esm({
     index = 0;
     component = async () => component_cache ?? (component_cache = (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default);
     server_id = "src/routes/+layout.server.ts";
-    imports = ["_app/immutable/nodes/0.8e6824c5.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/MenuIcon.svelte_svelte_type_style_lang.8c767792.js", "_app/immutable/chunks/singletons.810c9b17.js", "_app/immutable/chunks/Icon.16eea15c.js"];
+    imports = ["_app/immutable/nodes/0.04a54ae8.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/MenuIcon.svelte_svelte_type_style_lang.8c767792.js", "_app/immutable/chunks/singletons.93ea4272.js", "_app/immutable/chunks/Icon.16eea15c.js"];
     stylesheets = ["_app/immutable/assets/0.6a799a7c.css", "_app/immutable/assets/MenuIcon.0056b528.css"];
     fonts = [];
   }
@@ -1102,9 +1102,256 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => component_cache2 ?? (component_cache2 = (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default);
-    imports2 = ["_app/immutable/nodes/1.578b4910.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/singletons.810c9b17.js"];
+    imports2 = ["_app/immutable/nodes/1.9f1aa665.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/singletons.93ea4272.js"];
     stylesheets2 = [];
     fonts2 = [];
+  }
+});
+
+// .svelte-kit/output/server/chunks/projects.js
+var projects;
+var init_projects = __esm({
+  ".svelte-kit/output/server/chunks/projects.js"() {
+    projects = [
+      {
+        id: 1,
+        date: "11/10/2021",
+        title: "Personal Blog",
+        description: "Dive into my personal musings on life, technology, and continuous learning.",
+        details: "This blog is a testament to my journey as a developer and thinker. Built with the sleek SvelteKit for a reactive experience and styled by TailwindCSS for visual appeal. SEO optimizations ensure my voice is heard far and wide.",
+        features: ["Responsive Design", "SEO-Friendly", "Light/Dark Mode"],
+        technologies: ["SvelteKit", "TailwindCSS", "SEO Auditing Tools"],
+        imgUrl: "https://source.unsplash.com/random/600x400/?website",
+        repoUrl: "https://github.com/yourusername/personal-blog",
+        isExpanded: false,
+        liveDemo: "https://yourpersonalblog.com"
+      },
+      {
+        id: 2,
+        date: "11/11/2021",
+        title: "Basketball Predictor",
+        description: "Harnessing the power of machine learning to forecast sports event results with enhanced accuracy.",
+        details: "A sophisticated machine learning model trained on a rich dataset of historical sports statistics. It combines Scikit-learn\u2019s robust algorithms with Python\u2019s computing power to predict game outcomes, providing insights to sports enthusiasts and bettors.",
+        features: ["Data Visualization", "Statistical Analysis", "Predictive Modeling"],
+        technologies: ["Python", "Scikit-learn", "Pandas"],
+        imgUrl: "https://source.unsplash.com/random/600x400/?predictor",
+        repoUrl: "https://github.com/yourusername/sports-predictor",
+        isExpanded: false,
+        liveDemo: "https://yoursportspredictor.com"
+      },
+      {
+        id: 3,
+        date: "11/12/2021",
+        title: "Sales Forecaster",
+        description: "Optimize your inventory with our AI-powered sales forecasting tool.",
+        details: "Designed to assist businesses in predicting future sales, managing inventory, and optimizing supply chain operations. It leverages state-of-the-art machine learning algorithms to analyze sales data and make precise demand forecasts.",
+        features: ["Inventory Management", "Trend Analysis", "Machine Learning Predictions"],
+        technologies: ["TensorFlow", "Keras", "NumPy", "Matplotlib"],
+        imgUrl: "https://source.unsplash.com/random/600x400/?forecast",
+        repoUrl: "https://github.com/yourusername/sales-forecaster",
+        isExpanded: false,
+        liveDemo: "https://yoursalesforecaster.com"
+      },
+      {
+        id: 4,
+        date: "11/13/2021",
+        title: "API Gateway",
+        description: "A robust API gateway to streamline your services and data flow.",
+        details: "Central hub for managing, routing, and scaling microservices. It includes advanced anomaly detection to safeguard against unexpected traffic spikes and potential threats, ensuring reliable and secure service operations.",
+        features: ["Load Balancing", "Anomaly Detection", "Rate Limiting"],
+        technologies: ["Node.js", "Express", "Elasticsearch"],
+        imgUrl: "https://source.unsplash.com/random/600x400/?api",
+        repoUrl: "https://github.com/yourusername/api-gateway",
+        isExpanded: false,
+        liveDemo: "https://yourapigateway.com"
+      }
+    ];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/_id_/_page.ts.js
+var page_ts_exports = {};
+__export(page_ts_exports, {
+  load: () => load2
+});
+async function load2({ params }) {
+  const projectId = Number(params.id);
+  const project = projects[projectId - 1];
+  return {
+    project
+  };
+}
+var init_page_ts = __esm({
+  ".svelte-kit/output/server/entries/pages/_id_/_page.ts.js"() {
+    init_projects();
+  }
+});
+
+// .svelte-kit/output/server/chunks/SubSection.js
+var FullSection, SubSection;
+var init_SubSection = __esm({
+  ".svelte-kit/output/server/chunks/SubSection.js"() {
+    init_ssr();
+    FullSection = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { id } = $$props;
+      if ($$props.id === void 0 && $$bindings.id && id !== void 0)
+        $$bindings.id(id);
+      return `<section${add_attribute("id", id, 0)} class="text-gray-50 h-screen flex flex-col justify-around max-w-[1400px] mx-auto py-[70px] px-12 sm:py-[120px] md:px-[70px] lg:px-24">${slots.default ? slots.default({}) : ``}</section>`;
+    });
+    SubSection = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { id } = $$props;
+      let { heading } = $$props;
+      if ($$props.id === void 0 && $$bindings.id && id !== void 0)
+        $$bindings.id(id);
+      if ($$props.heading === void 0 && $$bindings.heading && heading !== void 0)
+        $$bindings.heading(heading);
+      return `<section${add_attribute("id", id, 0)} class="w-full block justify-center text-white px-9 py-12 2xl:px-44 xl:px-24 xl:py-24 lg:py-12 lg:px-12 md:flex"><div class="flex-shrink-0 uppercase text-left md:text-right w-auto md:w-[150px] lg:w-[200px] xl:w-[200px] xl:mr-[70px] mr-[50px] font-bold tracking-widest accent-color">${escape(heading)}</div> <div class="font-light text-base max-w-[650px] w-full pt-7 sm:pt-7 md:pt-0 pl-7 sm:pl-7 md:pl-12 lg:pl-0">${slots.default ? slots.default({}) : ``}</div></section>`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/_id_/_page.svelte.js
+var page_svelte_exports = {};
+__export(page_svelte_exports, {
+  default: () => Page
+});
+var Page;
+var init_page_svelte = __esm({
+  ".svelte-kit/output/server/entries/pages/_id_/_page.svelte.js"() {
+    init_ssr();
+    init_SubSection();
+    Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { data } = $$props;
+      let project = {
+        id: 1,
+        date: "11/10/2021",
+        title: "Personal Blog",
+        description: "Dive into my personal musings on life, technology, and continuous learning.",
+        details: "This blog is a testament to my journey as a developer and thinker. Built with the sleek SvelteKit for a reactive experience and styled by TailwindCSS for visual appeal. SEO optimizations ensure my voice is heard far and wide.",
+        concept: ["User-friendly UI", "Intuitive Navigation", "Engaging Content"],
+        stack: ["SvelteKit", "TailwindCSS", "SEO Auditing Tools"],
+        libraries: ["DaisyUI", "Chart.js"],
+        roadmap: [
+          {
+            version: "v2",
+            description: "Interactive Features",
+            status: "In Progress",
+            releaseDate: "06/30/2023",
+            progress: 60,
+            isExpanded: true,
+            developmentJourney: "The focus for Version 2.0 is on enhancing user engagement through interactive features. This phase involves integrating a real-time commenting system, introducing user polls, and improving the overall user experience based on feedback from Version 1.0.",
+            featureFocus: ["Real-Time Commenting System", "User Polls", "Performance Optimization"],
+            technicalChallenges: "Key challenges include implementing real-time features without compromising website performance and maintaining user privacy.",
+            skillsLearned: "Currently enhancing skills in real-time web technologies and learning about user data protection and privacy laws."
+          },
+          {
+            version: "v1",
+            description: "Initial Launch",
+            status: "Completed",
+            releaseDate: "01/02/2022",
+            progress: 100,
+            isExpanded: false,
+            developmentJourney: "Version 1.0 marked the official launch of the blog. The primary focus was on establishing a solid foundation with essential blogging functionalities. The journey involved extensive planning, UI/UX design iterations, and initial SEO setup.",
+            featureFocus: ["Basic Blogging Functionality", "Responsive Design", "SEO Foundations"],
+            technicalChallenges: "Challenges included ensuring cross-browser compatibility and implementing a responsive design that adapts to various screen sizes.",
+            skillsLearned: "Gained proficiency in SvelteKit and TailwindCSS, along with a deeper understanding of SEO principles."
+          }
+        ],
+        imgUrl: "https://source.unsplash.com/random/600x400/?website",
+        repoUrl: "https://github.com/yourusername/personal-blog",
+        isExpanded: false,
+        liveDemo: "https://yourpersonalblog.com"
+      };
+      if ($$props.data === void 0 && $$bindings.data && data !== void 0)
+        $$bindings.data(data);
+      return ` ${validate_component(FullSection, "FullSection").$$render($$result, { id: "project-start" }, {}, {
+        default: () => {
+          return `<div class="w-full mx-auto flex flex-col md:flex-row p-4"><figure class="flex"><img${add_attribute("src", project.imgUrl, 0)}${add_attribute("alt", project.title, 0)} class="rounded-lg shadow-md mb-4 md:mb-0 object-fit"></figure> <div class="text-center md:text-left md:ml-6"><h1 class="text-4xl font-bold mb-2 accent-color">${escape(project.title)}</h1> <p class="text-lg mb-2">${escape(project.description)}</p> <div class="container mx-auto text-base mb-4"><p class="text-gray-300">${escape(project.details)}</p></div> <time class="text-sm text-gray-300">Date: ${escape(project.date)}</time></div></div>`;
+        }
+      })} ${validate_component(SubSection, "SubSection").$$render(
+        $$result,
+        {
+          id: "project-roadmap",
+          heading: "Roadmap"
+        },
+        {},
+        {
+          default: () => {
+            return `<div class="container mx-auto">${each(project.roadmap, (roadmapItem, index4) => {
+              return `<div class="mb-8"><div class="flex justify-between items-center"><h4 class="text-xl font-bold text-white">${escape(roadmapItem.version)}</h4> <span class="text-sm text-gray-300">${escape(roadmapItem.status)}</span></div> <div class="mt-2"><div class="h-2 bg-gray-500 rounded-full"><div class="bg-amber-300 h-2 rounded-full" style="${"width: " + escape(roadmapItem.progress, true) + "%"}"></div></div> <p class="text-gray-200 mt-2">${escape(roadmapItem.description)}</p>  ${roadmapItem.isExpanded ? `<div class="mt-4 bg-gray-800 p-4 rounded-lg shadow-lg"><div class="space-y-4"><div><h5 class="font-semibold text-amber-300" data-svelte-h="svelte-1hvh0xc">Development Journey</h5> <p class="text-gray-300">${escape(roadmapItem.developmentJourney)}</p></div> <div><h5 class="font-semibold text-amber-300" data-svelte-h="svelte-rj8u5b">Feature Focus</h5> <ul class="list-disc pl-5 text-gray-300">${each(roadmapItem.featureFocus, (feature) => {
+                return `<li>${escape(feature)}</li>`;
+              })} </ul></div> <div><h5 class="font-semibold text-amber-300" data-svelte-h="svelte-1noniny">Technical Challenges</h5> <p class="text-gray-300">${escape(roadmapItem.technicalChallenges)}</p></div> <div><h5 class="font-semibold text-amber-300" data-svelte-h="svelte-1gx0by4">Learning and Skills Acquired</h5> <p class="text-gray-300">${escape(roadmapItem.skillsLearned)}</p> </div></div> </div>` : ``} <button class="accent-color text-sm mt-2">${escape(roadmapItem.isExpanded ? "Hide Details" : "View Details")} </button></div> </div>`;
+            })}</div>`;
+          }
+        }
+      )} ${validate_component(SubSection, "SubSection").$$render(
+        $$result,
+        {
+          id: "project-tech",
+          heading: "Technology"
+        },
+        {},
+        {
+          default: () => {
+            return `<div class="flex justify-between flex-wrap md:flex-nowrap"> <div class="mb-6 md:w-[47%]"><h3 class="text-gray-50 font-bold uppercase" data-svelte-h="svelte-dfwifl">Stack</h3> <ul class="text-gray-300">${each(project.stack, (stack) => {
+              return `<li class="my-[6px] text-sm">${escape(stack)}</li>`;
+            })}</ul></div>  <div class="mb-6 md:w-[47%]"><h3 class="text-gray-50 font-bold uppercase" data-svelte-h="svelte-16qwmeo">Concepts</h3> <ul class="text-gray-300">${each(project.concept, (concept) => {
+              return `<li class="my-[6px] text-sm">${escape(concept)}</li>`;
+            })}</ul></div>  <div class="mb-6 md:w-[47%]"><h3 class="text-gray-50 font-bold uppercase" data-svelte-h="svelte-1mfv98u">Libraries</h3> <ul class="text-gray-300">${each(project.libraries, (library) => {
+              return `<li class="my-[6px] text-sm">${escape(library)}</li>`;
+            })}</ul></div></div>`;
+          }
+        }
+      )} ${validate_component(SubSection, "SubSection").$$render(
+        $$result,
+        {
+          id: "project-highlights",
+          heading: "Highlights"
+        },
+        {},
+        {
+          default: () => {
+            return `<div data-svelte-h="svelte-gg4230">Screenshots (expandable)</div> <div data-svelte-h="svelte-r00vzs">REPLs</div>`;
+          }
+        }
+      )} ${validate_component(SubSection, "SubSection").$$render(
+        $$result,
+        {
+          id: "project-stats",
+          heading: "Statistics"
+        },
+        {},
+        {
+          default: () => {
+            return `<div class="mb-20" data-svelte-h="svelte-1vp2r5g">Git Statistics</div>`;
+          }
+        }
+      )}`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/3.js
+var __exports3 = {};
+__export(__exports3, {
+  component: () => component3,
+  fonts: () => fonts3,
+  imports: () => imports3,
+  index: () => index3,
+  stylesheets: () => stylesheets3,
+  universal: () => page_ts_exports,
+  universal_id: () => universal_id
+});
+var index3, component_cache3, component3, universal_id, imports3, stylesheets3, fonts3;
+var init__3 = __esm({
+  ".svelte-kit/output/server/nodes/3.js"() {
+    init_page_ts();
+    index3 = 3;
+    component3 = async () => component_cache3 ?? (component_cache3 = (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default);
+    universal_id = "src/routes/[id]/+page.ts";
+    imports3 = ["_app/immutable/nodes/3.942c1403.js", "_app/immutable/chunks/SubSection.fd5bad6b.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/MenuIcon.svelte_svelte_type_style_lang.8c767792.js"];
+    stylesheets3 = ["_app/immutable/assets/MenuIcon.0056b528.css"];
+    fonts3 = [];
   }
 });
 
@@ -1212,7 +1459,7 @@ var options = {
   root: Root,
   service_worker: false,
   templates: {
-    app: ({ head, body, assets: assets2, nonce, env }) => '<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <meta charset="utf-8" />\n    <link rel="icon" href="' + assets2 + '/favicon.png" />\n    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />\n    <meta name="viewport" content="width=device-width, initial-scale=1" />\n    ' + head + '\n  </head>\n  <body data-sveltekit-preload-data="hover">\n    <div style="display: contents">' + body + "</div>\n  </body>\n</html>\n",
+    app: ({ head, body, assets: assets2, nonce, env }) => '<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <meta charset="utf-8" />\n    <link rel="icon" href="' + assets2 + '/favicon.png" />\n    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />\n    <meta name="viewport" content="width=device-width, initial-scale=1" />\n    ' + head + '\n  </head>\n  <body data-sveltekit-preload-data="tap">\n    <div style="display: contents">' + body + "</div>\n  </body>\n</html>\n",
     error: ({ status, message }) => '<!doctype html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<title>' + message + `</title>
 
 		<style>
@@ -1284,7 +1531,7 @@ var options = {
 		<div class="error">
 			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n"
   },
-  version_hash: "13y0nso"
+  version_hash: "gio3en"
 };
 function get_hooks() {
   return {};
@@ -1624,13 +1871,13 @@ function stringify(value, reducers) {
       return NEGATIVE_INFINITY;
     if (thing === 0 && 1 / thing < 0)
       return NEGATIVE_ZERO;
-    const index4 = p++;
-    indexes.set(thing, index4);
+    const index5 = p++;
+    indexes.set(thing, index5);
     for (const { key: key2, fn } of custom) {
       const value2 = fn(thing);
       if (value2) {
-        stringified[index4] = `["${key2}",${flatten(value2)}]`;
-        return index4;
+        stringified[index5] = `["${key2}",${flatten(value2)}]`;
+        return index5;
       }
     }
     let str = "";
@@ -1722,12 +1969,12 @@ function stringify(value, reducers) {
           }
       }
     }
-    stringified[index4] = str;
-    return index4;
+    stringified[index5] = str;
+    return index5;
   }
-  const index3 = flatten(value);
-  if (index3 < 0)
-    return `${index3}`;
+  const index4 = flatten(value);
+  if (index4 < 0)
+    return `${index4}`;
   return `[${stringified.join(",")}]`;
 }
 function stringify_primitive2(thing) {
@@ -3039,8 +3286,8 @@ async function render_response({
   }
   const { client } = manifest2._;
   const modulepreloads = new Set(client.imports);
-  const stylesheets3 = new Set(client.stylesheets);
-  const fonts3 = new Set(client.fonts);
+  const stylesheets4 = new Set(client.stylesheets);
+  const fonts4 = new Set(client.fonts);
   const link_header_preloads = /* @__PURE__ */ new Set();
   const inline_styles = /* @__PURE__ */ new Map();
   let rendered;
@@ -3094,9 +3341,9 @@ async function render_response({
       for (const url of node.imports)
         modulepreloads.add(url);
       for (const url of node.stylesheets)
-        stylesheets3.add(url);
+        stylesheets4.add(url);
       for (const url of node.fonts)
-        fonts3.add(url);
+        fonts4.add(url);
       if (node.inline_styles) {
         Object.entries(await node.inline_styles()).forEach(([k, v]) => inline_styles.set(k, v));
       }
@@ -3124,7 +3371,7 @@ async function render_response({
     head += `
 	<style${attributes.join("")}>${content}</style>`;
   }
-  for (const dep of stylesheets3) {
+  for (const dep of stylesheets4) {
     const path = prefixed(dep);
     const attributes = ['rel="stylesheet"'];
     if (inline_styles.has(dep)) {
@@ -3138,7 +3385,7 @@ async function render_response({
     head += `
 		<link href="${path}" ${attributes.join(" ")}>`;
   }
-  for (const dep of fonts3) {
+  for (const dep of fonts4) {
     const path = prefixed(dep);
     if (resolve_opts.preload({ type: "font", path })) {
       const ext = dep.slice(dep.lastIndexOf(".") + 1);
@@ -3855,11 +4102,11 @@ async function render_page(event, page2, options2, manifest2, state, resolve_opt
           const error2 = await handle_error_and_jsonify(event, options2, err);
           while (i--) {
             if (page2.errors[i]) {
-              const index3 = (
+              const index4 = (
                 /** @type {number} */
                 page2.errors[i]
               );
-              const node2 = await manifest2._.nodes[index3]();
+              const node2 = await manifest2._.nodes[index4]();
               let j = i;
               while (!branch[j])
                 j -= 1;
@@ -4655,12 +4902,21 @@ var manifest = (() => {
     assets: /* @__PURE__ */ new Set(["favicon.png", "images/jefferson-santos-fCEJGBzAkrU-unsplash.jpg", "images/jerry-zhang-ePpaQC2c1xA-unsplash.jpg", "images/linus-nylund-Q5QspluNZmM-unsplash.jpg"]),
     mimeTypes: { ".png": "image/png", ".jpg": "image/jpeg" },
     _: {
-      client: { "start": "_app/immutable/entry/start.2d1a526c.js", "app": "_app/immutable/entry/app.817fe1ec.js", "imports": ["_app/immutable/entry/start.2d1a526c.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/singletons.810c9b17.js", "_app/immutable/entry/app.817fe1ec.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js"], "stylesheets": [], "fonts": [] },
+      client: { "start": "_app/immutable/entry/start.1cb9cce0.js", "app": "_app/immutable/entry/app.ed2044de.js", "imports": ["_app/immutable/entry/start.1cb9cce0.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/singletons.93ea4272.js", "_app/immutable/entry/app.ed2044de.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js"], "stylesheets": [], "fonts": [] },
       nodes: [
         __memo(() => Promise.resolve().then(() => (init__(), __exports))),
-        __memo(() => Promise.resolve().then(() => (init__2(), __exports2)))
+        __memo(() => Promise.resolve().then(() => (init__2(), __exports2))),
+        __memo(() => Promise.resolve().then(() => (init__3(), __exports3)))
       ],
-      routes: [],
+      routes: [
+        {
+          id: "/[id]",
+          pattern: /^\/([^/]+?)\/?$/,
+          params: [{ "name": "id", "optional": false, "rest": false, "chained": false }],
+          page: { layouts: [0], errors: [1], leaf: 2 },
+          endpoint: null
+        }
+      ],
       matchers: async () => {
         return {};
       }
