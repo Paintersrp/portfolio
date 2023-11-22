@@ -3,6 +3,7 @@
   import { slide } from 'svelte/transition';
 
   import { FullSection, SubSection } from '$comp';
+  import Icon from '$comp/Icon.svelte';
   export let data;
 
   //   let project: Project = data.project;
@@ -58,6 +59,13 @@
   function toggleDetails(index: number) {
     project.roadmap[index].isExpanded = !project.roadmap[index].isExpanded;
   }
+
+  function normalizeDate(dateStr: string): string {
+    const date = new Date(dateStr);
+    return `${date.toLocaleString('default', {
+      month: 'long'
+    })} ${date.getDate()}, ${date.getFullYear()}`;
+  }
 </script>
 
 <!-- <SubSection id={`project-${project.id}`} heading={`${project.title} JSON Data`}>
@@ -67,21 +75,43 @@
 </SubSection> -->
 
 <FullSection id="project-start">
-  <div class="w-full mx-auto flex flex-col md:flex-row p-4">
-    <figure class="flex">
+  <div class="w-full mx-auto flex flex-col md:flex-row p-4 items-center">
+    <figure class="flex-grow-0 flex-shrink-0 md:flex-grow md:flex-shrink w-full md:w-3/5">
       <img
         src={project.imgUrl}
         alt={project.title}
-        class="rounded-lg shadow-md mb-4 md:mb-0 object-fit"
+        class="rounded-lg shadow-md w-full h-auto object-cover mb-4 md:mb-0"
       />
     </figure>
-    <div class="text-center md:text-left md:ml-6">
-      <h1 class="text-4xl font-bold mb-2 accent-color">{project.title}</h1>
-      <p class="text-lg mb-2">{project.description}</p>
-      <div class="container mx-auto text-base mb-4">
-        <p class="text-gray-300">{project.details}</p>
+    <div class="flex-grow md:w-[37.5%] text-center md:text-left md:ml-6">
+      <div class="text-sm text-gray-300 mb-2">
+        <time datetime={project.date}>
+          {`${normalizeDate(project.date)} - ${normalizeDate(project.roadmap[0].releaseDate)}`}
+        </time>
       </div>
-      <time class="text-sm text-gray-300">Date: {project.date}</time>
+      <h1 class="text-4xl font-bold mb-4 accent-color transition duration-300">
+        {project.title}
+      </h1>
+      <p class="text-base mb-4 leading-relaxed">{project.description}</p>
+      <div class="text-sm text-gray-300 mb-6">
+        <p>{project.details}</p>
+      </div>
+      <div class="flex justify-center md:justify-start gap-4">
+        <a href={project.repoUrl} class="">
+          <Icon
+            type="github"
+            size="lg"
+            iconClass="accent-color hover:text-amber-500 transition duration-300 "
+          />
+        </a>
+        <a href={project.liveDemo} class="">
+          <Icon
+            type="deployed"
+            size="lg"
+            iconClass="accent-color hover:text-amber-500 transition duration-300"
+          />
+        </a>
+      </div>
     </div>
   </div>
 </FullSection>
@@ -100,9 +130,13 @@
           </div>
           <p class="text-gray-200 mt-2">{roadmapItem.description}</p>
 
+          <button class="accent-color text-sm mt-2" on:click={() => toggleDetails(index)}>
+            {roadmapItem.isExpanded ? 'Hide Details' : 'View Details'}
+          </button>
+
           <!-- Roadmap Item Details -->
           {#if roadmapItem.isExpanded}
-            <div transition:slide class="mt-4 bg-gray-800 p-4 rounded-lg shadow-lg">
+            <div transition:slide class="mt-2 bg-gray-800 p-4 rounded-lg shadow-lg">
               <div class="space-y-4">
                 <div>
                   <h5 class="font-semibold text-amber-300">Development Journey</h5>
@@ -127,10 +161,6 @@
               </div>
             </div>
           {/if}
-
-          <button class="accent-color text-sm mt-2" on:click={() => toggleDetails(index)}>
-            {roadmapItem.isExpanded ? 'Hide Details' : 'View Details'}
-          </button>
         </div>
       </div>
     {/each}

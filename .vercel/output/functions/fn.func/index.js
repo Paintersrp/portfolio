@@ -568,10 +568,10 @@ var init_layout_server_ts = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/Icon.js
-var AnalysisIcon, CodeIcon, CssIcon, DatabaseIcon, DjangoIcon, DownIcon, EmailIcon, GithubIcon, HtmlIcon, JavascriptIcon, LandscapeIcon, LinkedinIcon, NodeIcon, PythonIcon, ReactIcon, RightIcon, SvelteIcon, TwitterIcon, UpIcon, BabelIcon, DockerIcon, EngineerIcon, ExpressIcon, FlaskIcon, KoaIcon, SassIcon, VueIcon, WebpackIcon, TypescriptIcon, RustIcon, JavaIcon, WordpressIcon, DeepLearningIcon, RegressionIcon, ForecastingIcon, InstagramIcon, ExpandIcon, CollapseIcon, Icon;
-var init_Icon = __esm({
-  ".svelte-kit/output/server/chunks/Icon.js"() {
+// .svelte-kit/output/server/chunks/MenuIcon.svelte_svelte_type_style_lang.js
+var AnalysisIcon, CodeIcon, CssIcon, DatabaseIcon, DjangoIcon, DownIcon, EmailIcon, GithubIcon, HtmlIcon, JavascriptIcon, LandscapeIcon, LinkedinIcon, NodeIcon, PythonIcon, ReactIcon, RightIcon, SvelteIcon, TwitterIcon, UpIcon, BabelIcon, DockerIcon, EngineerIcon, ExpressIcon, FlaskIcon, KoaIcon, SassIcon, VueIcon, WebpackIcon, TypescriptIcon, RustIcon, JavaIcon, WordpressIcon, DeepLearningIcon, RegressionIcon, ForecastingIcon, InstagramIcon, ExpandIcon, CollapseIcon, DeployedIcon, Icon;
+var init_MenuIcon_svelte_svelte_type_style_lang = __esm({
+  ".svelte-kit/output/server/chunks/MenuIcon.svelte_svelte_type_style_lang.js"() {
     init_ssr();
     AnalysisIcon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let { iconSize } = $$props;
@@ -816,6 +816,12 @@ c8.9-2.3,18.2,1.2,23.4,8.7c3.2,4.4,4.4,9.9,3.5,15.3c-0.9,5.2-4.1,9.9-8.6,12.7l-2
         $$bindings.iconSize(iconSize);
       return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"${add_attribute("height", iconSize, 0)}${add_attribute("width", iconSize, 0)}><path d="m356-160-56-56 180-180 180 180-56 56-124-124-124 124Zm124-404L300-744l56-56 124 124 124-124 56 56-180 180Z"></path></svg>`;
     });
+    DeployedIcon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { iconSize } = $$props;
+      if ($$props.iconSize === void 0 && $$bindings.iconSize && iconSize !== void 0)
+        $$bindings.iconSize(iconSize);
+      return `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"${add_attribute("height", iconSize, 0)}${add_attribute("width", iconSize, 0)} viewBox="0 -960 960 960"><path d="M440-183v-274L200-596v274l240 139Zm80 0 240-139v-274L520-457v274Zm-40-343 237-137-237-137-237 137 237 137ZM160-252q-19-11-29.5-29T120-321v-318q0-22 10.5-40t29.5-29l280-161q19-11 40-11t40 11l280 161q19 11 29.5 29t10.5 40v318q0 22-10.5 40T800-252L520-91q-19 11-40 11t-40-11L160-252Zm320-228Z"></path></svg>`;
+    });
     Icon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let iconSize;
       let icon;
@@ -871,7 +877,8 @@ c8.9-2.3,18.2,1.2,23.4,8.7c3.2,4.4,4.4,9.9,3.5,15.3c-0.9,5.2-4.1,9.9-8.6,12.7l-2
         forecasting: ForecastingIcon,
         instagram: InstagramIcon,
         expand: ExpandIcon,
-        collapse: CollapseIcon
+        collapse: CollapseIcon,
+        deployed: DeployedIcon
       };
       if ($$props.iconClass === void 0 && $$bindings.iconClass && iconClass !== void 0)
         $$bindings.iconClass(iconClass);
@@ -918,21 +925,17 @@ var init_layout_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
     init_ssr();
     init_chunks();
-    init_Icon();
+    init_MenuIcon_svelte_svelte_type_style_lang();
     disableScrollHandling = /* @__PURE__ */ client_method("disable_scroll_handling");
     afterNavigate = /* @__PURE__ */ client_method("after_navigate");
     navItems = [
       {
-        title: "Nothing",
+        title: "Home",
         route: "/"
       },
       {
-        title: "Here",
+        title: "Project Slug Demo",
         route: "/skills"
-      },
-      {
-        title: "Yet :)",
-        route: "projects"
       }
     ];
     css = {
@@ -1043,8 +1046,8 @@ var init__ = __esm({
     index = 0;
     component = async () => component_cache ?? (component_cache = (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default);
     server_id = "src/routes/+layout.server.ts";
-    imports = ["_app/immutable/nodes/0.04a54ae8.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/MenuIcon.svelte_svelte_type_style_lang.8c767792.js", "_app/immutable/chunks/singletons.93ea4272.js", "_app/immutable/chunks/Icon.16eea15c.js"];
-    stylesheets = ["_app/immutable/assets/0.6a799a7c.css", "_app/immutable/assets/MenuIcon.0056b528.css"];
+    imports = ["_app/immutable/nodes/0.3b72cc84.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/MenuIcon.svelte_svelte_type_style_lang.505584d3.js", "_app/immutable/chunks/singletons.75b09d07.js"];
+    stylesheets = ["_app/immutable/assets/0.1fd9c90e.css", "_app/immutable/assets/MenuIcon.0056b528.css"];
     fonts = [];
   }
 });
@@ -1102,7 +1105,7 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => component_cache2 ?? (component_cache2 = (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default);
-    imports2 = ["_app/immutable/nodes/1.9f1aa665.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/singletons.93ea4272.js"];
+    imports2 = ["_app/immutable/nodes/1.5c863766.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/singletons.75b09d07.js"];
     stylesheets2 = [];
     fonts2 = [];
   }
@@ -1215,11 +1218,16 @@ var page_svelte_exports = {};
 __export(page_svelte_exports, {
   default: () => Page
 });
+function normalizeDate(dateStr) {
+  const date = new Date(dateStr);
+  return `${date.toLocaleString("default", { month: "long" })} ${date.getDate()}, ${date.getFullYear()}`;
+}
 var Page;
 var init_page_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_id_/_page.svelte.js"() {
     init_ssr();
     init_SubSection();
+    init_MenuIcon_svelte_svelte_type_style_lang();
     Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let { data } = $$props;
       let project = {
@@ -1266,7 +1274,25 @@ var init_page_svelte = __esm({
         $$bindings.data(data);
       return ` ${validate_component(FullSection, "FullSection").$$render($$result, { id: "project-start" }, {}, {
         default: () => {
-          return `<div class="w-full mx-auto flex flex-col md:flex-row p-4"><figure class="flex"><img${add_attribute("src", project.imgUrl, 0)}${add_attribute("alt", project.title, 0)} class="rounded-lg shadow-md mb-4 md:mb-0 object-fit"></figure> <div class="text-center md:text-left md:ml-6"><h1 class="text-4xl font-bold mb-2 accent-color">${escape(project.title)}</h1> <p class="text-lg mb-2">${escape(project.description)}</p> <div class="container mx-auto text-base mb-4"><p class="text-gray-300">${escape(project.details)}</p></div> <time class="text-sm text-gray-300">Date: ${escape(project.date)}</time></div></div>`;
+          return `<div class="w-full mx-auto flex flex-col md:flex-row p-4 items-center"><figure class="flex-grow-0 flex-shrink-0 md:flex-grow md:flex-shrink w-full md:w-3/5"><img${add_attribute("src", project.imgUrl, 0)}${add_attribute("alt", project.title, 0)} class="rounded-lg shadow-md w-full h-auto object-cover mb-4 md:mb-0"></figure> <div class="flex-grow md:w-[37.5%] text-center md:text-left md:ml-6"><div class="text-sm text-gray-300 mb-2"><time${add_attribute("datetime", project.date, 0)}>${escape(`${normalizeDate(project.date)} - ${normalizeDate(project.roadmap[0].releaseDate)}`)}</time></div> <h1 class="text-4xl font-bold mb-4 accent-color transition duration-300">${escape(project.title)}</h1> <p class="text-base mb-4 leading-relaxed">${escape(project.description)}</p> <div class="text-sm text-gray-300 mb-6"><p>${escape(project.details)}</p></div> <div class="flex justify-center md:justify-start gap-4"><a${add_attribute("href", project.repoUrl, 0)} class="">${validate_component(Icon, "Icon").$$render(
+            $$result,
+            {
+              type: "github",
+              size: "lg",
+              iconClass: "accent-color hover:text-amber-500 transition duration-300 "
+            },
+            {},
+            {}
+          )}</a> <a${add_attribute("href", project.liveDemo, 0)} class="">${validate_component(Icon, "Icon").$$render(
+            $$result,
+            {
+              type: "deployed",
+              size: "lg",
+              iconClass: "accent-color hover:text-amber-500 transition duration-300"
+            },
+            {},
+            {}
+          )}</a></div></div></div>`;
         }
       })} ${validate_component(SubSection, "SubSection").$$render(
         $$result,
@@ -1278,9 +1304,9 @@ var init_page_svelte = __esm({
         {
           default: () => {
             return `<div class="container mx-auto">${each(project.roadmap, (roadmapItem, index4) => {
-              return `<div class="mb-8"><div class="flex justify-between items-center"><h4 class="text-xl font-bold text-white">${escape(roadmapItem.version)}</h4> <span class="text-sm text-gray-300">${escape(roadmapItem.status)}</span></div> <div class="mt-2"><div class="h-2 bg-gray-500 rounded-full"><div class="bg-amber-300 h-2 rounded-full" style="${"width: " + escape(roadmapItem.progress, true) + "%"}"></div></div> <p class="text-gray-200 mt-2">${escape(roadmapItem.description)}</p>  ${roadmapItem.isExpanded ? `<div class="mt-4 bg-gray-800 p-4 rounded-lg shadow-lg"><div class="space-y-4"><div><h5 class="font-semibold text-amber-300" data-svelte-h="svelte-1hvh0xc">Development Journey</h5> <p class="text-gray-300">${escape(roadmapItem.developmentJourney)}</p></div> <div><h5 class="font-semibold text-amber-300" data-svelte-h="svelte-rj8u5b">Feature Focus</h5> <ul class="list-disc pl-5 text-gray-300">${each(roadmapItem.featureFocus, (feature) => {
+              return `<div class="mb-8"><div class="flex justify-between items-center"><h4 class="text-xl font-bold text-white">${escape(roadmapItem.version)}</h4> <span class="text-sm text-gray-300">${escape(roadmapItem.status)}</span></div> <div class="mt-2"><div class="h-2 bg-gray-500 rounded-full"><div class="bg-amber-300 h-2 rounded-full" style="${"width: " + escape(roadmapItem.progress, true) + "%"}"></div></div> <p class="text-gray-200 mt-2">${escape(roadmapItem.description)}</p> <button class="accent-color text-sm mt-2">${escape(roadmapItem.isExpanded ? "Hide Details" : "View Details")}</button>  ${roadmapItem.isExpanded ? `<div class="mt-2 bg-gray-800 p-4 rounded-lg shadow-lg"><div class="space-y-4"><div><h5 class="font-semibold text-amber-300" data-svelte-h="svelte-1hvh0xc">Development Journey</h5> <p class="text-gray-300">${escape(roadmapItem.developmentJourney)}</p></div> <div><h5 class="font-semibold text-amber-300" data-svelte-h="svelte-rj8u5b">Feature Focus</h5> <ul class="list-disc pl-5 text-gray-300">${each(roadmapItem.featureFocus, (feature) => {
                 return `<li>${escape(feature)}</li>`;
-              })} </ul></div> <div><h5 class="font-semibold text-amber-300" data-svelte-h="svelte-1noniny">Technical Challenges</h5> <p class="text-gray-300">${escape(roadmapItem.technicalChallenges)}</p></div> <div><h5 class="font-semibold text-amber-300" data-svelte-h="svelte-1gx0by4">Learning and Skills Acquired</h5> <p class="text-gray-300">${escape(roadmapItem.skillsLearned)}</p> </div></div> </div>` : ``} <button class="accent-color text-sm mt-2">${escape(roadmapItem.isExpanded ? "Hide Details" : "View Details")} </button></div> </div>`;
+              })} </ul></div> <div><h5 class="font-semibold text-amber-300" data-svelte-h="svelte-1noniny">Technical Challenges</h5> <p class="text-gray-300">${escape(roadmapItem.technicalChallenges)}</p></div> <div><h5 class="font-semibold text-amber-300" data-svelte-h="svelte-1gx0by4">Learning and Skills Acquired</h5> <p class="text-gray-300">${escape(roadmapItem.skillsLearned)}</p> </div></div> </div>` : ``}</div> </div>`;
             })}</div>`;
           }
         }
@@ -1349,7 +1375,7 @@ var init__3 = __esm({
     index3 = 3;
     component3 = async () => component_cache3 ?? (component_cache3 = (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default);
     universal_id = "src/routes/[id]/+page.ts";
-    imports3 = ["_app/immutable/nodes/3.942c1403.js", "_app/immutable/chunks/SubSection.fd5bad6b.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/MenuIcon.svelte_svelte_type_style_lang.8c767792.js"];
+    imports3 = ["_app/immutable/nodes/3.42a8f3cb.js", "_app/immutable/chunks/SubSection.fd5bad6b.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/MenuIcon.svelte_svelte_type_style_lang.505584d3.js"];
     stylesheets3 = ["_app/immutable/assets/MenuIcon.0056b528.css"];
     fonts3 = [];
   }
@@ -1531,7 +1557,7 @@ var options = {
 		<div class="error">
 			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n"
   },
-  version_hash: "gio3en"
+  version_hash: "lvuejj"
 };
 function get_hooks() {
   return {};
@@ -4902,7 +4928,7 @@ var manifest = (() => {
     assets: /* @__PURE__ */ new Set(["favicon.png", "images/jefferson-santos-fCEJGBzAkrU-unsplash.jpg", "images/jerry-zhang-ePpaQC2c1xA-unsplash.jpg", "images/linus-nylund-Q5QspluNZmM-unsplash.jpg"]),
     mimeTypes: { ".png": "image/png", ".jpg": "image/jpeg" },
     _: {
-      client: { "start": "_app/immutable/entry/start.1cb9cce0.js", "app": "_app/immutable/entry/app.ed2044de.js", "imports": ["_app/immutable/entry/start.1cb9cce0.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/singletons.93ea4272.js", "_app/immutable/entry/app.ed2044de.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js"], "stylesheets": [], "fonts": [] },
+      client: { "start": "_app/immutable/entry/start.aed53e36.js", "app": "_app/immutable/entry/app.7e3897a9.js", "imports": ["_app/immutable/entry/start.aed53e36.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/singletons.75b09d07.js", "_app/immutable/entry/app.7e3897a9.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js"], "stylesheets": [], "fonts": [] },
       nodes: [
         __memo(() => Promise.resolve().then(() => (init__(), __exports))),
         __memo(() => Promise.resolve().then(() => (init__2(), __exports2))),

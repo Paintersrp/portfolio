@@ -56,7 +56,8 @@
     forecasting: Icons.ForecastingIcon,
     instagram: Icons.InstagramIcon,
     expand: Icons.ExpandIcon,
-    collapse: Icons.CollapseIcon
+    collapse: Icons.CollapseIcon,
+    deployed: Icons.DeployedIcon
   };
 
   $: iconSize = sizeMap[size];

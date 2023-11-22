@@ -70,7 +70,8 @@ declare global {
     | 'deeplearning'
     | 'instagram'
     | 'expand'
-    | 'collapse';
+    | 'collapse'
+    | 'deployed';
 
   interface Social {
     name: IconType;

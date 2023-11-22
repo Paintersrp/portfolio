@@ -1,14 +1,10 @@
 export const navItems: NavigationItems = [
   {
-    title: 'Nothing',
+    title: 'Home',
     route: '/'
   },
   {
-    title: 'Here',
+    title: 'Project Slug Demo',
     route: '/skills'
-  },
-  {
-    title: 'Yet :)',
-    route: 'projects'
   }
 ];

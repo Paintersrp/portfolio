@@ -36,3 +36,4 @@ export { default as ForecastingIcon } from './ForecastingIcon.svelte';
 export { default as InstagramIcon } from './InstagramIcon.svelte';
 export { default as ExpandIcon } from './ExpandIcon.svelte';
 export { default as CollapseIcon } from './CollapseIcon.svelte';
+export { default as DeployedIcon } from './DeployedIcon.svelte';
