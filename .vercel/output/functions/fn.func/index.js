@@ -80,13 +80,19 @@ function subscribe(store, ...callbacks) {
   const unsub = store.subscribe(...callbacks);
   return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
 }
-function set_current_component(component4) {
-  current_component = component4;
+function null_to_empty(value) {
+  return value == null ? "" : value;
+}
+function set_current_component(component5) {
+  current_component = component5;
 }
 function get_current_component() {
   if (!current_component)
     throw new Error("Function called outside component initialization");
   return current_component;
+}
+function onDestroy(fn) {
+  get_current_component().$$.on_destroy.push(fn);
 }
 function setContext(key2, context) {
   get_current_component().$$.context.set(key2, context);
@@ -120,15 +126,15 @@ function each(items, fn) {
   }
   return str;
 }
-function validate_component(component4, name) {
-  if (!component4 || !component4.$$render) {
+function validate_component(component5, name) {
+  if (!component5 || !component5.$$render) {
     if (name === "svelte:component")
       name += " this={...}";
     throw new Error(
       `<${name}> is not a valid SSR component. You may need to review your build config to ensure that dependencies are compiled, rather than imported as pre-compiled modules. Otherwise you may need to fix a <${name}>.`
     );
   }
-  return component4;
+  return component5;
 }
 function create_ssr_component(fn) {
   function $$render(result, props, bindings, slots, context) {
@@ -156,7 +162,7 @@ function create_ssr_component(fn) {
       return {
         html,
         css: {
-          code: Array.from(result.css).map((css2) => css2.code).join("\n"),
+          code: Array.from(result.css).map((css3) => css3.code).join("\n"),
           map: null
           // TODO
         },
@@ -180,6 +186,88 @@ var init_ssr = __esm({
     missing_component = {
       $$render: () => ""
     };
+  }
+});
+
+// .svelte-kit/output/server/chunks/index2.js
+function error(status, body) {
+  if (isNaN(status) || status < 400 || status > 599) {
+    throw new Error(`HTTP error status codes must be between 400 and 599 \u2014 ${status} is invalid`);
+  }
+  return new HttpError(status, body);
+}
+function json(data, init2) {
+  const body = JSON.stringify(data);
+  const headers = new Headers(init2?.headers);
+  if (!headers.has("content-length")) {
+    headers.set("content-length", encoder.encode(body).byteLength.toString());
+  }
+  if (!headers.has("content-type")) {
+    headers.set("content-type", "application/json");
+  }
+  return new Response(body, {
+    ...init2,
+    headers
+  });
+}
+function text(body, init2) {
+  const headers = new Headers(init2?.headers);
+  if (!headers.has("content-length")) {
+    const encoded = encoder.encode(body);
+    headers.set("content-length", encoded.byteLength.toString());
+    return new Response(encoded, {
+      ...init2,
+      headers
+    });
+  }
+  return new Response(body, {
+    ...init2,
+    headers
+  });
+}
+var HttpError, Redirect, ActionFailure, encoder;
+var init_index2 = __esm({
+  ".svelte-kit/output/server/chunks/index2.js"() {
+    HttpError = class {
+      /**
+       * @param {number} status
+       * @param {{message: string} extends App.Error ? (App.Error | string | undefined) : App.Error} body
+       */
+      constructor(status, body) {
+        this.status = status;
+        if (typeof body === "string") {
+          this.body = { message: body };
+        } else if (body) {
+          this.body = body;
+        } else {
+          this.body = { message: `Error: ${status}` };
+        }
+      }
+      toString() {
+        return JSON.stringify(this.body);
+      }
+    };
+    Redirect = class {
+      /**
+       * @param {300 | 301 | 302 | 303 | 304 | 305 | 306 | 307 | 308} status
+       * @param {string} location
+       */
+      constructor(status, location) {
+        this.status = status;
+        this.location = location;
+      }
+    };
+    ActionFailure = class {
+      /**
+       * @param {number} status
+       * @param {T} [data]
+       */
+      constructor(status, data) {
+        this.status = status;
+        this.data = data;
+      }
+    };
+    encoder = new TextEncoder();
   }
 });
 
@@ -253,20 +341,20 @@ var require_cookie = __commonJS({
       var obj = {};
       var opt = options2 || {};
       var dec = opt.decode || decode;
-      var index4 = 0;
-      while (index4 < str.length) {
-        var eqIdx = str.indexOf("=", index4);
+      var index5 = 0;
+      while (index5 < str.length) {
+        var eqIdx = str.indexOf("=", index5);
         if (eqIdx === -1) {
           break;
         }
-        var endIdx = str.indexOf(";", index4);
+        var endIdx = str.indexOf(";", index5);
         if (endIdx === -1) {
           endIdx = str.length;
         } else if (endIdx < eqIdx) {
-          index4 = str.lastIndexOf(";", eqIdx - 1) + 1;
+          index5 = str.lastIndexOf(";", eqIdx - 1) + 1;
           continue;
         }
-        var key2 = str.slice(index4, eqIdx).trim();
+        var key2 = str.slice(index5, eqIdx).trim();
         if (void 0 === obj[key2]) {
           var val = str.slice(eqIdx + 1, endIdx).trim();
           if (val.charCodeAt(0) === 34) {
@@ -274,7 +362,7 @@ var require_cookie = __commonJS({
           }
           obj[key2] = tryDecode(val, dec);
         }
-        index4 = endIdx + 1;
+        index5 = endIdx + 1;
       }
       return obj;
     }
@@ -568,10 +656,207 @@ var init_layout_server_ts = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/MenuIcon.svelte_svelte_type_style_lang.js
-var AnalysisIcon, CodeIcon, CssIcon, DatabaseIcon, DjangoIcon, DownIcon, EmailIcon, GithubIcon, HtmlIcon, JavascriptIcon, LandscapeIcon, LinkedinIcon, NodeIcon, PythonIcon, ReactIcon, RightIcon, SvelteIcon, TwitterIcon, UpIcon, BabelIcon, DockerIcon, EngineerIcon, ExpressIcon, FlaskIcon, KoaIcon, SassIcon, VueIcon, WebpackIcon, TypescriptIcon, RustIcon, JavaIcon, WordpressIcon, DeepLearningIcon, RegressionIcon, ForecastingIcon, InstagramIcon, ExpandIcon, CollapseIcon, DeployedIcon, Icon;
-var init_MenuIcon_svelte_svelte_type_style_lang = __esm({
-  ".svelte-kit/output/server/chunks/MenuIcon.svelte_svelte_type_style_lang.js"() {
+// .svelte-kit/output/server/chunks/nav.js
+var projects, navItems;
+var init_nav = __esm({
+  ".svelte-kit/output/server/chunks/nav.js"() {
+    projects = [
+      {
+        id: 1,
+        slug: "portfolio",
+        date: "11/10/2021",
+        title: "Portfolio",
+        description: "Dive into my personal musings on life, technology, and continuous learning.",
+        details: "This blog is a testament to my journey as a developer and thinker. Built with the sleek SvelteKit for a reactive experience and styled by TailwindCSS for visual appeal. SEO optimizations ensure my voice is heard far and wide.",
+        concepts: ["User-friendly UI", "Intuitive Navigation", "Engaging Content"],
+        stack: ["SvelteKit", "TailwindCSS", "SEO Auditing Tools"],
+        libraries: ["DaisyUI", "Chart.js"],
+        roadmap: [
+          {
+            version: "v2",
+            description: "Interactive Features",
+            status: "In Progress",
+            releaseDate: "06/30/2023",
+            progress: 60,
+            isExpanded: false,
+            developmentJourney: "The focus for Version 2.0 is on enhancing user engagement through interactive features. This phase involves integrating a real-time commenting system, introducing user polls, and improving the overall user experience based on feedback from Version 1.0.",
+            featureFocus: ["Real-Time Commenting System", "User Polls", "Performance Optimization"],
+            technicalChallenges: "Key challenges include implementing real-time features without compromising website performance and maintaining user privacy.",
+            skillsLearned: "Currently enhancing skills in real-time web technologies and learning about user data protection and privacy laws."
+          },
+          {
+            version: "v1",
+            description: "Initial Launch",
+            status: "Completed",
+            releaseDate: "01/02/2022",
+            progress: 100,
+            isExpanded: false,
+            developmentJourney: "Version 1.0 marked the official launch of the blog. The primary focus was on establishing a solid foundation with essential blogging functionalities. The journey involved extensive planning, UI/UX design iterations, and initial SEO setup.",
+            featureFocus: ["Basic Blogging Functionality", "Responsive Design", "SEO Foundations"],
+            technicalChallenges: "Challenges included ensuring cross-browser compatibility and implementing a responsive design that adapts to various screen sizes.",
+            skillsLearned: "Gained proficiency in SvelteKit and TailwindCSS, along with a deeper understanding of SEO principles."
+          }
+        ],
+        imgUrl: "https://source.unsplash.com/random/600x400/?website",
+        repoUrl: "https://github.com/Paintersrp/portfolio",
+        repoName: "portfolio",
+        isExpanded: false,
+        liveDemo: "https://yourpersonalblog.com"
+      },
+      {
+        id: 2,
+        slug: "blog",
+        date: "11/10/2021",
+        title: "Blog",
+        description: "Dive into my personal musings on life, technology, and continuous learning.",
+        details: "This blog is a testament to my journey as a developer and thinker. Built with the sleek SvelteKit for a reactive experience and styled by TailwindCSS for visual appeal. SEO optimizations ensure my voice is heard far and wide.",
+        concepts: ["User-friendly UI", "Intuitive Navigation", "Engaging Content"],
+        stack: ["SvelteKit", "TailwindCSS", "SEO Auditing Tools"],
+        libraries: ["DaisyUI", "Chart.js"],
+        roadmap: [
+          {
+            version: "v2",
+            description: "Interactive Features",
+            status: "In Progress",
+            releaseDate: "06/30/2023",
+            progress: 60,
+            isExpanded: false,
+            developmentJourney: "The focus for Version 2.0 is on enhancing user engagement through interactive features. This phase involves integrating a real-time commenting system, introducing user polls, and improving the overall user experience based on feedback from Version 1.0.",
+            featureFocus: ["Real-Time Commenting System", "User Polls", "Performance Optimization"],
+            technicalChallenges: "Key challenges include implementing real-time features without compromising website performance and maintaining user privacy.",
+            skillsLearned: "Currently enhancing skills in real-time web technologies and learning about user data protection and privacy laws."
+          },
+          {
+            version: "v1",
+            description: "Initial Launch",
+            status: "Completed",
+            releaseDate: "01/02/2022",
+            progress: 100,
+            isExpanded: false,
+            developmentJourney: "Version 1.0 marked the official launch of the blog. The primary focus was on establishing a solid foundation with essential blogging functionalities. The journey involved extensive planning, UI/UX design iterations, and initial SEO setup.",
+            featureFocus: ["Basic Blogging Functionality", "Responsive Design", "SEO Foundations"],
+            technicalChallenges: "Challenges included ensuring cross-browser compatibility and implementing a responsive design that adapts to various screen sizes.",
+            skillsLearned: "Gained proficiency in SvelteKit and TailwindCSS, along with a deeper understanding of SEO principles."
+          }
+        ],
+        imgUrl: "https://source.unsplash.com/random/600x400/?website",
+        repoUrl: "https://github.com/Paintersrp/portfolio",
+        repoName: "portfolio",
+        isExpanded: false,
+        liveDemo: "https://yourpersonalblog.com"
+      },
+      {
+        id: 3,
+        slug: "predictor",
+        date: "11/11/2021",
+        title: "Predictor",
+        description: "Harnessing the power of machine learning to forecast sports event results with enhanced accuracy.",
+        details: "A sophisticated machine learning model trained on a rich dataset of historical sports statistics. It combines Scikit-learn\u2019s robust algorithms with Python\u2019s computing power to predict game outcomes, providing insights to sports enthusiasts and bettors.",
+        concepts: ["Data Analysis", "Predictive Modeling", "Machine Learning Optimization"],
+        stack: ["Python", "Scikit-learn", "Pandas"],
+        libraries: ["NumPy", "Matplotlib", "Seaborn"],
+        roadmap: [
+          {
+            version: "v1.0",
+            description: "Initial Model Development",
+            status: "Completed",
+            releaseDate: "12/01/2021",
+            progress: 100,
+            isExpanded: false,
+            developmentJourney: "The initial phase focused on developing a base predictive model...",
+            featureFocus: ["Initial Model Training", "Data Gathering", "Baseline Accuracy"],
+            technicalChallenges: "Challenges in data preprocessing and feature selection...",
+            skillsLearned: "Advanced data analysis techniques and model optimization..."
+          }
+        ],
+        imgUrl: "https://source.unsplash.com/random/600x400/?predictor",
+        repoUrl: "https://github.com/yourusername/sports-predictor",
+        repoName: "sports-predictor",
+        isExpanded: false,
+        liveDemo: "https://yoursportspredictor.com"
+      },
+      {
+        id: 4,
+        slug: "forecaster",
+        date: "11/12/2021",
+        title: "Forecaster",
+        description: "Optimize your inventory with our AI-powered sales forecasting tool.",
+        details: "Designed to assist businesses in predicting future sales, managing inventory, and optimizing supply chain operations. It leverages state-of-the-art machine learning algorithms to analyze sales data and make precise demand forecasts.",
+        concepts: ["Inventory Forecasting", "Sales Data Analysis", "Supply Chain Optimization"],
+        stack: ["TensorFlow", "Keras", "NumPy", "Matplotlib"],
+        libraries: ["Pandas", "Scikit-learn"],
+        roadmap: [
+          {
+            version: "v1.0",
+            description: "Initial Algorithm Development",
+            status: "Completed",
+            releaseDate: "01/15/2022",
+            progress: 100,
+            isExpanded: false,
+            developmentJourney: "Initial phase focusing on developing the forecasting algorithm...",
+            featureFocus: ["Algorithm Design", "Data Integration", "Initial Testing"],
+            technicalChallenges: "Handling large datasets and integrating diverse data sources...",
+            skillsLearned: "Deep learning techniques for time series forecasting..."
+          }
+        ],
+        imgUrl: "https://source.unsplash.com/random/600x400/?forecast",
+        repoUrl: "https://github.com/yourusername/sales-forecaster",
+        repoName: "sales-forecaster",
+        isExpanded: false,
+        liveDemo: "https://yoursalesforecaster.com"
+      },
+      {
+        id: 5,
+        slug: "gateway",
+        date: "11/13/2021",
+        title: "API Gateway",
+        description: "A robust API gateway to streamline your services and data flow.",
+        details: "Central hub for managing, routing, and scaling microservices. It includes advanced anomaly detection to safeguard against unexpected traffic spikes and potential threats, ensuring reliable and secure service operations.",
+        concepts: ["Microservices Management", "Traffic Routing", "Security and Reliability"],
+        stack: ["Node.js", "Express", "Elasticsearch"],
+        libraries: ["Redis", "JWT", "Axios"],
+        roadmap: [
+          {
+            version: "v1.0",
+            description: "Core Gateway Functionality",
+            status: "Completed",
+            releaseDate: "02/20/2022",
+            progress: 100,
+            isExpanded: false,
+            developmentJourney: "Focused on establishing core gateway functionalities...",
+            featureFocus: ["Request Routing", "Load Balancing", "Security Implementation"],
+            technicalChallenges: "Implementing efficient load balancing and secure data routing...",
+            skillsLearned: "Node.js performance optimization and advanced security techniques..."
+          }
+        ],
+        imgUrl: "https://source.unsplash.com/random/600x400/?api",
+        repoUrl: "https://github.com/yourusername/api-gateway",
+        repoName: "api-gateway",
+        isExpanded: false,
+        liveDemo: "https://yourapigateway.com"
+      }
+    ];
+    navItems = [
+      {
+        title: "Home",
+        route: "/"
+      },
+      {
+        title: "Projects",
+        route: void 0,
+        children: projects.map((project) => ({
+          title: project.title,
+          route: `/${project.slug}`
+        }))
+      }
+    ];
+  }
+});
+
+// .svelte-kit/output/server/chunks/Icon.js
+var AnalysisIcon, CodeIcon, CssIcon, DatabaseIcon, DjangoIcon, DownIcon, EmailIcon, GithubIcon, HtmlIcon, JavascriptIcon, LandscapeIcon, LinkedinIcon, NodeIcon, PythonIcon, ReactIcon, RightIcon, SvelteIcon, TwitterIcon, UpIcon, BabelIcon, DockerIcon, EngineerIcon, ExpressIcon, FlaskIcon, KoaIcon, SassIcon, VueIcon, WebpackIcon, TypescriptIcon, RustIcon, JavaIcon, WordpressIcon, DeepLearningIcon, RegressionIcon, ForecastingIcon, InstagramIcon, ExpandIcon, CollapseIcon, DeployedIcon, LinkIcon, Icon;
+var init_Icon = __esm({
+  ".svelte-kit/output/server/chunks/Icon.js"() {
     init_ssr();
     AnalysisIcon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let { iconSize } = $$props;
@@ -808,7 +1093,7 @@ c8.9-2.3,18.2,1.2,23.4,8.7c3.2,4.4,4.4,9.9,3.5,15.3c-0.9,5.2-4.1,9.9-8.6,12.7l-2
       let { iconSize } = $$props;
       if ($$props.iconSize === void 0 && $$bindings.iconSize && iconSize !== void 0)
         $$bindings.iconSize(iconSize);
-      return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"${add_attribute("height", iconSize, 0)}${add_attribute("width", iconSize, 0)}><path d="M480-120 300-300l58-58 122 122 122-122 58 58-180 180ZM358-598l-58-58 180-180 180 180-58 58-122-122-122 122Z"></path></svg>`;
+      return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"${add_attribute("height", iconSize, 0)}${add_attribute("width", iconSize, 0)}><path d="M480-345 240-585l56-56 184 184 184-184 56 56-240 240Z"></path></svg>`;
     });
     CollapseIcon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let { iconSize } = $$props;
@@ -821,6 +1106,12 @@ c8.9-2.3,18.2,1.2,23.4,8.7c3.2,4.4,4.4,9.9,3.5,15.3c-0.9,5.2-4.1,9.9-8.6,12.7l-2
       if ($$props.iconSize === void 0 && $$bindings.iconSize && iconSize !== void 0)
         $$bindings.iconSize(iconSize);
       return `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"${add_attribute("height", iconSize, 0)}${add_attribute("width", iconSize, 0)} viewBox="0 -960 960 960"><path d="M440-183v-274L200-596v274l240 139Zm80 0 240-139v-274L520-457v274Zm-40-343 237-137-237-137-237 137 237 137ZM160-252q-19-11-29.5-29T120-321v-318q0-22 10.5-40t29.5-29l280-161q19-11 40-11t40 11l280 161q19 11 29.5 29t10.5 40v318q0 22-10.5 40T800-252L520-91q-19 11-40 11t-40-11L160-252Zm320-228Z"></path></svg>`;
+    });
+    LinkIcon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { iconSize } = $$props;
+      if ($$props.iconSize === void 0 && $$bindings.iconSize && iconSize !== void 0)
+        $$bindings.iconSize(iconSize);
+      return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"${add_attribute("height", iconSize, 0)}${add_attribute("width", iconSize, 0)}><path d="M440-280H280q-83 0-141.5-58.5T80-480q0-83 58.5-141.5T280-680h160v80H280q-50 0-85 35t-35 85q0 50 35 85t85 35h160v80ZM320-440v-80h320v80H320Zm200 160v-80h160q50 0 85-35t35-85q0-50-35-85t-85-35H520v-80h160q83 0 141.5 58.5T880-480q0 83-58.5 141.5T680-280H520Z"></path></svg>`;
     });
     Icon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let iconSize;
@@ -878,7 +1169,8 @@ c8.9-2.3,18.2,1.2,23.4,8.7c3.2,4.4,4.4,9.9,3.5,15.3c-0.9,5.2-4.1,9.9-8.6,12.7l-2
         instagram: InstagramIcon,
         expand: ExpandIcon,
         collapse: CollapseIcon,
-        deployed: DeployedIcon
+        deployed: DeployedIcon,
+        link: LinkIcon
       };
       if ($$props.iconClass === void 0 && $$bindings.iconClass && iconClass !== void 0)
         $$bindings.iconClass(iconClass);
@@ -920,24 +1212,15 @@ function mediaQueryStore(query) {
   const store = writable(false);
   return { subscribe: store.subscribe };
 }
-var disableScrollHandling, afterNavigate, navItems, css, MenuIcon, Layout;
+var disableScrollHandling, afterNavigate, css, MenuIcon, Layout;
 var init_layout_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
     init_ssr();
     init_chunks();
-    init_MenuIcon_svelte_svelte_type_style_lang();
+    init_nav();
+    init_Icon();
     disableScrollHandling = /* @__PURE__ */ client_method("disable_scroll_handling");
     afterNavigate = /* @__PURE__ */ client_method("after_navigate");
-    navItems = [
-      {
-        title: "Home",
-        route: "/"
-      },
-      {
-        title: "Project Slug Demo",
-        route: "/skills"
-      }
-    ];
     css = {
       code: ":root{--transition-duration:600ms}button.svelte-rv88i1.svelte-rv88i1{cursor:pointer;display:flex;align-items:center;overflow:hidden}svg.svelte-rv88i1.svelte-rv88i1{transition:transform var(--transition-duration)}.top.svelte-rv88i1.svelte-rv88i1{stroke-dasharray:40 160;transition:stroke-dashoffset var(--transition-duration)}.middle.svelte-rv88i1.svelte-rv88i1{transform-origin:50%;transition:transform var(--transition-duration)}.bottom.svelte-rv88i1.svelte-rv88i1{stroke-dasharray:40 85;transition:stroke-dashoffset var(--transition-duration)}.open.svelte-rv88i1.svelte-rv88i1{transform:rotate(45deg)}.open.svelte-rv88i1 .top.svelte-rv88i1,.open.svelte-rv88i1 .bottom.svelte-rv88i1{stroke-dashoffset:-64px}.open.svelte-rv88i1 .middle.svelte-rv88i1{transform:rotate(90deg)}",
       map: null
@@ -948,7 +1231,7 @@ var init_layout_svelte = __esm({
         open = !open;
       } } = $$props;
       let { ariaLabel = "toggle menu" } = $$props;
-      let { width = 64 } = $$props;
+      let { width = 56 } = $$props;
       if ($$props.open === void 0 && $$bindings.open && open !== void 0)
         $$bindings.open(open);
       if ($$props.onClick === void 0 && $$bindings.onClick && onClick !== void 0)
@@ -961,7 +1244,6 @@ var init_layout_svelte = __esm({
       return `<button${add_attribute("aria-expanded", open, 0)}${add_attribute("aria-label", ariaLabel, 0)} class="accent-color md:hidden svelte-rv88i1"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5"${add_attribute("width", width, 0)} class="${["svelte-rv88i1", open ? "open" : ""].join(" ").trim()}"><path class="top svelte-rv88i1" d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20"></path><path class="middle svelte-rv88i1" d="m 30,50 h 40"></path><path class="bottom svelte-rv88i1" d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20"></path></svg> </button>`;
     });
     Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let pathname;
       let $$unsubscribe_small;
       let $isMenuOpen, $$unsubscribe_isMenuOpen;
       let { data } = $$props;
@@ -1001,18 +1283,17 @@ var init_layout_svelte = __esm({
       });
       if ($$props.data === void 0 && $$bindings.data && data !== void 0)
         $$bindings.data(data);
-      pathname = data.url;
-      {
-        console.log(pathname);
-      }
+      data.url;
       $$unsubscribe_small();
       $$unsubscribe_isMenuOpen();
       return `<main class="flex flex-col bg-[#1d1d20] min-h-screen overflow-x-hidden overflow-y-hidden w-full"> <header class="p-1 fixed top-0 right-0 justify-end z-50">${validate_component(MenuIcon, "MenuIcon").$$render($$result, { open: $isMenuOpen, onClick: toggleMenu }, {}, {})}</header>  ${$isMenuOpen ? `<div class="fixed inset-0 flex items-center bg-[#1d1d20] justify-center p-4 z-40"><div class="flex flex-col">${each(navItems, (item) => {
-        return `<a${add_attribute("href", item.route, 0)} class="text-5xl md:text-6xl font-bold accent-color hover:text-amber-300 text-center leading-tight mb-4 hover:underline">${escape(item.title)} </a>`;
+        return `${item.route ? `<a${add_attribute("href", item.route, 0)} class="text-4xl md:text-5xl font-bold accent-color hover:text-amber-300 text-center leading-tight mb-4 hover:underline">${escape(item.title)} </a>` : ``} ${item.children ? `${each(item.children, (child) => {
+          return `<a${add_attribute("href", child.route, 0)} class="text-4xl md:text-5xl font-bold accent-color hover:text-amber-300 text-center leading-tight mb-4 hover:underline">${escape(child.title)} </a>`;
+        })}` : ``}`;
       })}</div></div>` : ``}  <div>${slots.default ? slots.default({}) : ``}</div>  <footer class="block md:flex md:justify-between md:items-center py-12 px-7 md:px-20 bg-opacity-[1.5%] bg-white"><div class="font-bold w-auto text-center mb-6 md:w-[200px] md:text-left md:mb-0 text-gray-200" data-svelte-h="svelte-1h9ai9t"><div class="text-sm"><span class="accent-color">\xA9</span>
         Copyright
         <span class="">2023</span></div> <div class="text-sm"><span>Made by
-          <a href="/" class="underline-link accent-color !font-extrabold">Ryan Painter</a></span></div></div> <div class="flex justify-center">${each(socials, (social, index4) => {
+          <a href="/" class="underline-link accent-color !font-extrabold">Ryan Painter</a></span></div></div> <div class="flex justify-center">${each(socials, (social, index5) => {
         return `<a${add_attribute("href", social.url, 0)} class="uppercase font-bold mx-3 lg:mx-4" target="_blank" rel="noopener noreferrer"${add_attribute("title", social.name, 0)}>${validate_component(Icon, "Icon").$$render(
           $$result,
           {
@@ -1046,147 +1327,9 @@ var init__ = __esm({
     index = 0;
     component = async () => component_cache ?? (component_cache = (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default);
     server_id = "src/routes/+layout.server.ts";
-    imports = ["_app/immutable/nodes/0.3b72cc84.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/MenuIcon.svelte_svelte_type_style_lang.505584d3.js", "_app/immutable/chunks/singletons.75b09d07.js"];
-    stylesheets = ["_app/immutable/assets/0.1fd9c90e.css", "_app/immutable/assets/MenuIcon.0056b528.css"];
+    imports = ["_app/immutable/nodes/0.f97d2988.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/Icon.fd8d61d3.js", "_app/immutable/chunks/singletons.ccc62dc5.js"];
+    stylesheets = ["_app/immutable/assets/0.ff414715.css", "_app/immutable/assets/MenuIcon.0056b528.css"];
     fonts = [];
-  }
-});
-
-// .svelte-kit/output/server/entries/fallbacks/error.svelte.js
-var error_svelte_exports = {};
-__export(error_svelte_exports, {
-  default: () => Error$1
-});
-var getStores, page, Error$1;
-var init_error_svelte = __esm({
-  ".svelte-kit/output/server/entries/fallbacks/error.svelte.js"() {
-    init_ssr();
-    getStores = () => {
-      const stores = getContext("__svelte__");
-      return {
-        /** @type {typeof page} */
-        page: {
-          subscribe: stores.page.subscribe
-        },
-        /** @type {typeof navigating} */
-        navigating: {
-          subscribe: stores.navigating.subscribe
-        },
-        /** @type {typeof updated} */
-        updated: stores.updated
-      };
-    };
-    page = {
-      subscribe(fn) {
-        const store = getStores().page;
-        return store.subscribe(fn);
-      }
-    };
-    Error$1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $page, $$unsubscribe_page;
-      $$unsubscribe_page = subscribe(page, (value) => $page = value);
-      $$unsubscribe_page();
-      return `<h1>${escape($page.status)}</h1> <p>${escape($page.error?.message)}</p>`;
-    });
-  }
-});
-
-// .svelte-kit/output/server/nodes/1.js
-var __exports2 = {};
-__export(__exports2, {
-  component: () => component2,
-  fonts: () => fonts2,
-  imports: () => imports2,
-  index: () => index2,
-  stylesheets: () => stylesheets2
-});
-var index2, component_cache2, component2, imports2, stylesheets2, fonts2;
-var init__2 = __esm({
-  ".svelte-kit/output/server/nodes/1.js"() {
-    index2 = 1;
-    component2 = async () => component_cache2 ?? (component_cache2 = (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default);
-    imports2 = ["_app/immutable/nodes/1.5c863766.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/singletons.75b09d07.js"];
-    stylesheets2 = [];
-    fonts2 = [];
-  }
-});
-
-// .svelte-kit/output/server/chunks/projects.js
-var projects;
-var init_projects = __esm({
-  ".svelte-kit/output/server/chunks/projects.js"() {
-    projects = [
-      {
-        id: 1,
-        date: "11/10/2021",
-        title: "Personal Blog",
-        description: "Dive into my personal musings on life, technology, and continuous learning.",
-        details: "This blog is a testament to my journey as a developer and thinker. Built with the sleek SvelteKit for a reactive experience and styled by TailwindCSS for visual appeal. SEO optimizations ensure my voice is heard far and wide.",
-        features: ["Responsive Design", "SEO-Friendly", "Light/Dark Mode"],
-        technologies: ["SvelteKit", "TailwindCSS", "SEO Auditing Tools"],
-        imgUrl: "https://source.unsplash.com/random/600x400/?website",
-        repoUrl: "https://github.com/yourusername/personal-blog",
-        isExpanded: false,
-        liveDemo: "https://yourpersonalblog.com"
-      },
-      {
-        id: 2,
-        date: "11/11/2021",
-        title: "Basketball Predictor",
-        description: "Harnessing the power of machine learning to forecast sports event results with enhanced accuracy.",
-        details: "A sophisticated machine learning model trained on a rich dataset of historical sports statistics. It combines Scikit-learn\u2019s robust algorithms with Python\u2019s computing power to predict game outcomes, providing insights to sports enthusiasts and bettors.",
-        features: ["Data Visualization", "Statistical Analysis", "Predictive Modeling"],
-        technologies: ["Python", "Scikit-learn", "Pandas"],
-        imgUrl: "https://source.unsplash.com/random/600x400/?predictor",
-        repoUrl: "https://github.com/yourusername/sports-predictor",
-        isExpanded: false,
-        liveDemo: "https://yoursportspredictor.com"
-      },
-      {
-        id: 3,
-        date: "11/12/2021",
-        title: "Sales Forecaster",
-        description: "Optimize your inventory with our AI-powered sales forecasting tool.",
-        details: "Designed to assist businesses in predicting future sales, managing inventory, and optimizing supply chain operations. It leverages state-of-the-art machine learning algorithms to analyze sales data and make precise demand forecasts.",
-        features: ["Inventory Management", "Trend Analysis", "Machine Learning Predictions"],
-        technologies: ["TensorFlow", "Keras", "NumPy", "Matplotlib"],
-        imgUrl: "https://source.unsplash.com/random/600x400/?forecast",
-        repoUrl: "https://github.com/yourusername/sales-forecaster",
-        isExpanded: false,
-        liveDemo: "https://yoursalesforecaster.com"
-      },
-      {
-        id: 4,
-        date: "11/13/2021",
-        title: "API Gateway",
-        description: "A robust API gateway to streamline your services and data flow.",
-        details: "Central hub for managing, routing, and scaling microservices. It includes advanced anomaly detection to safeguard against unexpected traffic spikes and potential threats, ensuring reliable and secure service operations.",
-        features: ["Load Balancing", "Anomaly Detection", "Rate Limiting"],
-        technologies: ["Node.js", "Express", "Elasticsearch"],
-        imgUrl: "https://source.unsplash.com/random/600x400/?api",
-        repoUrl: "https://github.com/yourusername/api-gateway",
-        isExpanded: false,
-        liveDemo: "https://yourapigateway.com"
-      }
-    ];
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/_id_/_page.ts.js
-var page_ts_exports = {};
-__export(page_ts_exports, {
-  load: () => load2
-});
-async function load2({ params }) {
-  const projectId = Number(params.id);
-  const project = projects[projectId - 1];
-  return {
-    project
-  };
-}
-var init_page_ts = __esm({
-  ".svelte-kit/output/server/entries/pages/_id_/_page.ts.js"() {
-    init_projects();
   }
 });
 
@@ -1213,63 +1356,288 @@ var init_SubSection = __esm({
   }
 });
 
-// .svelte-kit/output/server/entries/pages/_id_/_page.svelte.js
+// .svelte-kit/output/server/entries/pages/_error.svelte.js
+var error_svelte_exports = {};
+__export(error_svelte_exports, {
+  default: () => Error$1
+});
+var getStores, page, Error$1;
+var init_error_svelte = __esm({
+  ".svelte-kit/output/server/entries/pages/_error.svelte.js"() {
+    init_ssr();
+    init_SubSection();
+    getStores = () => {
+      const stores = getContext("__svelte__");
+      return {
+        /** @type {typeof page} */
+        page: {
+          subscribe: stores.page.subscribe
+        },
+        /** @type {typeof navigating} */
+        navigating: {
+          subscribe: stores.navigating.subscribe
+        },
+        /** @type {typeof updated} */
+        updated: stores.updated
+      };
+    };
+    page = {
+      subscribe(fn) {
+        const store = getStores().page;
+        return store.subscribe(fn);
+      }
+    };
+    Error$1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $page, $$unsubscribe_page;
+      $$unsubscribe_page = subscribe(page, (value) => $page = value);
+      $$unsubscribe_page();
+      return `${validate_component(FullSection, "FullSection").$$render($$result, { id: "error" }, {}, {
+        default: () => {
+          return `${validate_component(SubSection, "SubSection").$$render($$result, { id: "error-msg", heading: "Error" }, {}, {
+            default: () => {
+              return `<pre class="whitespace-pre-wrap accent-color tracking-wide">        ${escape(JSON.stringify($page, void 0, 2))}
+    </pre>`;
+            }
+          })}`;
+        }
+      })}`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/1.js
+var __exports2 = {};
+__export(__exports2, {
+  component: () => component2,
+  fonts: () => fonts2,
+  imports: () => imports2,
+  index: () => index2,
+  stylesheets: () => stylesheets2
+});
+var index2, component_cache2, component2, imports2, stylesheets2, fonts2;
+var init__2 = __esm({
+  ".svelte-kit/output/server/nodes/1.js"() {
+    index2 = 1;
+    component2 = async () => component_cache2 ?? (component_cache2 = (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default);
+    imports2 = ["_app/immutable/nodes/1.8e97c9e2.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/singletons.ccc62dc5.js", "_app/immutable/chunks/SubSection.e1c97470.js"];
+    stylesheets2 = ["_app/immutable/assets/MenuIcon.0056b528.css"];
+    fonts2 = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/_page.ts.js
+var page_ts_exports = {};
+var init_page_ts = __esm({
+  ".svelte-kit/output/server/entries/pages/_page.ts.js"() {
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/_page.svelte.js
 var page_svelte_exports = {};
 __export(page_svelte_exports, {
   default: () => Page
+});
+var skills, AnimatedText, css2, Page;
+var init_page_svelte = __esm({
+  ".svelte-kit/output/server/entries/pages/_page.svelte.js"() {
+    init_ssr();
+    init_nav();
+    init_SubSection();
+    init_Icon();
+    skills = [
+      {
+        id: 1,
+        title: "Languages",
+        items: [
+          { text: "JavaScript", icon: "javascript" },
+          { text: "TypeScript", icon: "typescript" },
+          { text: "Python", icon: "python" },
+          { text: "Rust", icon: "rust" },
+          { text: "Java", icon: "java" }
+        ]
+      },
+      {
+        id: 2,
+        title: "Frameworks",
+        items: [
+          { text: "React", icon: "react" },
+          { text: "Svelte", icon: "svelte" },
+          { text: "Vue", icon: "vue" },
+          { text: "Express", icon: "express" },
+          { text: "Koa", icon: "koa" },
+          { text: "Django", icon: "django" },
+          { text: "Flask", icon: "flask" },
+          { text: "Wordpress", icon: "wordpress" }
+        ]
+      },
+      {
+        id: 3,
+        title: "Machine Learning",
+        items: [
+          { text: "Regression", icon: "regression" },
+          { text: "Forecasting", icon: "forecasting" },
+          { text: "Deep Learning", icon: "deeplearning" }
+        ]
+      }
+    ];
+    AnimatedText = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { messages } = $$props;
+      let { textClass = "" } = $$props;
+      let { duration = 2e3 } = $$props;
+      let index5 = 0;
+      let roller;
+      onDestroy(() => {
+        clearInterval(roller);
+      });
+      if ($$props.messages === void 0 && $$bindings.messages && messages !== void 0)
+        $$bindings.messages(messages);
+      if ($$props.textClass === void 0 && $$bindings.textClass && textClass !== void 0)
+        $$bindings.textClass(textClass);
+      if ($$props.duration === void 0 && $$bindings.duration && duration !== void 0)
+        $$bindings.duration(duration);
+      return `<h1${add_attribute("class", textClass, 0)}>${escape(messages[index5])}</h1>`;
+    });
+    css2 = {
+      code: "main{background:#1d1d20 !important}.skills-grid.svelte-x51ewb.svelte-x51ewb{--_space:1rem;padding:0;display:grid;gap:var(--_space);grid-template-columns:repeat(auto-fill, minmax(25%, 1fr));grid-auto-rows:minmax(100px, auto)}@media(max-width: 1200px){.skills-grid.svelte-x51ewb.svelte-x51ewb{grid-template-columns:repeat(auto-fill, minmax(25%, 1fr))}}@media(max-width: 980px){.skills-grid.svelte-x51ewb.svelte-x51ewb{grid-template-columns:repeat(auto-fill, minmax(20%, 1fr))}}@media(max-width: 768px){.skills-grid.svelte-x51ewb.svelte-x51ewb{grid-template-columns:repeat(auto-fill, minmax(20%, 1fr))}}@media(max-width: 600px){.skills-grid.svelte-x51ewb.svelte-x51ewb{grid-template-columns:repeat(auto-fill, minmax(33%, 1fr))}}.skill-card.svelte-x51ewb.svelte-x51ewb{position:relative}.skill-card.svelte-x51ewb.svelte-x51ewb:hover{transform:scale(1.01)}.expanded.svelte-x51ewb.svelte-x51ewb{grid-column:span 2;grid-row:span 2}@media(max-width: 600px){.expanded.svelte-x51ewb.svelte-x51ewb{grid-column:span 2;grid-row:span 2}}.skill-details.svelte-x51ewb.svelte-x51ewb{display:none}.expanded.svelte-x51ewb .skill-details.svelte-x51ewb{display:block}",
+      map: null
+    };
+    Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      const messagesToAnimate = [
+        "TypeScript",
+        "Python",
+        "React",
+        "Svelte",
+        "Backend Systems",
+        "Cloud Services",
+        "Database Management",
+        "RESTful & GraphQL APIs",
+        "Progressive Web Apps",
+        "Machine Learning",
+        "Data Engineering",
+        "Data Visualization"
+      ];
+      let projects$1 = projects;
+      $$result.css.add(css2);
+      return `<div class="w-full">${validate_component(FullSection, "FullSection").$$render($$result, { id: "landing" }, {}, {
+        default: () => {
+          return `<h2 class="intro__tagline" data-svelte-h="svelte-1plky9q">I&#39;m <span class="font-black accent-color">Ryan Painter</span>, Lorem ipsum dolor sit amet
+      consectetur adipisicing elit. Necessitatibus eos dolores modi quisquam voluptatum eum magni
+      quod nostrum obcaecati blanditiis.</h2> <div class="container min-h-[70px]">${validate_component(AnimatedText, "AnimatedText").$$render(
+            $$result,
+            {
+              messages: messagesToAnimate,
+              textClass: "intro__tagline !font-bold accent-color"
+            },
+            {},
+            {}
+          )}</div> <h3 class="intro__contact" data-svelte-h="svelte-1374xtp">Contact me at:
+      <a href="mailto:paintersrp@gmail.com" class="highlight-link">paintersrp@gmail.com</a></h3>`;
+        }
+      })} ${validate_component(SubSection, "SubSection").$$render($$result, { id: "background", heading: "Background" }, {}, {
+        default: () => {
+          return `<p class="mt-0 mb-6 text-gray-300" data-svelte-h="svelte-elsyxg">Tits Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, sint ex, similique
+      facere sequi accusamus assumenda tempore nulla dignissimos a facilis excepturi magni
+      consequatur necessitatibus deleniti vero odio earum praesentium. Natus repellendus deserunt
+      laborum dolores a unde ipsum neque nostrum voluptates sapiente, facilis in cum, provident
+      veniam enim corporis similique!</p> <p class="mt-0 mb-6 text-gray-300" data-svelte-h="svelte-l4tfaa">Lorem ipsum dolor sit amet <a href="/" class="underline-link text-white">consectetur</a>,
+      adipisicing elit. Repellendus veritatis optio odio eveniet vel, quia quod. Consectetur,
+      maiores cumque? Animi provident officiis veniam in minus natus assumenda veritatis incidunt
+      aliquid.</p> <p class="mt-0 mb-6 text-gray-300" data-svelte-h="svelte-kitch9">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel ratione et consectetur rem
+      temporibus nulla?</p>`;
+        }
+      })}  ${validate_component(SubSection, "SubSection").$$render($$result, { id: "projects", heading: "Projects" }, {}, {
+        default: () => {
+          return `<div class="skills-grid svelte-x51ewb">${each(projects$1, (project) => {
+            return `<button class="${[
+              escape(null_to_empty(`skill-card text-amber-50 bg-white bg-opacity-[5%] rounded-lg shadow-md flex flex-col items-center cursor-pointer transition duration-300 ease-in-out hover:shadow-xl hover:bg-opacity-[10%] relative ${project.isExpanded ? "justify-center p-6" : "p-4"}`), true) + " svelte-x51ewb",
+              project.isExpanded ? "expanded" : ""
+            ].join(" ").trim()}"><figure class="flex justify-center mb-4"><img class="${escape(null_to_empty(`object-cover rounded shadow mx-auto  ${project.isExpanded ? "w-full" : "w-full"}`), true) + " svelte-x51ewb"}"${add_attribute("src", project.imgUrl, 0)}${add_attribute("alt", project.title, 0)}></figure> <span class="${escape(null_to_empty(`font-semibold ${project.isExpanded ? "text-xl" : " text-sm"}`), true) + " svelte-x51ewb"}">${escape(project.title)}</span> ${project.isExpanded ? `<div class="faster-in-blur mt-3 !flex"><a${add_attribute("href", `/${project.slug}`, 0)} class="min-w-[75px] px-2 md:px-4 my-auto py-2 text-sm bg-amber-300 bg-opacity-90 hover:bg-opacity-80 shadow-md text-white font-extrabold">Details</a> <a${add_attribute("href", project.repoUrl, 0)} class="min-w-[75px] px-2 md:px-4 my-auto py-2 text-sm bg-amber-300 bg-opacity-90 hover:bg-opacity-80 shadow-md text-white font-extrabold">GitHub</a> <a${add_attribute("href", project.liveDemo, 0)} class="min-w-[75px] px-2 md:px-4 my-auto py-2 text-sm bg-amber-300 bg-opacity-90 hover:bg-opacity-80 shadow-md text-white font-extrabold">Demo</a> </div>` : ``} </button>`;
+          })}</div>`;
+        }
+      })} ${validate_component(SubSection, "SubSection").$$render($$result, { id: "skills", heading: "Skills" }, {}, {
+        default: () => {
+          return `<div class="flex justify-between flex-wrap md:flex-nowrap">${each(skills, (skillset, index5) => {
+            return `<div class="mb-6 md:w-[47%]"><div class="text-gray-50 font-bold uppercase">${escape(skillset.title)}</div> <ul>${each(skillset.items, (item, index22) => {
+              return `<li class="my-[6px] text-sm text-gray-300"><div class="flex gap-3 dasdadsad items-center">${item.icon ? `${validate_component(Icon, "Icon").$$render(
+                $$result,
+                {
+                  type: item.icon,
+                  size: "sm",
+                  iconClass: "accent-color"
+                },
+                {},
+                {}
+              )}` : ``} ${escape(item.text)}</div> </li>`;
+            })}</ul> </div>`;
+          })}</div>`;
+        }
+      })} </div>`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/2.js
+var __exports3 = {};
+__export(__exports3, {
+  component: () => component3,
+  fonts: () => fonts3,
+  imports: () => imports3,
+  index: () => index3,
+  stylesheets: () => stylesheets3,
+  universal: () => page_ts_exports,
+  universal_id: () => universal_id
+});
+var index3, component_cache3, component3, universal_id, imports3, stylesheets3, fonts3;
+var init__3 = __esm({
+  ".svelte-kit/output/server/nodes/2.js"() {
+    init_page_ts();
+    index3 = 2;
+    component3 = async () => component_cache3 ?? (component_cache3 = (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default);
+    universal_id = "src/routes/+page.ts";
+    imports3 = ["_app/immutable/nodes/2.fbc73162.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/Icon.fd8d61d3.js", "_app/immutable/chunks/SubSection.e1c97470.js"];
+    stylesheets3 = ["_app/immutable/assets/2.68c96077.css", "_app/immutable/assets/MenuIcon.0056b528.css"];
+    fonts3 = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/_slug_/_page.ts.js
+var page_ts_exports2 = {};
+__export(page_ts_exports2, {
+  load: () => load2
+});
+async function load2({ params }) {
+  const projectSlug = params.slug;
+  const project = projects.find((p) => p.slug === projectSlug);
+  if (!project) {
+    throw error(404, { message: "Project not found" });
+  }
+  return { project };
+}
+var init_page_ts2 = __esm({
+  ".svelte-kit/output/server/entries/pages/_slug_/_page.ts.js"() {
+    init_nav();
+    init_index2();
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/_slug_/_page.svelte.js
+var page_svelte_exports2 = {};
+__export(page_svelte_exports2, {
+  default: () => Page2
 });
 function normalizeDate(dateStr) {
   const date = new Date(dateStr);
   return `${date.toLocaleString("default", { month: "long" })} ${date.getDate()}, ${date.getFullYear()}`;
 }
-var Page;
-var init_page_svelte = __esm({
-  ".svelte-kit/output/server/entries/pages/_id_/_page.svelte.js"() {
+var Page2;
+var init_page_svelte2 = __esm({
+  ".svelte-kit/output/server/entries/pages/_slug_/_page.svelte.js"() {
     init_ssr();
     init_SubSection();
-    init_MenuIcon_svelte_svelte_type_style_lang();
-    Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    init_Icon();
+    Page2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let { data } = $$props;
-      let project = {
-        id: 1,
-        date: "11/10/2021",
-        title: "Personal Blog",
-        description: "Dive into my personal musings on life, technology, and continuous learning.",
-        details: "This blog is a testament to my journey as a developer and thinker. Built with the sleek SvelteKit for a reactive experience and styled by TailwindCSS for visual appeal. SEO optimizations ensure my voice is heard far and wide.",
-        concept: ["User-friendly UI", "Intuitive Navigation", "Engaging Content"],
-        stack: ["SvelteKit", "TailwindCSS", "SEO Auditing Tools"],
-        libraries: ["DaisyUI", "Chart.js"],
-        roadmap: [
-          {
-            version: "v2",
-            description: "Interactive Features",
-            status: "In Progress",
-            releaseDate: "06/30/2023",
-            progress: 60,
-            isExpanded: true,
-            developmentJourney: "The focus for Version 2.0 is on enhancing user engagement through interactive features. This phase involves integrating a real-time commenting system, introducing user polls, and improving the overall user experience based on feedback from Version 1.0.",
-            featureFocus: ["Real-Time Commenting System", "User Polls", "Performance Optimization"],
-            technicalChallenges: "Key challenges include implementing real-time features without compromising website performance and maintaining user privacy.",
-            skillsLearned: "Currently enhancing skills in real-time web technologies and learning about user data protection and privacy laws."
-          },
-          {
-            version: "v1",
-            description: "Initial Launch",
-            status: "Completed",
-            releaseDate: "01/02/2022",
-            progress: 100,
-            isExpanded: false,
-            developmentJourney: "Version 1.0 marked the official launch of the blog. The primary focus was on establishing a solid foundation with essential blogging functionalities. The journey involved extensive planning, UI/UX design iterations, and initial SEO setup.",
-            featureFocus: ["Basic Blogging Functionality", "Responsive Design", "SEO Foundations"],
-            technicalChallenges: "Challenges included ensuring cross-browser compatibility and implementing a responsive design that adapts to various screen sizes.",
-            skillsLearned: "Gained proficiency in SvelteKit and TailwindCSS, along with a deeper understanding of SEO principles."
-          }
-        ],
-        imgUrl: "https://source.unsplash.com/random/600x400/?website",
-        repoUrl: "https://github.com/yourusername/personal-blog",
-        isExpanded: false,
-        liveDemo: "https://yourpersonalblog.com"
-      };
+      let project = data.project;
       if ($$props.data === void 0 && $$bindings.data && data !== void 0)
         $$bindings.data(data);
       return ` ${validate_component(FullSection, "FullSection").$$render($$result, { id: "project-start" }, {}, {
@@ -1303,7 +1671,7 @@ var init_page_svelte = __esm({
         {},
         {
           default: () => {
-            return `<div class="container mx-auto">${each(project.roadmap, (roadmapItem, index4) => {
+            return `<div class="container mx-auto">${each(project.roadmap, (roadmapItem, index5) => {
               return `<div class="mb-8"><div class="flex justify-between items-center"><h4 class="text-xl font-bold text-white">${escape(roadmapItem.version)}</h4> <span class="text-sm text-gray-300">${escape(roadmapItem.status)}</span></div> <div class="mt-2"><div class="h-2 bg-gray-500 rounded-full"><div class="bg-amber-300 h-2 rounded-full" style="${"width: " + escape(roadmapItem.progress, true) + "%"}"></div></div> <p class="text-gray-200 mt-2">${escape(roadmapItem.description)}</p> <button class="accent-color text-sm mt-2">${escape(roadmapItem.isExpanded ? "Hide Details" : "View Details")}</button>  ${roadmapItem.isExpanded ? `<div class="mt-2 bg-gray-800 p-4 rounded-lg shadow-lg"><div class="space-y-4"><div><h5 class="font-semibold text-amber-300" data-svelte-h="svelte-1hvh0xc">Development Journey</h5> <p class="text-gray-300">${escape(roadmapItem.developmentJourney)}</p></div> <div><h5 class="font-semibold text-amber-300" data-svelte-h="svelte-rj8u5b">Feature Focus</h5> <ul class="list-disc pl-5 text-gray-300">${each(roadmapItem.featureFocus, (feature) => {
                 return `<li>${escape(feature)}</li>`;
               })} </ul></div> <div><h5 class="font-semibold text-amber-300" data-svelte-h="svelte-1noniny">Technical Challenges</h5> <p class="text-gray-300">${escape(roadmapItem.technicalChallenges)}</p></div> <div><h5 class="font-semibold text-amber-300" data-svelte-h="svelte-1gx0by4">Learning and Skills Acquired</h5> <p class="text-gray-300">${escape(roadmapItem.skillsLearned)}</p> </div></div> </div>` : ``}</div> </div>`;
@@ -1321,7 +1689,7 @@ var init_page_svelte = __esm({
           default: () => {
             return `<div class="flex justify-between flex-wrap md:flex-nowrap"> <div class="mb-6 md:w-[47%]"><h3 class="text-gray-50 font-bold uppercase" data-svelte-h="svelte-dfwifl">Stack</h3> <ul class="text-gray-300">${each(project.stack, (stack) => {
               return `<li class="my-[6px] text-sm">${escape(stack)}</li>`;
-            })}</ul></div>  <div class="mb-6 md:w-[47%]"><h3 class="text-gray-50 font-bold uppercase" data-svelte-h="svelte-16qwmeo">Concepts</h3> <ul class="text-gray-300">${each(project.concept, (concept) => {
+            })}</ul></div>  <div class="mb-6 md:w-[47%]"><h3 class="text-gray-50 font-bold uppercase" data-svelte-h="svelte-16qwmeo">Concepts</h3> <ul class="text-gray-300">${each(project.concepts, (concept) => {
               return `<li class="my-[6px] text-sm">${escape(concept)}</li>`;
             })}</ul></div>  <div class="mb-6 md:w-[47%]"><h3 class="text-gray-50 font-bold uppercase" data-svelte-h="svelte-1mfv98u">Libraries</h3> <ul class="text-gray-300">${each(project.libraries, (library) => {
               return `<li class="my-[6px] text-sm">${escape(library)}</li>`;
@@ -1358,26 +1726,26 @@ var init_page_svelte = __esm({
 });
 
 // .svelte-kit/output/server/nodes/3.js
-var __exports3 = {};
-__export(__exports3, {
-  component: () => component3,
-  fonts: () => fonts3,
-  imports: () => imports3,
-  index: () => index3,
-  stylesheets: () => stylesheets3,
-  universal: () => page_ts_exports,
-  universal_id: () => universal_id
+var __exports4 = {};
+__export(__exports4, {
+  component: () => component4,
+  fonts: () => fonts4,
+  imports: () => imports4,
+  index: () => index4,
+  stylesheets: () => stylesheets4,
+  universal: () => page_ts_exports2,
+  universal_id: () => universal_id2
 });
-var index3, component_cache3, component3, universal_id, imports3, stylesheets3, fonts3;
-var init__3 = __esm({
+var index4, component_cache4, component4, universal_id2, imports4, stylesheets4, fonts4;
+var init__4 = __esm({
   ".svelte-kit/output/server/nodes/3.js"() {
-    init_page_ts();
-    index3 = 3;
-    component3 = async () => component_cache3 ?? (component_cache3 = (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default);
-    universal_id = "src/routes/[id]/+page.ts";
-    imports3 = ["_app/immutable/nodes/3.42a8f3cb.js", "_app/immutable/chunks/SubSection.fd5bad6b.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/MenuIcon.svelte_svelte_type_style_lang.505584d3.js"];
-    stylesheets3 = ["_app/immutable/assets/MenuIcon.0056b528.css"];
-    fonts3 = [];
+    init_page_ts2();
+    index4 = 3;
+    component4 = async () => component_cache4 ?? (component_cache4 = (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default);
+    universal_id2 = "src/routes/[slug]/+page.ts";
+    imports4 = ["_app/immutable/nodes/3.c1611f1a.js", "_app/immutable/chunks/Icon.fd8d61d3.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/control.f5b05b5f.js", "_app/immutable/chunks/SubSection.e1c97470.js"];
+    stylesheets4 = ["_app/immutable/assets/MenuIcon.0056b528.css"];
+    fonts4 = [];
   }
 });
 
@@ -1557,11 +1925,14 @@ var options = {
 		<div class="error">
 			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n"
   },
-  version_hash: "lvuejj"
+  version_hash: "1uic9z1"
 };
 function get_hooks() {
   return {};
 }
+
+// .svelte-kit/output/server/index.js
+init_index2();
 
 // node_modules/devalue/src/utils.js
 var escaped = {
@@ -1897,13 +2268,13 @@ function stringify(value, reducers) {
       return NEGATIVE_INFINITY;
     if (thing === 0 && 1 / thing < 0)
       return NEGATIVE_ZERO;
-    const index5 = p++;
-    indexes.set(thing, index5);
+    const index6 = p++;
+    indexes.set(thing, index6);
     for (const { key: key2, fn } of custom) {
       const value2 = fn(thing);
       if (value2) {
-        stringified[index5] = `["${key2}",${flatten(value2)}]`;
-        return index5;
+        stringified[index6] = `["${key2}",${flatten(value2)}]`;
+        return index6;
       }
     }
     let str = "";
@@ -1995,12 +2366,12 @@ function stringify(value, reducers) {
           }
       }
     }
-    stringified[index5] = str;
-    return index5;
+    stringified[index6] = str;
+    return index6;
   }
-  const index4 = flatten(value);
-  if (index4 < 0)
-    return `${index4}`;
+  const index5 = flatten(value);
+  if (index5 < 0)
+    return `${index5}`;
   return `[${stringified.join(",")}]`;
 }
 function stringify_primitive2(thing) {
@@ -2081,45 +2452,6 @@ function is_form_content_type(request) {
     "text/plain"
   );
 }
-var HttpError = class {
-  /**
-   * @param {number} status
-   * @param {{message: string} extends App.Error ? (App.Error | string | undefined) : App.Error} body
-   */
-  constructor(status, body) {
-    this.status = status;
-    if (typeof body === "string") {
-      this.body = { message: body };
-    } else if (body) {
-      this.body = body;
-    } else {
-      this.body = { message: `Error: ${status}` };
-    }
-  }
-  toString() {
-    return JSON.stringify(this.body);
-  }
-};
-var Redirect = class {
-  /**
-   * @param {300 | 301 | 302 | 303 | 304 | 305 | 306 | 307 | 308} status
-   * @param {string} location
-   */
-  constructor(status, location) {
-    this.status = status;
-    this.location = location;
-  }
-};
-var ActionFailure = class {
-  /**
-   * @param {number} status
-   * @param {T} [data]
-   */
-  constructor(status, data) {
-    this.status = status;
-    this.data = data;
-  }
-};
 function exec(match, params, matchers) {
   const result = {};
   const values = match.slice(1);
@@ -2158,42 +2490,6 @@ function exec(match, params, matchers) {
   if (buffered)
     return;
   return result;
-}
-function error(status, body) {
-  if (isNaN(status) || status < 400 || status > 599) {
-    throw new Error(`HTTP error status codes must be between 400 and 599 \u2014 ${status} is invalid`);
-  }
-  return new HttpError(status, body);
-}
-function json(data, init2) {
-  const body = JSON.stringify(data);
-  const headers = new Headers(init2?.headers);
-  if (!headers.has("content-length")) {
-    headers.set("content-length", encoder$3.encode(body).byteLength.toString());
-  }
-  if (!headers.has("content-type")) {
-    headers.set("content-type", "application/json");
-  }
-  return new Response(body, {
-    ...init2,
-    headers
-  });
-}
-var encoder$3 = new TextEncoder();
-function text(body, init2) {
-  const headers = new Headers(init2?.headers);
-  if (!headers.has("content-length")) {
-    const encoded = encoder$3.encode(body);
-    headers.set("content-length", encoded.byteLength.toString());
-    return new Response(encoded, {
-      ...init2,
-      headers
-    });
-  }
-  return new Response(body, {
-    ...init2,
-    headers
-  });
 }
 function coalesce_to_error(err) {
   return err instanceof Error || err && /** @type {any} */
@@ -3312,8 +3608,8 @@ async function render_response({
   }
   const { client } = manifest2._;
   const modulepreloads = new Set(client.imports);
-  const stylesheets4 = new Set(client.stylesheets);
-  const fonts4 = new Set(client.fonts);
+  const stylesheets5 = new Set(client.stylesheets);
+  const fonts5 = new Set(client.fonts);
   const link_header_preloads = /* @__PURE__ */ new Set();
   const inline_styles = /* @__PURE__ */ new Map();
   let rendered;
@@ -3367,9 +3663,9 @@ async function render_response({
       for (const url of node.imports)
         modulepreloads.add(url);
       for (const url of node.stylesheets)
-        stylesheets4.add(url);
+        stylesheets5.add(url);
       for (const url of node.fonts)
-        fonts4.add(url);
+        fonts5.add(url);
       if (node.inline_styles) {
         Object.entries(await node.inline_styles()).forEach(([k, v]) => inline_styles.set(k, v));
       }
@@ -3397,7 +3693,7 @@ async function render_response({
     head += `
 	<style${attributes.join("")}>${content}</style>`;
   }
-  for (const dep of stylesheets4) {
+  for (const dep of stylesheets5) {
     const path = prefixed(dep);
     const attributes = ['rel="stylesheet"'];
     if (inline_styles.has(dep)) {
@@ -3411,7 +3707,7 @@ async function render_response({
     head += `
 		<link href="${path}" ${attributes.join(" ")}>`;
   }
-  for (const dep of fonts4) {
+  for (const dep of fonts5) {
     const path = prefixed(dep);
     if (resolve_opts.preload({ type: "font", path })) {
       const ext = dep.slice(dep.lastIndexOf(".") + 1);
@@ -3764,7 +4060,7 @@ function once(fn) {
     return result = fn();
   };
 }
-var encoder = new TextEncoder();
+var encoder2 = new TextEncoder();
 async function render_data(event, route, options2, manifest2, state, invalidated_data_nodes, trailing_slash) {
   if (!route.page) {
     return new Response(void 0, {
@@ -3852,9 +4148,9 @@ async function render_data(event, route, options2, manifest2, state, invalidated
     return new Response(
       new ReadableStream({
         async start(controller) {
-          controller.enqueue(encoder.encode(data));
+          controller.enqueue(encoder2.encode(data));
           for await (const chunk of chunks) {
-            controller.enqueue(encoder.encode(chunk));
+            controller.enqueue(encoder2.encode(chunk));
           }
           controller.close();
         },
@@ -4128,11 +4424,11 @@ async function render_page(event, page2, options2, manifest2, state, resolve_opt
           const error2 = await handle_error_and_jsonify(event, options2, err);
           while (i--) {
             if (page2.errors[i]) {
-              const index4 = (
+              const index5 = (
                 /** @type {number} */
                 page2.errors[i]
               );
-              const node2 = await manifest2._.nodes[index4]();
+              const node2 = await manifest2._.nodes[index5]();
               let j = i;
               while (!branch[j])
                 j -= 1;
@@ -4288,8 +4584,8 @@ function get_cookies(request, url, trailing_slash) {
         continue;
       if (!path_matches(destination.pathname, cookie.options.path))
         continue;
-      const encoder2 = cookie.options.encode || encodeURIComponent;
-      combined_cookies[cookie.name] = encoder2(cookie.value);
+      const encoder22 = cookie.options.encode || encodeURIComponent;
+      combined_cookies[cookie.name] = encoder22(cookie.value);
     }
     if (header2) {
       const parsed = (0, import_cookie.parse)(header2, { decode: (value) => value });
@@ -4928,18 +5224,26 @@ var manifest = (() => {
     assets: /* @__PURE__ */ new Set(["favicon.png", "images/jefferson-santos-fCEJGBzAkrU-unsplash.jpg", "images/jerry-zhang-ePpaQC2c1xA-unsplash.jpg", "images/linus-nylund-Q5QspluNZmM-unsplash.jpg"]),
     mimeTypes: { ".png": "image/png", ".jpg": "image/jpeg" },
     _: {
-      client: { "start": "_app/immutable/entry/start.aed53e36.js", "app": "_app/immutable/entry/app.7e3897a9.js", "imports": ["_app/immutable/entry/start.aed53e36.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/singletons.75b09d07.js", "_app/immutable/entry/app.7e3897a9.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js"], "stylesheets": [], "fonts": [] },
+      client: { "start": "_app/immutable/entry/start.d265c6a8.js", "app": "_app/immutable/entry/app.f2d9d3e1.js", "imports": ["_app/immutable/entry/start.d265c6a8.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/singletons.ccc62dc5.js", "_app/immutable/chunks/control.f5b05b5f.js", "_app/immutable/entry/app.f2d9d3e1.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js"], "stylesheets": [], "fonts": [] },
       nodes: [
         __memo(() => Promise.resolve().then(() => (init__(), __exports))),
         __memo(() => Promise.resolve().then(() => (init__2(), __exports2))),
-        __memo(() => Promise.resolve().then(() => (init__3(), __exports3)))
+        __memo(() => Promise.resolve().then(() => (init__3(), __exports3))),
+        __memo(() => Promise.resolve().then(() => (init__4(), __exports4)))
       ],
       routes: [
         {
-          id: "/[id]",
-          pattern: /^\/([^/]+?)\/?$/,
-          params: [{ "name": "id", "optional": false, "rest": false, "chained": false }],
+          id: "/",
+          pattern: /^\/$/,
+          params: [],
           page: { layouts: [0], errors: [1], leaf: 2 },
+          endpoint: null
+        },
+        {
+          id: "/[slug]",
+          pattern: /^\/([^/]+?)\/?$/,
+          params: [{ "name": "slug", "optional": false, "rest": false, "chained": false }],
+          page: { layouts: [0], errors: [1], leaf: 3 },
           endpoint: null
         }
       ],
