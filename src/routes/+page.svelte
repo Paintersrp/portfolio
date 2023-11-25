@@ -52,11 +52,11 @@
 
   <SubSection id="background" heading="Background">
     <p class="mt-0 mb-6 text-gray-300">
-      Tits Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, sint ex, similique
-      facere sequi accusamus assumenda tempore nulla dignissimos a facilis excepturi magni
-      consequatur necessitatibus deleniti vero odio earum praesentium. Natus repellendus deserunt
-      laborum dolores a unde ipsum neque nostrum voluptates sapiente, facilis in cum, provident
-      veniam enim corporis similique!
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, sint ex, similique facere
+      sequi accusamus assumenda tempore nulla dignissimos a facilis excepturi magni consequatur
+      necessitatibus deleniti vero odio earum praesentium. Natus repellendus deserunt laborum
+      dolores a unde ipsum neque nostrum voluptates sapiente, facilis in cum, provident veniam enim
+      corporis similique!
     </p>
     <p class="mt-0 mb-6 text-gray-300">
       Lorem ipsum dolor sit amet <a href="/" class="underline-link text-white">consectetur</a>,

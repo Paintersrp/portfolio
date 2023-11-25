@@ -46,7 +46,7 @@ export const projects = [
     repoUrl: 'https://github.com/Paintersrp/portfolio',
     repoName: 'portfolio',
     isExpanded: false,
-    liveDemo: 'https://yourpersonalblog.com'
+    liveDemo: 'https://portfolio.com'
   },
   {
     id: 2,
@@ -91,11 +91,11 @@ export const projects = [
           'Gained proficiency in SvelteKit and TailwindCSS, along with a deeper understanding of SEO principles.'
       }
     ],
-    imgUrl: 'https://source.unsplash.com/random/600x400/?website',
+    imgUrl: 'https://source.unsplash.com/random/600x400/?blog',
     repoUrl: 'https://github.com/Paintersrp/portfolio',
     repoName: 'portfolio',
     isExpanded: false,
-    liveDemo: 'https://yourpersonalblog.com'
+    liveDemo: 'https://blog.com'
   },
   {
     id: 3,
@@ -127,7 +127,7 @@ export const projects = [
     repoUrl: 'https://github.com/yourusername/sports-predictor',
     repoName: 'sports-predictor',
     isExpanded: false,
-    liveDemo: 'https://yoursportspredictor.com'
+    liveDemo: 'https://predictor.com'
   },
   {
     id: 4,
@@ -158,7 +158,7 @@ export const projects = [
     repoUrl: 'https://github.com/yourusername/sales-forecaster',
     repoName: 'sales-forecaster',
     isExpanded: false,
-    liveDemo: 'https://yoursalesforecaster.com'
+    liveDemo: 'https://forecaster.com'
   },
   {
     id: 5,
@@ -189,7 +189,7 @@ export const projects = [
     repoUrl: 'https://github.com/yourusername/api-gateway',
     repoName: 'api-gateway',
     isExpanded: false,
-    liveDemo: 'https://yourapigateway.com'
+    liveDemo: 'https://apigateway.com'
   }
 ];
 

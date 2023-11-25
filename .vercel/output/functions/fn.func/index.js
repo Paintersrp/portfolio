@@ -701,7 +701,7 @@ var init_nav = __esm({
         repoUrl: "https://github.com/Paintersrp/portfolio",
         repoName: "portfolio",
         isExpanded: false,
-        liveDemo: "https://yourpersonalblog.com"
+        liveDemo: "https://portfolio.com"
       },
       {
         id: 2,
@@ -739,11 +739,11 @@ var init_nav = __esm({
             skillsLearned: "Gained proficiency in SvelteKit and TailwindCSS, along with a deeper understanding of SEO principles."
           }
         ],
-        imgUrl: "https://source.unsplash.com/random/600x400/?website",
+        imgUrl: "https://source.unsplash.com/random/600x400/?blog",
         repoUrl: "https://github.com/Paintersrp/portfolio",
         repoName: "portfolio",
         isExpanded: false,
-        liveDemo: "https://yourpersonalblog.com"
+        liveDemo: "https://blog.com"
       },
       {
         id: 3,
@@ -773,7 +773,7 @@ var init_nav = __esm({
         repoUrl: "https://github.com/yourusername/sports-predictor",
         repoName: "sports-predictor",
         isExpanded: false,
-        liveDemo: "https://yoursportspredictor.com"
+        liveDemo: "https://predictor.com"
       },
       {
         id: 4,
@@ -803,7 +803,7 @@ var init_nav = __esm({
         repoUrl: "https://github.com/yourusername/sales-forecaster",
         repoName: "sales-forecaster",
         isExpanded: false,
-        liveDemo: "https://yoursalesforecaster.com"
+        liveDemo: "https://forecaster.com"
       },
       {
         id: 5,
@@ -833,7 +833,7 @@ var init_nav = __esm({
         repoUrl: "https://github.com/yourusername/api-gateway",
         repoName: "api-gateway",
         isExpanded: false,
-        liveDemo: "https://yourapigateway.com"
+        liveDemo: "https://apigateway.com"
       }
     ];
     navItems = [
@@ -1231,7 +1231,7 @@ var init_layout_svelte = __esm({
         open = !open;
       } } = $$props;
       let { ariaLabel = "toggle menu" } = $$props;
-      let { width = 56 } = $$props;
+      let { width = 64 } = $$props;
       if ($$props.open === void 0 && $$bindings.open && open !== void 0)
         $$bindings.open(open);
       if ($$props.onClick === void 0 && $$bindings.onClick && onClick !== void 0)
@@ -1327,7 +1327,7 @@ var init__ = __esm({
     index = 0;
     component = async () => component_cache ?? (component_cache = (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default);
     server_id = "src/routes/+layout.server.ts";
-    imports = ["_app/immutable/nodes/0.f97d2988.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/Icon.fd8d61d3.js", "_app/immutable/chunks/singletons.ccc62dc5.js"];
+    imports = ["_app/immutable/nodes/0.94c7e368.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/Icon.c5406e6c.js", "_app/immutable/chunks/singletons.4b9deaa3.js"];
     stylesheets = ["_app/immutable/assets/0.ff414715.css", "_app/immutable/assets/MenuIcon.0056b528.css"];
     fonts = [];
   }
@@ -1419,7 +1419,7 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => component_cache2 ?? (component_cache2 = (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default);
-    imports2 = ["_app/immutable/nodes/1.8e97c9e2.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/singletons.ccc62dc5.js", "_app/immutable/chunks/SubSection.e1c97470.js"];
+    imports2 = ["_app/immutable/nodes/1.b8ca7424.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/singletons.4b9deaa3.js", "_app/immutable/chunks/SubSection.e1c97470.js"];
     stylesheets2 = ["_app/immutable/assets/MenuIcon.0056b528.css"];
     fonts2 = [];
   }
@@ -1535,11 +1535,11 @@ var init_page_svelte = __esm({
         }
       })} ${validate_component(SubSection, "SubSection").$$render($$result, { id: "background", heading: "Background" }, {}, {
         default: () => {
-          return `<p class="mt-0 mb-6 text-gray-300" data-svelte-h="svelte-elsyxg">Tits Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, sint ex, similique
-      facere sequi accusamus assumenda tempore nulla dignissimos a facilis excepturi magni
-      consequatur necessitatibus deleniti vero odio earum praesentium. Natus repellendus deserunt
-      laborum dolores a unde ipsum neque nostrum voluptates sapiente, facilis in cum, provident
-      veniam enim corporis similique!</p> <p class="mt-0 mb-6 text-gray-300" data-svelte-h="svelte-l4tfaa">Lorem ipsum dolor sit amet <a href="/" class="underline-link text-white">consectetur</a>,
+          return `<p class="mt-0 mb-6 text-gray-300" data-svelte-h="svelte-1vligaq">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, sint ex, similique facere
+      sequi accusamus assumenda tempore nulla dignissimos a facilis excepturi magni consequatur
+      necessitatibus deleniti vero odio earum praesentium. Natus repellendus deserunt laborum
+      dolores a unde ipsum neque nostrum voluptates sapiente, facilis in cum, provident veniam enim
+      corporis similique!</p> <p class="mt-0 mb-6 text-gray-300" data-svelte-h="svelte-l4tfaa">Lorem ipsum dolor sit amet <a href="/" class="underline-link text-white">consectetur</a>,
       adipisicing elit. Repellendus veritatis optio odio eveniet vel, quia quod. Consectetur,
       maiores cumque? Animi provident officiis veniam in minus natus assumenda veritatis incidunt
       aliquid.</p> <p class="mt-0 mb-6 text-gray-300" data-svelte-h="svelte-kitch9">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel ratione et consectetur rem
@@ -1594,7 +1594,7 @@ var init__3 = __esm({
     index3 = 2;
     component3 = async () => component_cache3 ?? (component_cache3 = (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default);
     universal_id = "src/routes/+page.ts";
-    imports3 = ["_app/immutable/nodes/2.fbc73162.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/Icon.fd8d61d3.js", "_app/immutable/chunks/SubSection.e1c97470.js"];
+    imports3 = ["_app/immutable/nodes/2.525aa90b.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/Icon.c5406e6c.js", "_app/immutable/chunks/SubSection.e1c97470.js"];
     stylesheets3 = ["_app/immutable/assets/2.68c96077.css", "_app/immutable/assets/MenuIcon.0056b528.css"];
     fonts3 = [];
   }
@@ -1743,7 +1743,7 @@ var init__4 = __esm({
     index4 = 3;
     component4 = async () => component_cache4 ?? (component_cache4 = (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default);
     universal_id2 = "src/routes/[slug]/+page.ts";
-    imports4 = ["_app/immutable/nodes/3.c1611f1a.js", "_app/immutable/chunks/Icon.fd8d61d3.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/control.f5b05b5f.js", "_app/immutable/chunks/SubSection.e1c97470.js"];
+    imports4 = ["_app/immutable/nodes/3.72ee4dbd.js", "_app/immutable/chunks/Icon.c5406e6c.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/control.f5b05b5f.js", "_app/immutable/chunks/SubSection.e1c97470.js"];
     stylesheets4 = ["_app/immutable/assets/MenuIcon.0056b528.css"];
     fonts4 = [];
   }
@@ -1925,7 +1925,7 @@ var options = {
 		<div class="error">
 			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n"
   },
-  version_hash: "1uic9z1"
+  version_hash: "1lpc5g0"
 };
 function get_hooks() {
   return {};
@@ -5224,7 +5224,7 @@ var manifest = (() => {
     assets: /* @__PURE__ */ new Set(["favicon.png", "images/jefferson-santos-fCEJGBzAkrU-unsplash.jpg", "images/jerry-zhang-ePpaQC2c1xA-unsplash.jpg", "images/linus-nylund-Q5QspluNZmM-unsplash.jpg"]),
     mimeTypes: { ".png": "image/png", ".jpg": "image/jpeg" },
     _: {
-      client: { "start": "_app/immutable/entry/start.d265c6a8.js", "app": "_app/immutable/entry/app.f2d9d3e1.js", "imports": ["_app/immutable/entry/start.d265c6a8.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/singletons.ccc62dc5.js", "_app/immutable/chunks/control.f5b05b5f.js", "_app/immutable/entry/app.f2d9d3e1.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js"], "stylesheets": [], "fonts": [] },
+      client: { "start": "_app/immutable/entry/start.13c9997f.js", "app": "_app/immutable/entry/app.f357ec1a.js", "imports": ["_app/immutable/entry/start.13c9997f.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/singletons.4b9deaa3.js", "_app/immutable/chunks/control.f5b05b5f.js", "_app/immutable/entry/app.f357ec1a.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js"], "stylesheets": [], "fonts": [] },
       nodes: [
         __memo(() => Promise.resolve().then(() => (init__(), __exports))),
         __memo(() => Promise.resolve().then(() => (init__2(), __exports2))),
