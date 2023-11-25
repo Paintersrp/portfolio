@@ -35,6 +35,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@sentry/node": "^7.81.1",
 		"@types/node": "^20.8.10",
 		"node": "^21.1.0",
 		"svelte-inview": "^4.0.1"

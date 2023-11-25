@@ -1,60 +1,16 @@
 <script lang="ts">
-  import { linear } from 'svelte/easing';
   import { slide } from 'svelte/transition';
 
-  import { FullSection, SubSection } from '$comp';
-  import Icon from '$comp/Icon.svelte';
+  import { Icon, FullSection, SubSection } from '$comp';
+  import { onMount } from 'svelte';
+
   export let data;
 
-  //   let project: Project = data.project;
-  let project = {
-    id: 1,
-    date: '11/10/2021',
-    title: 'Personal Blog',
-    description: 'Dive into my personal musings on life, technology, and continuous learning.',
-    details:
-      'This blog is a testament to my journey as a developer and thinker. Built with the sleek SvelteKit for a reactive experience and styled by TailwindCSS for visual appeal. SEO optimizations ensure my voice is heard far and wide.',
-    concept: ['User-friendly UI', 'Intuitive Navigation', 'Engaging Content'],
-    stack: ['SvelteKit', 'TailwindCSS', 'SEO Auditing Tools'],
-    libraries: ['DaisyUI', 'Chart.js'],
+  let project: Project = data.project;
 
-    roadmap: [
-      {
-        version: 'v2',
-        description: 'Interactive Features',
-        status: 'In Progress',
-        releaseDate: '06/30/2023',
-        progress: 60,
-        isExpanded: true,
-        developmentJourney:
-          'The focus for Version 2.0 is on enhancing user engagement through interactive features. This phase involves integrating a real-time commenting system, introducing user polls, and improving the overall user experience based on feedback from Version 1.0.',
-        featureFocus: ['Real-Time Commenting System', 'User Polls', 'Performance Optimization'],
-        technicalChallenges:
-          'Key challenges include implementing real-time features without compromising website performance and maintaining user privacy.',
-        skillsLearned:
-          'Currently enhancing skills in real-time web technologies and learning about user data protection and privacy laws.'
-      },
-      {
-        version: 'v1',
-        description: 'Initial Launch',
-        status: 'Completed',
-        releaseDate: '01/02/2022',
-        progress: 100,
-        isExpanded: false,
-        developmentJourney:
-          'Version 1.0 marked the official launch of the blog. The primary focus was on establishing a solid foundation with essential blogging functionalities. The journey involved extensive planning, UI/UX design iterations, and initial SEO setup.',
-        featureFocus: ['Basic Blogging Functionality', 'Responsive Design', 'SEO Foundations'],
-        technicalChallenges:
-          'Challenges included ensuring cross-browser compatibility and implementing a responsive design that adapts to various screen sizes.',
-        skillsLearned:
-          'Gained proficiency in SvelteKit and TailwindCSS, along with a deeper understanding of SEO principles.'
-      }
-    ],
-    imgUrl: 'https://source.unsplash.com/random/600x400/?website',
-    repoUrl: 'https://github.com/yourusername/personal-blog',
-    isExpanded: false,
-    liveDemo: 'https://yourpersonalblog.com'
-  };
+  onMount(() => {
+    project.roadmap[0].isExpanded = true;
+  });
 
   function toggleDetails(index: number) {
     project.roadmap[index].isExpanded = !project.roadmap[index].isExpanded;
@@ -178,15 +134,17 @@
         {/each}
       </ul>
     </div>
+
     <!-- Concept -->
     <div class="mb-6 md:w-[47%]">
       <h3 class="text-gray-50 font-bold uppercase">Concepts</h3>
       <ul class="text-gray-300">
-        {#each project.concept as concept}
+        {#each project.concepts as concept}
           <li class="my-[6px] text-sm">{concept}</li>
         {/each}
       </ul>
     </div>
+
     <!-- Libraries -->
     <div class="mb-6 md:w-[47%]">
       <h3 class="text-gray-50 font-bold uppercase">Libraries</h3>
@@ -203,6 +161,7 @@
   <div>Screenshots (expandable)</div>
   <div>REPLs</div>
 </SubSection>
+
 <SubSection id="project-stats" heading="Statistics">
   <div class="mb-20">Git Statistics</div>
 </SubSection>

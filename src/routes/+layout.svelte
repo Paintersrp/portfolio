@@ -8,7 +8,6 @@
   import { sineIn, sineOut } from 'svelte/easing';
 
   import { afterNavigate, disableScrollHandling, preloadCode } from '$app/navigation';
-  import { scrollToSection } from '$lib/utils';
   import { mediaQueryStore } from '$lib/stores';
   import { navItems } from '$lib/const';
   import { MenuIcon, Icon } from '$comp';
@@ -32,14 +31,11 @@
     isMenuOpen.update((n) => !n);
   };
 
-  const navigateToSection = (route: string) => {
-    toggleMenu();
-    scrollToSection(route);
-  };
-
   onMount(() => {
-    const navRoutes = navItems.map((item) => item.route);
-    preloadCode(...navRoutes);
+    const allRoutes = navItems.flatMap((item) =>
+      item.children ? item.children.map((child) => child.route) : [item.route]
+    );
+    preloadCode(...(allRoutes as string[]));
   });
 
   afterNavigate(() => {
@@ -51,7 +47,6 @@
 
   $: iconSize = $small ? 'sm' : 'md';
   $: pathname = data.url;
-  $: console.log(pathname);
 </script>
 
 <main class="flex flex-col bg-[#1d1d20] min-h-screen overflow-x-hidden overflow-y-hidden w-full">
@@ -69,13 +64,26 @@
     >
       <div class="flex flex-col">
         {#each navItems as item}
-          <a
-            on:click={toggleMenu}
-            href={item.route}
-            class="text-5xl md:text-6xl font-bold accent-color hover:text-amber-300 text-center leading-tight mb-4 hover:underline"
-          >
-            {item.title}
-          </a>
+          {#if item.route}
+            <a
+              on:click={toggleMenu}
+              href={item.route}
+              class="text-4xl md:text-5xl font-bold accent-color hover:text-amber-300 text-center leading-tight mb-4 hover:underline"
+            >
+              {item.title}
+            </a>
+          {/if}
+          {#if item.children}
+            {#each item.children as child}
+              <a
+                on:click={toggleMenu}
+                href={child.route}
+                class="text-4xl md:text-5xl font-bold accent-color hover:text-amber-300 text-center leading-tight mb-4 hover:underline"
+              >
+                {child.title}
+              </a>
+            {/each}
+          {/if}
         {/each}
       </div>
     </div>

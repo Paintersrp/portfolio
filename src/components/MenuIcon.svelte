@@ -5,7 +5,7 @@
   };
 
   export let ariaLabel = 'toggle menu';
-  export let width: string | number = 64;
+  export let width: string | number = 56;
 </script>
 
 <button

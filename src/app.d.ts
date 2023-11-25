@@ -9,25 +9,41 @@ declare global {
     // interface Platform {}
   }
 
+  type RoadmapItem = {
+    version: string;
+    description: string;
+    status: string;
+    releaseDate: string;
+    progress: number;
+    isExpanded: boolean;
+    developmentJourney: string;
+    featureFocus: string[];
+    technicalChallenges: string;
+    skillsLearned: string;
+  };
+
   type Project = {
     id: number;
+    slug: string;
     date: string;
     title: string;
     description: string;
     details: string;
-    features: string[];
-    technologies: string[];
+    concepts: string[];
+    stack: string[];
+    libraries: string[];
+    roadmap: RoadmapItem[];
     imgUrl: string;
     repoUrl: string;
-    liveDemo: string;
+    repoName: string;
     isExpanded: boolean;
+    liveDemo: string;
   };
 
   type Skill = {
     text: string;
     icon: IconType;
     isExpanded: boolean;
-
     roadmap: { date: string; milestone: string }[];
   };
 
@@ -71,7 +87,8 @@ declare global {
     | 'instagram'
     | 'expand'
     | 'collapse'
-    | 'deployed';
+    | 'deployed'
+    | 'link';
 
   interface Social {
     name: IconType;
@@ -80,23 +97,10 @@ declare global {
 
   type Socials = Social[];
 
-  interface Project {
-    id: number;
-    date: string;
-    title: string;
-    description: string;
-    details: string;
-    features: string[];
-    technologies: string[];
-    imgUrl: string;
-    repoUrl: string;
-    isExpanded: boolean;
-    liveDemo: string;
-  }
-
   interface NavigationItem {
     title: string;
-    route: string;
+    route: string | undefined;
+    children?: NavigationItem[];
   }
 
   type NavigationItems = NavigationItem[];
@@ -115,7 +119,6 @@ declare global {
     coverWidth: number;
     coverHeight: number;
     categories: string[];
-
     PostContent: any;
   }
 

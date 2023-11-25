@@ -1,10 +1,16 @@
+import { projects } from './projects';
+
 export const navItems: NavigationItems = [
   {
     title: 'Home',
     route: '/'
   },
   {
-    title: 'Project Slug Demo',
-    route: '/skills'
+    title: 'Projects',
+    route: undefined,
+    children: projects.map((project) => ({
+      title: project.title,
+      route: `/${project.slug}`
+    }))
   }
 ];

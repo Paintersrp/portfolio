@@ -52,11 +52,11 @@
 
   <SubSection id="background" heading="Background">
     <p class="mt-0 mb-6 text-gray-300">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, sint ex, similique facere
-      sequi accusamus assumenda tempore nulla dignissimos a facilis excepturi magni consequatur
-      necessitatibus deleniti vero odio earum praesentium. Natus repellendus deserunt laborum
-      dolores a unde ipsum neque nostrum voluptates sapiente, facilis in cum, provident veniam enim
-      corporis similique!
+      Tits Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, sint ex, similique
+      facere sequi accusamus assumenda tempore nulla dignissimos a facilis excepturi magni
+      consequatur necessitatibus deleniti vero odio earum praesentium. Natus repellendus deserunt
+      laborum dolores a unde ipsum neque nostrum voluptates sapiente, facilis in cum, provident
+      veniam enim corporis similique!
     </p>
     <p class="mt-0 mb-6 text-gray-300">
       Lorem ipsum dolor sit amet <a href="/" class="underline-link text-white">consectetur</a>,
@@ -98,7 +98,7 @@
           {#if project.isExpanded}
             <div class="faster-in-blur mt-3 !flex">
               <a
-                href={`/${project.id}`}
+                href={`/${project.slug}`}
                 class="min-w-[75px] px-2 md:px-4 my-auto py-2 text-sm bg-amber-300 bg-opacity-90 hover:bg-opacity-80 shadow-md text-white font-extrabold"
               >
                 Details
@@ -132,7 +132,7 @@
           <ul>
             {#each skillset.items as item, index (index)}
               <li class="my-[6px] text-sm text-gray-300">
-                <div class="flex gap-3 items-center">
+                <div class="flex gap-3 dasdadsad items-center">
                   {#if item.icon}
                     <Icon type={item.icon} size="sm" iconClass="accent-color" />
                   {/if}

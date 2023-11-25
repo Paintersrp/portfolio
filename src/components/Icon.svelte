@@ -57,7 +57,8 @@
     instagram: Icons.InstagramIcon,
     expand: Icons.ExpandIcon,
     collapse: Icons.CollapseIcon,
-    deployed: Icons.DeployedIcon
+    deployed: Icons.DeployedIcon,
+    link: Icons.LinkIcon
   };
 
   $: iconSize = sizeMap[size];
