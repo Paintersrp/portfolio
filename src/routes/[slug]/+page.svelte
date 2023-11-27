@@ -1,8 +1,8 @@
 <script lang="ts">
   import { slide } from 'svelte/transition';
-
-  import { Icon, FullSection, SubSection } from '$comp';
   import { onMount } from 'svelte';
+
+  import { Icon, FullSection, SubSection, Tooltip } from '$comp';
 
   export let data;
 
@@ -55,19 +55,23 @@
         <p>{project.details}</p>
       </div>
       <div class="flex justify-center md:justify-start gap-4">
-        <a href={project.repoUrl} class="">
-          <Icon
-            type="github"
-            size="lg"
-            iconClass="accent-color hover:text-amber-500 transition duration-300 "
-          />
+        <a type="button" href={project.repoUrl} class="">
+          <Tooltip content="Repository">
+            <Icon
+              type="github"
+              size="lg"
+              iconClass="hover:text-opacity-90 text-amber-300 scale-95 hover:scale-100 transition-transform ease-in-out"
+            />
+          </Tooltip>
         </a>
-        <a href={project.liveDemo} class="">
-          <Icon
-            type="deployed"
-            size="lg"
-            iconClass="accent-color hover:text-amber-500 transition duration-300"
-          />
+        <a href={project.liveDemo} type="button" class="">
+          <Tooltip content="Demo">
+            <Icon
+              type="deployed"
+              size="lg"
+              iconClass="hover:text-opacity-90 text-amber-300 scale-95 hover:scale-100 transition-transform ease-in-out"
+            />
+          </Tooltip>
         </a>
       </div>
     </div>
@@ -157,6 +161,11 @@
       </ul>
     </div>
   </div>
+</SubSection>
+
+<SubSection id="project-highlights" heading="Highlights">
+  <div>Screenshots (expandable)</div>
+  <div>REPLs</div>
 </SubSection>
 
 <SubSection id="project-highlights" heading="Highlights">

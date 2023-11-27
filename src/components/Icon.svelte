@@ -58,7 +58,9 @@
     expand: Icons.ExpandIcon,
     collapse: Icons.CollapseIcon,
     deployed: Icons.DeployedIcon,
-    link: Icons.LinkIcon
+    link: Icons.LinkIcon,
+    info: Icons.InfoIcon,
+    more: Icons.MoreIcon
   };
 
   $: iconSize = sizeMap[size];

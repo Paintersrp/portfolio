@@ -88,11 +88,14 @@ declare global {
     | 'expand'
     | 'collapse'
     | 'deployed'
-    | 'link';
+    | 'link'
+    | 'info'
+    | 'more';
 
   interface Social {
     name: IconType;
     url: string;
+    tooltip: string;
   }
 
   type Socials = Social[];

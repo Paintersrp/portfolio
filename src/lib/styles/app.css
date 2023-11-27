@@ -57,79 +57,7 @@ p {
   background: #272727;
 }
 
-@media screen and (max-width: 630px) {
-  .intro {
-    padding: 120px 70px;
-  }
-}
-
-@media screen and (max-width: 550px) {
-  .intro {
-    padding: 120px 50px;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .intro {
-    padding: 70px 50px;
-  }
-}
-
-.intro__tagline {
-  font-size: 2.5rem;
-}
-
-@media screen and (max-width: 1024px) {
-  .intro__tagline {
-    font-size: 2.25rem;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .intro__tagline {
-    font-size: 2rem;
-  }
-}
-
-@media screen and (max-width: 550px) {
-  .intro__tagline {
-    font-size: 1.75rem;
-  }
-}
-
-@media screen and (max-width: 360px) {
-  .intro__tagline {
-    font-size: 1.5rem;
-  }
-}
-
-@media screen and (max-width: 330px) {
-  .intro__tagline {
-    font-size: 1.4rem;
-  }
-}
-
-.intro__tagline {
-  font-weight: 300;
-  max-width: 700px;
-}
-
-.intro__tagline .name {
-  font-weight: 700;
-}
-
-.intro__contact {
-  font-size: 1.25rem;
-  font-weight: 400;
-}
-
-@media screen and (max-width: 550px) {
-  .intro__contact {
-    font-size: 1rem;
-  }
-}
-
-.intro__contact .highlight-link {
+.highlight-link {
   transition: all 0.2s ease-in-out;
   font-weight: 400;
   text-decoration: none;
@@ -139,9 +67,23 @@ p {
   box-shadow: inset 0 -3px 0 var(--accent);
 }
 
-.intro__contact .highlight-link:hover {
+.highlight-link:hover {
   box-shadow: inset 0 -33px 0 0 var(--accent);
   color: black;
+}
+
+.sm-highlight-link {
+  transition: all 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+  text-decoration: none;
+  display: inline-block;
+  padding: 2px 3px;
+  text-decoration: none;
+  box-shadow: inset 0 0px 0 rgba(252, 211, 77, 0.95);
+  line-height: 1.25rem;
+}
+
+.sm-highlight-link:hover {
+  box-shadow: inset 0 -5px 0 0 rgba(252, 211, 77, 0.95);
 }
 
 @media screen and (max-width: 630px) {

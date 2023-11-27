@@ -13,25 +13,23 @@
     disableScrollHandling,
     preloadCode
   } from '$app/navigation';
+  import { page } from '$app/stores';
   import { mediaQueryStore } from '$lib/stores';
   import { navItems } from '$lib/const';
-  import { MenuIcon, Icon } from '$comp';
-  import type { NavigationTarget } from '@sveltejs/kit';
-  import { page } from '$app/stores';
+  import { MenuIcon, Icon, Tooltip } from '$comp';
 
-  // Preloaded data from +layout.server.ts
   export let data;
 
   const socials: Socials = [
-    { name: 'github', url: 'https://github.com/' },
-    { name: 'linkedin', url: 'https://linkedin.com/' },
-    { name: 'twitter', url: 'https://twitter.com/' },
-    { name: 'email', url: 'paintersrp@gmail.com' }
+    { name: 'github', url: 'https://github.com/Paintersrp', tooltip: 'Paintersrp' },
+    { name: 'linkedin', url: 'https://linkedin.com/Paintersrp', tooltip: 'Paintersrp' },
+    { name: 'twitter', url: 'https://twitter.com/Paintersrp', tooltip: '@Paintersrp' },
+    { name: 'email', url: 'paintersrp@gmail.com', tooltip: 'Contact Me' }
   ];
 
+  const isSmallScreen = mediaQueryStore('(max-width: 640px)');
   const isMenuOpen = writable(false);
-  const small = mediaQueryStore('(max-width: 600px)');
-  const currentPage = writable<string | null>('/');
+  const currentPage = writable('/');
 
   let iconSize: IconSize;
 
@@ -39,32 +37,28 @@
     isMenuOpen.update((n) => !n);
   };
 
+  const setRoute = (to: any) => {
+    if (to.params.slug) {
+      $currentPage = '/' + to.params.slug;
+    } else {
+      if (to.route) {
+        $currentPage = to.route?.id;
+      }
+    }
+  };
+
   onMount(() => {
     const allRoutes = navItems.flatMap((item) =>
       item.children ? item.children.map((child) => child.route) : [item.route]
     );
+
     preloadCode(...(allRoutes as string[]));
-
-    console.log('here');
-
-    if ($page.params) {
-      if ($page.params?.slug) {
-        $currentPage = '/' + $page.params.slug;
-      }
-    } else {
-      if ($page.route) {
-        $currentPage = $page.route?.id;
-      }
-    }
+    setRoute($page);
   });
 
   beforeNavigate(({ to }) => {
-    if (to?.params?.slug) {
-      $currentPage = '/' + to.params.slug;
-    } else {
-      if (to?.route) {
-        $currentPage = to?.route?.id;
-      }
+    if (to) {
+      setRoute(to);
     }
   });
 
@@ -76,9 +70,8 @@
     }, 400);
   });
 
-  $: iconSize = $small ? 'sm' : 'md';
+  $: iconSize = $isSmallScreen ? 'sm' : 'md';
   $: pathname = data.url;
-  $: console.log($currentPage);
 </script>
 
 <main class="flex flex-col bg-[#1d1d20] min-h-screen w-full overflow-x-hidden">
@@ -94,7 +87,7 @@
       out:blur={{ easing: sineIn, amount: 15, duration: 300 }}
       class="fixed inset-0 flex items-center bg-[#1d1d20] justify-center p-4 z-40"
     >
-      <div class="flex flex-col justify-start items-start w-[300px]">
+      <div class="flex flex-col justify-start items-start w-[250px] md:w-[300px]">
         {#each navItems as item, index (index)}
           {#if item.route}
             <a
@@ -107,7 +100,8 @@
                 class="nav-indicator mr-4 h-px w-8 bg-amber-100 transition-all group-hover:w-16 group-hover:bg-amber-300 group-focus-visible:w-16 group-focus-visible:bg-amber-300 motion-reduce:transition-none"
               />
               <span
-                class="nav-text text-2xl font-bold uppercase tracking-widest text-gray-100 group-hover:text-white group-focus-visible:text-slate-200"
+                class:sm-highlight-link={$currentPage !== item.route}
+                class="nav-text text-xl md:text-2xl font-bold uppercase tracking-widest text-gray-100 group-hover:text-white group-focus-visible:text-slate-200"
               >
                 {item.title}
               </span>
@@ -125,7 +119,8 @@
                   class="nav-indicator mr-4 h-px w-8 bg-amber-100 transition-all group-hover:w-16 group-hover:bg-amber-300 group-focus-visible:w-16 group-focus-visible:bg-amber-300 motion-reduce:transition-none"
                 />
                 <span
-                  class="nav-text text-2xl font-bold uppercase tracking-widest text-gray-100 group-hover:text-white group-focus-visible:text-slate-200"
+                  class:sm-highlight-link={$currentPage !== child.route}
+                  class="nav-text text-lg md:text-2xl font-bold uppercase tracking-widest text-gray-100 group-hover:text-white group-focus-visible:text-slate-200"
                 >
                   {child.title}
                 </span>
@@ -217,5 +212,6 @@
   .active .nav-text {
     --tw-text-opacity: 1;
     color: rgb(252 211 77 / 1);
+    /* box-shadow: inset 0 -5px 0 rgba(252, 211, 77, 0.95); */
   }
 </style>

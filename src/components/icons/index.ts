@@ -38,3 +38,5 @@ export { default as ExpandIcon } from './ExpandIcon.svelte';
 export { default as CollapseIcon } from './CollapseIcon.svelte';
 export { default as DeployedIcon } from './DeployedIcon.svelte';
 export { default as LinkIcon } from './LinkIcon.svelte';
+export { default as InfoIcon } from './InfoIcon.svelte';
+export { default as MoreIcon } from './MoreIcon.svelte';

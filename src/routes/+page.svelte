@@ -1,15 +1,16 @@
 <script lang="ts">
   import { flip } from 'svelte/animate';
-  import { sineOut } from 'svelte/easing';
 
   import { projects as _projects, skills } from '$lib/const';
-  import { AnimatedText, Icon, FullSection, SubSection } from '$comp';
+  import { AnimatedText, Icon, FullSection, SubSection, Tooltip } from '$comp';
 
   const messagesToAnimate = [
     'TypeScript',
     'Python',
+    'Java',
     'React',
     'Svelte',
+    'Vue',
     'Backend Systems',
     'Cloud Services',
     'Database Management',
@@ -33,50 +34,56 @@
 
 <div class="w-full">
   <FullSection id="landing">
-    <h2 class="intro__tagline">
-      I'm <span class="font-black accent-color">Ryan Painter</span>, Lorem ipsum dolor sit amet
-      consectetur adipisicing elit. Necessitatibus eos dolores modi quisquam voluptatum eum magni
-      quod nostrum obcaecati blanditiis.
+    <h2
+      class="font-light max-w-[700px] text-[1.75rem] md:text-[2rem] lg:text-[2.25rem] xl:text-[2.5rem]"
+    >
+      Hi, I'm <span class="font-black accent-color">Ryan Painter</span> — a Full Stack Developer and
+      UI Designer. I specialize in developing engaging web experiences. From dynamic backends to intuitive
+      user interfaces, my goal is to bring innovative ideas to life.
     </h2>
     <div class="container min-h-[70px]">
       <AnimatedText
         messages={messagesToAnimate}
-        textClass="intro__tagline !font-bold accent-color"
+        textClass="max-w-[700px] text-[1.75rem] md:text-[2rem] lg:text-[2.25rem] xl:text-[2.5rem] font-bold accent-color"
       />
     </div>
-    <h3 class="intro__contact">
-      Contact me at:
+    <h3 class="text-base md:text-xl">
+      Connect with me:
       <a href="mailto:paintersrp@gmail.com" class="highlight-link">paintersrp@gmail.com</a>
     </h3>
   </FullSection>
 
-  <SubSection id="background" heading="Background">
+  <SubSection id="about" heading="About">
     <p class="mt-0 mb-6 text-gray-300">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, sint ex, similique facere
-      sequi accusamus assumenda tempore nulla dignissimos a facilis excepturi magni consequatur
-      necessitatibus deleniti vero odio earum praesentium. Natus repellendus deserunt laborum
-      dolores a unde ipsum neque nostrum voluptates sapiente, facilis in cum, provident veniam enim
-      corporis similique!
+      In 2021, my journey into web development began with a Kaggle Machine Learning challenge,
+      sparking a deep interest in Python and data analysis. This quickly expanded into a fascination
+      with the entire web development spectrum. I ventured into JavaScript/TypeScript and the NodeJS
+      ecosystem, honing my skills in API development and front-end design. Embracing frameworks like
+      React, Svelte, and Vue, I've developed a diverse and robust skill set, allowing me to craft
+      comprehensive web solutions.
     </p>
     <p class="mt-0 mb-6 text-gray-300">
-      Lorem ipsum dolor sit amet <a href="/" class="underline-link text-white">consectetur</a>,
-      adipisicing elit. Repellendus veritatis optio odio eveniet vel, quia quod. Consectetur,
-      maiores cumque? Animi provident officiis veniam in minus natus assumenda veritatis incidunt
-      aliquid.
+      This portfolio is a testament to my self-driven journey. It showcases a range of personal
+      <a href="/" class="underline-link text-white"> projects </a>, each reflecting my dedication to
+      creating functional and visually appealing digital experiences. Although I haven't yet
+      ventured into a professional corporate setting, my work demonstrates my commitment to web
+      development and eagerness to innovate.
     </p>
-
     <p class="mt-0 mb-6 text-gray-300">
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel ratione et consectetur rem
-      temporibus nulla?
+      When not immersed in coding, I indulge in my love for TV shows and movies, exploring various
+      genres for relaxation and inspiration. Live music and comedy also play a significant role in
+      my life, offering fresh perspectives that fuel my creativity. These interests, while distinct
+      from my professional pursuits, enrich my approach to web development, infusing it with unique
+      insights and a well-rounded outlook.
     </p>
   </SubSection>
 
   <!-- Interactive Grid of Skills, animated by FLIP -->
   <SubSection id="projects" heading="Projects">
     <div class="skills-grid">
-      {#each projects as project (project.slug)}
+      {#each projects as project (project.id)}
         <button
-          animate:flip={{ duration: 400, easing: sineOut }}
+          animate:flip={{ duration: 400 }}
           class={`skill-card text-amber-50 bg-white bg-opacity-[5%] rounded-lg shadow-md flex flex-col items-center cursor-pointer transition duration-300 ease-in-out hover:shadow-xl hover:bg-opacity-[10%] relative ${
             project.isExpanded ? 'justify-center p-4' : 'p-2.5'
           }`}
@@ -97,26 +104,37 @@
           </span>
           {#if project.isExpanded}
             <div class="faster-in-blur mt-3 !flex">
-              <a
-                href={`/${project.slug}`}
-                class="min-w-[75px] px-2 md:px-4 my-auto py-2 text-sm bg-amber-300 bg-opacity-90 hover:bg-opacity-80 shadow-md text-white font-extrabold"
-              >
-                Details
-              </a>
-              <a
-                on:click|stopPropagation
-                href={project.repoUrl}
-                class="min-w-[75px] px-2 md:px-4 my-auto py-2 text-sm bg-amber-300 bg-opacity-90 hover:bg-opacity-80 shadow-md text-white font-extrabold"
-              >
-                GitHub
-              </a>
-              <a
-                on:click|stopPropagation
-                href={project.liveDemo}
-                class="min-w-[75px] px-2 md:px-4 my-auto py-2 text-sm bg-amber-300 bg-opacity-90 hover:bg-opacity-80 shadow-md text-white font-extrabold"
-              >
-                Demo
-              </a>
+              <div class="inline-flex rounded-md shadow-sm gap-4" role="group">
+                <a
+                  on:click|stopPropagation
+                  href={project.repoUrl}
+                  type="button"
+                  class="hover:text-opacity-90 text-amber-300 scale-95 hover:scale-100 transition-transform ease-in-out"
+                >
+                  <Tooltip content="Repository">
+                    <Icon type="github" />
+                  </Tooltip>
+                </a>
+                <a
+                  on:click|stopPropagation
+                  href={project.liveDemo}
+                  type="button"
+                  class="hover:text-opacity-90 text-amber-300 scale-95 hover:scale-100 transition-transform ease-in-out"
+                >
+                  <Tooltip content="Demo">
+                    <Icon type="deployed" />
+                  </Tooltip>
+                </a>
+                <a
+                  href={`/${project.slug}`}
+                  type="button"
+                  class="hover:text-opacity-90 text-amber-300 scale-95 hover:scale-100 transition-transform ease-in-out"
+                >
+                  <Tooltip content="Project Details">
+                    <Icon type="more" />
+                  </Tooltip>
+                </a>
+              </div>
             </div>
           {/if}
         </button>
@@ -190,10 +208,6 @@
 
   .skill-card {
     position: relative;
-  }
-
-  .skill-card:hover {
-    transform: scale(1.05);
   }
 
   .expanded {
