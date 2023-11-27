@@ -57,18 +57,6 @@ p {
   background: #272727;
 }
 
-/* New Landing */
-.intro {
-  padding: 120px 100px;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  max-width: 1440px;
-  margin: 0 auto;
-  color: #f1f1f1;
-}
-
 @media screen and (max-width: 630px) {
   .intro {
     padding: 120px 70px;

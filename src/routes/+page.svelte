@@ -74,11 +74,11 @@
   <!-- Interactive Grid of Skills, animated by FLIP -->
   <SubSection id="projects" heading="Projects">
     <div class="skills-grid">
-      {#each projects as project (project.id)}
+      {#each projects as project (project.slug)}
         <button
           animate:flip={{ duration: 400, easing: sineOut }}
           class={`skill-card text-amber-50 bg-white bg-opacity-[5%] rounded-lg shadow-md flex flex-col items-center cursor-pointer transition duration-300 ease-in-out hover:shadow-xl hover:bg-opacity-[10%] relative ${
-            project.isExpanded ? 'justify-center p-6' : 'p-4'
+            project.isExpanded ? 'justify-center p-4' : 'p-2.5'
           }`}
           class:expanded={project.isExpanded}
           on:click={() => toggleProject(project)}
@@ -122,6 +122,9 @@
         </button>
       {/each}
     </div>
+    <!-- Add Full Project List Link / Page  -->
+    <!-- Add Full Project List Link / Page  -->
+    <!-- Add Full Project List Link / Page  -->
   </SubSection>
 
   <SubSection id="skills" heading="Skills">
@@ -132,7 +135,7 @@
           <ul>
             {#each skillset.items as item, index (index)}
               <li class="my-[6px] text-sm text-gray-300">
-                <div class="flex gap-3 dasdadsad items-center">
+                <div class="flex gap-3 items-center">
                   {#if item.icon}
                     <Icon type={item.icon} size="sm" iconClass="accent-color" />
                   {/if}
@@ -190,7 +193,7 @@
   }
 
   .skill-card:hover {
-    transform: scale(1.01);
+    transform: scale(1.05);
   }
 
   .expanded {

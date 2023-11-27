@@ -190,7 +190,66 @@ export const projects = [
     repoName: 'api-gateway',
     isExpanded: false,
     liveDemo: 'https://apigateway.com'
+  },
+  {
+    id: 6,
+    slug: 'reddit-clone',
+    date: '11/26/2023',
+    title: 'Reddit Clone',
+    description: '',
+    details: '',
+    concepts: [],
+    stack: [],
+    libraries: [],
+    roadmap: [
+      {
+        version: '1',
+        description: '',
+        status: '',
+        releaseDate: '11/26/2023',
+        progress: 0,
+        isExpanded: false,
+        developmentJourney: '',
+        featureFocus: [],
+        technicalChallenges: '',
+        skillsLearned: ''
+      }
+    ],
+    imgUrl: 'https://source.unsplash.com/random/600x400/?reddit',
+    repoUrl: 'https://github.com/Paintersrp/reddit-clone',
+    repoName: 'reddit-clone',
+    isExpanded: false,
+    liveDemo: '/'
   }
 ];
 
-// export const projectIndex = new Map(projects.map((project) => [project.slug, project]));
+// {
+//   id: 6,
+//   slug: 'reddit-clone',
+//   date: '11/26/2023',
+//   title: 'Reddit Clone',
+//   description: '',
+//   details: '',
+//   concepts: [],
+//   stack: [],
+//   libraries: [],
+//   roadmap: [
+//     {
+//       version: '1',
+//       description: '',
+//       status: '',
+//       releaseDate: '11/26/2023',
+//       progress: 0,
+//       isExpanded: false,
+//       developmentJourney: '',
+//       featureFocus: [],
+//       technicalChallenges: '',
+//       skillsLearned: ''
+//     }
+//   ],
+//   imgUrl: 'https://source.unsplash.com/random/600x400/?reddit',
+//   repoUrl: 'https://github.com/Paintersrp/reddit-clone',
+//   repoName: 'reddit-clone',
+//   isExpanded: false,
+//   liveDemo: '/'
+// }

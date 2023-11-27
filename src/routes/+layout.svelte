@@ -7,10 +7,17 @@
   import { blur, fly } from 'svelte/transition';
   import { sineIn, sineOut } from 'svelte/easing';
 
-  import { afterNavigate, disableScrollHandling, preloadCode } from '$app/navigation';
+  import {
+    afterNavigate,
+    beforeNavigate,
+    disableScrollHandling,
+    preloadCode
+  } from '$app/navigation';
   import { mediaQueryStore } from '$lib/stores';
   import { navItems } from '$lib/const';
   import { MenuIcon, Icon } from '$comp';
+  import type { NavigationTarget } from '@sveltejs/kit';
+  import { page } from '$app/stores';
 
   // Preloaded data from +layout.server.ts
   export let data;
@@ -24,6 +31,7 @@
 
   const isMenuOpen = writable(false);
   const small = mediaQueryStore('(max-width: 600px)');
+  const currentPage = writable<string | null>('/');
 
   let iconSize: IconSize;
 
@@ -36,10 +44,33 @@
       item.children ? item.children.map((child) => child.route) : [item.route]
     );
     preloadCode(...(allRoutes as string[]));
+
+    console.log('here');
+
+    if ($page.params) {
+      if ($page.params?.slug) {
+        $currentPage = '/' + $page.params.slug;
+      }
+    } else {
+      if ($page.route) {
+        $currentPage = $page.route?.id;
+      }
+    }
   });
 
-  afterNavigate(() => {
+  beforeNavigate(({ to }) => {
+    if (to?.params?.slug) {
+      $currentPage = '/' + to.params.slug;
+    } else {
+      if (to?.route) {
+        $currentPage = to?.route?.id;
+      }
+    }
+  });
+
+  afterNavigate(({ to }) => {
     disableScrollHandling();
+
     setTimeout(() => {
       scrollTo({ top: 0, behavior: 'instant' });
     }, 400);
@@ -47,9 +78,10 @@
 
   $: iconSize = $small ? 'sm' : 'md';
   $: pathname = data.url;
+  $: console.log($currentPage);
 </script>
 
-<main class="flex flex-col bg-[#1d1d20] min-h-screen overflow-x-hidden overflow-y-hidden w-full">
+<main class="flex flex-col bg-[#1d1d20] min-h-screen w-full overflow-x-hidden">
   <!-- Application Header -->
   <header class="p-1 fixed top-0 right-0 justify-end z-50">
     <MenuIcon open={$isMenuOpen} onClick={toggleMenu} />
@@ -62,15 +94,23 @@
       out:blur={{ easing: sineIn, amount: 15, duration: 300 }}
       class="fixed inset-0 flex items-center bg-[#1d1d20] justify-center p-4 z-40"
     >
-      <div class="flex flex-col">
-        {#each navItems as item}
+      <div class="flex flex-col justify-start items-start w-[300px]">
+        {#each navItems as item, index (index)}
           {#if item.route}
             <a
               on:click={toggleMenu}
               href={item.route}
-              class="text-4xl md:text-5xl font-bold accent-color hover:text-amber-300 text-center leading-tight mb-4 hover:underline"
+              class="route group flex items-center text-4xl md:text-5xl font-bold accent-color text-center leading-tight mb-4"
+              class:active={$currentPage === item.route}
             >
-              {item.title}
+              <span
+                class="nav-indicator mr-4 h-px w-8 bg-amber-100 transition-all group-hover:w-16 group-hover:bg-amber-300 group-focus-visible:w-16 group-focus-visible:bg-amber-300 motion-reduce:transition-none"
+              />
+              <span
+                class="nav-text text-2xl font-bold uppercase tracking-widest text-gray-100 group-hover:text-white group-focus-visible:text-slate-200"
+              >
+                {item.title}
+              </span>
             </a>
           {/if}
           {#if item.children}
@@ -78,9 +118,17 @@
               <a
                 on:click={toggleMenu}
                 href={child.route}
-                class="text-4xl md:text-5xl font-bold accent-color hover:text-amber-300 text-center leading-tight mb-4 hover:underline"
+                class="route group flex items-center text-4xl md:text-5xl font-bold accent-color text-center leading-tight mb-4"
+                class:active={$currentPage === child.route}
               >
-                {child.title}
+                <span
+                  class="nav-indicator mr-4 h-px w-8 bg-amber-100 transition-all group-hover:w-16 group-hover:bg-amber-300 group-focus-visible:w-16 group-focus-visible:bg-amber-300 motion-reduce:transition-none"
+                />
+                <span
+                  class="nav-text text-2xl font-bold uppercase tracking-widest text-gray-100 group-hover:text-white group-focus-visible:text-slate-200"
+                >
+                  {child.title}
+                </span>
               </a>
             {/each}
           {/if}
@@ -135,3 +183,39 @@
     </div>
   </footer>
 </main>
+
+<style>
+  .nav-indicator {
+    display: inline-block;
+    height: 2px;
+    width: 2rem;
+    transition: all 0.3s ease;
+  }
+
+  .route:hover .nav-indicator {
+    width: 4rem;
+    --tw-bg-opacity: 1;
+    background-color: rgb(252 211 77 / 1);
+  }
+
+  .route {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .nav-text {
+    position: relative;
+    display: inline-block;
+  }
+
+  .active .nav-indicator {
+    width: 4rem;
+    --tw-bg-opacity: 1;
+    background-color: rgb(252 211 77 / 1);
+  }
+
+  .active .nav-text {
+    --tw-text-opacity: 1;
+    color: rgb(252 211 77 / 1);
+  }
+</style>

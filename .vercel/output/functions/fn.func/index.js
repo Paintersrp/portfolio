@@ -83,6 +83,10 @@ function subscribe(store, ...callbacks) {
 function null_to_empty(value) {
   return value == null ? "" : value;
 }
+function set_store_value(store, ret, value) {
+  store.set(value);
+  return ret;
+}
 function set_current_component(component5) {
   current_component = component5;
 }
@@ -834,6 +838,36 @@ var init_nav = __esm({
         repoName: "api-gateway",
         isExpanded: false,
         liveDemo: "https://apigateway.com"
+      },
+      {
+        id: 6,
+        slug: "reddit-clone",
+        date: "11/26/2023",
+        title: "Reddit Clone",
+        description: "",
+        details: "",
+        concepts: [],
+        stack: [],
+        libraries: [],
+        roadmap: [
+          {
+            version: "1",
+            description: "",
+            status: "",
+            releaseDate: "11/26/2023",
+            progress: 0,
+            isExpanded: false,
+            developmentJourney: "",
+            featureFocus: [],
+            technicalChallenges: "",
+            skillsLearned: ""
+          }
+        ],
+        imgUrl: "https://source.unsplash.com/random/600x400/?reddit",
+        repoUrl: "https://github.com/Paintersrp/reddit-clone",
+        repoName: "reddit-clone",
+        isExpanded: false,
+        liveDemo: "/"
       }
     ];
     navItems = [
@@ -1185,6 +1219,35 @@ c8.9-2.3,18.2,1.2,23.4,8.7c3.2,4.4,4.4,9.9,3.5,15.3c-0.9,5.2-4.1,9.9-8.6,12.7l-2
   }
 });
 
+// .svelte-kit/output/server/chunks/stores.js
+var getStores, page;
+var init_stores = __esm({
+  ".svelte-kit/output/server/chunks/stores.js"() {
+    init_ssr();
+    getStores = () => {
+      const stores = getContext("__svelte__");
+      return {
+        /** @type {typeof page} */
+        page: {
+          subscribe: stores.page.subscribe
+        },
+        /** @type {typeof navigating} */
+        navigating: {
+          subscribe: stores.navigating.subscribe
+        },
+        /** @type {typeof updated} */
+        updated: stores.updated
+      };
+    };
+    page = {
+      subscribe(fn) {
+        const store = getStores().page;
+        return store.subscribe(fn);
+      }
+    };
+  }
+});
+
 // .svelte-kit/output/server/entries/pages/_layout.svelte.js
 var layout_svelte_exports = {};
 __export(layout_svelte_exports, {
@@ -1212,16 +1275,18 @@ function mediaQueryStore(query) {
   const store = writable(false);
   return { subscribe: store.subscribe };
 }
-var disableScrollHandling, afterNavigate, css, MenuIcon, Layout;
+var disableScrollHandling, beforeNavigate, afterNavigate, css$1, MenuIcon, css, Layout;
 var init_layout_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
     init_ssr();
     init_chunks();
     init_nav();
     init_Icon();
+    init_stores();
     disableScrollHandling = /* @__PURE__ */ client_method("disable_scroll_handling");
+    beforeNavigate = /* @__PURE__ */ client_method("before_navigate");
     afterNavigate = /* @__PURE__ */ client_method("after_navigate");
-    css = {
+    css$1 = {
       code: ":root{--transition-duration:600ms}button.svelte-rv88i1.svelte-rv88i1{cursor:pointer;display:flex;align-items:center;overflow:hidden}svg.svelte-rv88i1.svelte-rv88i1{transition:transform var(--transition-duration)}.top.svelte-rv88i1.svelte-rv88i1{stroke-dasharray:40 160;transition:stroke-dashoffset var(--transition-duration)}.middle.svelte-rv88i1.svelte-rv88i1{transform-origin:50%;transition:transform var(--transition-duration)}.bottom.svelte-rv88i1.svelte-rv88i1{stroke-dasharray:40 85;transition:stroke-dashoffset var(--transition-duration)}.open.svelte-rv88i1.svelte-rv88i1{transform:rotate(45deg)}.open.svelte-rv88i1 .top.svelte-rv88i1,.open.svelte-rv88i1 .bottom.svelte-rv88i1{stroke-dashoffset:-64px}.open.svelte-rv88i1 .middle.svelte-rv88i1{transform:rotate(90deg)}",
       map: null
     };
@@ -1240,12 +1305,19 @@ var init_layout_svelte = __esm({
         $$bindings.ariaLabel(ariaLabel);
       if ($$props.width === void 0 && $$bindings.width && width !== void 0)
         $$bindings.width(width);
-      $$result.css.add(css);
+      $$result.css.add(css$1);
       return `<button${add_attribute("aria-expanded", open, 0)}${add_attribute("aria-label", ariaLabel, 0)} class="accent-color md:hidden svelte-rv88i1"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5"${add_attribute("width", width, 0)} class="${["svelte-rv88i1", open ? "open" : ""].join(" ").trim()}"><path class="top svelte-rv88i1" d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20"></path><path class="middle svelte-rv88i1" d="m 30,50 h 40"></path><path class="bottom svelte-rv88i1" d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20"></path></svg> </button>`;
     });
+    css = {
+      code: ".nav-indicator.svelte-11qbq60.svelte-11qbq60{display:inline-block;height:2px;width:2rem;transition:all 0.3s ease}.route.svelte-11qbq60:hover .nav-indicator.svelte-11qbq60{width:4rem;--tw-bg-opacity:1;background-color:rgb(252 211 77 / 1)}.route.svelte-11qbq60.svelte-11qbq60{position:relative;overflow:hidden}.nav-text.svelte-11qbq60.svelte-11qbq60{position:relative;display:inline-block}.active.svelte-11qbq60 .nav-indicator.svelte-11qbq60{width:4rem;--tw-bg-opacity:1;background-color:rgb(252 211 77 / 1)}.active.svelte-11qbq60 .nav-text.svelte-11qbq60{--tw-text-opacity:1;color:rgb(252 211 77 / 1)}",
+      map: null
+    };
     Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $currentPage, $$unsubscribe_currentPage;
       let $$unsubscribe_small;
+      let $$unsubscribe_page;
       let $isMenuOpen, $$unsubscribe_isMenuOpen;
+      $$unsubscribe_page = subscribe(page, (value) => value);
       let { data } = $$props;
       const socials = [
         {
@@ -1269,10 +1341,21 @@ var init_layout_svelte = __esm({
       $$unsubscribe_isMenuOpen = subscribe(isMenuOpen, (value) => $isMenuOpen = value);
       const small = mediaQueryStore();
       $$unsubscribe_small = subscribe(small, (value) => value);
+      const currentPage = writable("/");
+      $$unsubscribe_currentPage = subscribe(currentPage, (value) => $currentPage = value);
       const toggleMenu = () => {
         isMenuOpen.update((n) => !n);
       };
-      afterNavigate(() => {
+      beforeNavigate(({ to }) => {
+        if (to?.params?.slug) {
+          set_store_value(currentPage, $currentPage = "/" + to.params.slug, $currentPage);
+        } else {
+          if (to?.route) {
+            set_store_value(currentPage, $currentPage = to?.route?.id, $currentPage);
+          }
+        }
+      });
+      afterNavigate(({ to }) => {
         disableScrollHandling();
         setTimeout(
           () => {
@@ -1283,12 +1366,24 @@ var init_layout_svelte = __esm({
       });
       if ($$props.data === void 0 && $$bindings.data && data !== void 0)
         $$bindings.data(data);
+      $$result.css.add(css);
       data.url;
+      {
+        console.log($currentPage);
+      }
+      $$unsubscribe_currentPage();
       $$unsubscribe_small();
+      $$unsubscribe_page();
       $$unsubscribe_isMenuOpen();
-      return `<main class="flex flex-col bg-[#1d1d20] min-h-screen overflow-x-hidden overflow-y-hidden w-full"> <header class="p-1 fixed top-0 right-0 justify-end z-50">${validate_component(MenuIcon, "MenuIcon").$$render($$result, { open: $isMenuOpen, onClick: toggleMenu }, {}, {})}</header>  ${$isMenuOpen ? `<div class="fixed inset-0 flex items-center bg-[#1d1d20] justify-center p-4 z-40"><div class="flex flex-col">${each(navItems, (item) => {
-        return `${item.route ? `<a${add_attribute("href", item.route, 0)} class="text-4xl md:text-5xl font-bold accent-color hover:text-amber-300 text-center leading-tight mb-4 hover:underline">${escape(item.title)} </a>` : ``} ${item.children ? `${each(item.children, (child) => {
-          return `<a${add_attribute("href", child.route, 0)} class="text-4xl md:text-5xl font-bold accent-color hover:text-amber-300 text-center leading-tight mb-4 hover:underline">${escape(child.title)} </a>`;
+      return `<main class="flex flex-col bg-[#1d1d20] min-h-screen w-full overflow-x-hidden"> <header class="p-1 fixed top-0 right-0 justify-end z-50">${validate_component(MenuIcon, "MenuIcon").$$render($$result, { open: $isMenuOpen, onClick: toggleMenu }, {}, {})}</header>   ${$isMenuOpen ? `<div class="fixed inset-0 flex items-center bg-[#1d1d20] justify-center p-4 z-40"><div class="flex flex-col justify-start items-start w-[300px]">${each(navItems, (item, index5) => {
+        return `${item.route ? `<a${add_attribute("href", item.route, 0)} class="${[
+          "route group flex items-center text-4xl md:text-5xl font-bold accent-color text-center leading-tight mb-4 svelte-11qbq60",
+          $currentPage === item.route ? "active" : ""
+        ].join(" ").trim()}"><span class="nav-indicator mr-4 h-px w-8 bg-amber-100 transition-all group-hover:w-16 group-hover:bg-amber-300 group-focus-visible:w-16 group-focus-visible:bg-amber-300 motion-reduce:transition-none svelte-11qbq60"></span> <span class="nav-text text-2xl font-bold uppercase tracking-widest text-gray-100 group-hover:text-white group-focus-visible:text-slate-200 svelte-11qbq60">${escape(item.title)}</span> </a>` : ``} ${item.children ? `${each(item.children, (child) => {
+          return `<a${add_attribute("href", child.route, 0)} class="${[
+            "route group flex items-center text-4xl md:text-5xl font-bold accent-color text-center leading-tight mb-4 svelte-11qbq60",
+            $currentPage === child.route ? "active" : ""
+          ].join(" ").trim()}"><span class="nav-indicator mr-4 h-px w-8 bg-amber-100 transition-all group-hover:w-16 group-hover:bg-amber-300 group-focus-visible:w-16 group-focus-visible:bg-amber-300 motion-reduce:transition-none svelte-11qbq60"></span> <span class="nav-text text-2xl font-bold uppercase tracking-widest text-gray-100 group-hover:text-white group-focus-visible:text-slate-200 svelte-11qbq60">${escape(child.title)}</span> </a>`;
         })}` : ``}`;
       })}</div></div>` : ``}  <div>${slots.default ? slots.default({}) : ``}</div>  <footer class="block md:flex md:justify-between md:items-center py-12 px-7 md:px-20 bg-opacity-[1.5%] bg-white"><div class="font-bold w-auto text-center mb-6 md:w-[200px] md:text-left md:mb-0 text-gray-200" data-svelte-h="svelte-1h9ai9t"><div class="text-sm"><span class="accent-color">\xA9</span>
         Copyright
@@ -1304,7 +1399,7 @@ var init_layout_svelte = __esm({
           {},
           {}
         )} </a>`;
-      })}</div></footer></main>`;
+      })}</div></footer> </main>`;
     });
   }
 });
@@ -1327,8 +1422,8 @@ var init__ = __esm({
     index = 0;
     component = async () => component_cache ?? (component_cache = (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default);
     server_id = "src/routes/+layout.server.ts";
-    imports = ["_app/immutable/nodes/0.94c7e368.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/Icon.c5406e6c.js", "_app/immutable/chunks/singletons.4b9deaa3.js"];
-    stylesheets = ["_app/immutable/assets/0.ff414715.css", "_app/immutable/assets/MenuIcon.0056b528.css"];
+    imports = ["_app/immutable/nodes/0.109b87e6.js", "_app/immutable/chunks/scheduler.f5d82c9d.js", "_app/immutable/chunks/index.e0aa46a0.js", "_app/immutable/chunks/Icon.ee66a5d8.js", "_app/immutable/chunks/singletons.0bc841c0.js", "_app/immutable/chunks/stores.ebae017b.js"];
+    stylesheets = ["_app/immutable/assets/0.d7953dd5.css", "_app/immutable/assets/MenuIcon.0056b528.css"];
     fonts = [];
   }
 });
@@ -1359,35 +1454,15 @@ var init_SubSection = __esm({
 // .svelte-kit/output/server/entries/pages/_error.svelte.js
 var error_svelte_exports = {};
 __export(error_svelte_exports, {
-  default: () => Error$1
+  default: () => Error2
 });
-var getStores, page, Error$1;
+var Error2;
 var init_error_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_error.svelte.js"() {
     init_ssr();
+    init_stores();
     init_SubSection();
-    getStores = () => {
-      const stores = getContext("__svelte__");
-      return {
-        /** @type {typeof page} */
-        page: {
-          subscribe: stores.page.subscribe
-        },
-        /** @type {typeof navigating} */
-        navigating: {
-          subscribe: stores.navigating.subscribe
-        },
-        /** @type {typeof updated} */
-        updated: stores.updated
-      };
-    };
-    page = {
-      subscribe(fn) {
-        const store = getStores().page;
-        return store.subscribe(fn);
-      }
-    };
-    Error$1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Error2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $page, $$unsubscribe_page;
       $$unsubscribe_page = subscribe(page, (value) => $page = value);
       $$unsubscribe_page();
@@ -1419,7 +1494,7 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => component_cache2 ?? (component_cache2 = (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default);
-    imports2 = ["_app/immutable/nodes/1.b8ca7424.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/singletons.4b9deaa3.js", "_app/immutable/chunks/SubSection.e1c97470.js"];
+    imports2 = ["_app/immutable/nodes/1.cdd7b9a9.js", "_app/immutable/chunks/scheduler.f5d82c9d.js", "_app/immutable/chunks/index.e0aa46a0.js", "_app/immutable/chunks/stores.ebae017b.js", "_app/immutable/chunks/singletons.0bc841c0.js", "_app/immutable/chunks/SubSection.eb8cd66b.js"];
     stylesheets2 = ["_app/immutable/assets/MenuIcon.0056b528.css"];
     fonts2 = [];
   }
@@ -1498,7 +1573,7 @@ var init_page_svelte = __esm({
       return `<h1${add_attribute("class", textClass, 0)}>${escape(messages[index5])}</h1>`;
     });
     css2 = {
-      code: "main{background:#1d1d20 !important}.skills-grid.svelte-x51ewb.svelte-x51ewb{--_space:1rem;padding:0;display:grid;gap:var(--_space);grid-template-columns:repeat(auto-fill, minmax(25%, 1fr));grid-auto-rows:minmax(100px, auto)}@media(max-width: 1200px){.skills-grid.svelte-x51ewb.svelte-x51ewb{grid-template-columns:repeat(auto-fill, minmax(25%, 1fr))}}@media(max-width: 980px){.skills-grid.svelte-x51ewb.svelte-x51ewb{grid-template-columns:repeat(auto-fill, minmax(20%, 1fr))}}@media(max-width: 768px){.skills-grid.svelte-x51ewb.svelte-x51ewb{grid-template-columns:repeat(auto-fill, minmax(20%, 1fr))}}@media(max-width: 600px){.skills-grid.svelte-x51ewb.svelte-x51ewb{grid-template-columns:repeat(auto-fill, minmax(33%, 1fr))}}.skill-card.svelte-x51ewb.svelte-x51ewb{position:relative}.skill-card.svelte-x51ewb.svelte-x51ewb:hover{transform:scale(1.01)}.expanded.svelte-x51ewb.svelte-x51ewb{grid-column:span 2;grid-row:span 2}@media(max-width: 600px){.expanded.svelte-x51ewb.svelte-x51ewb{grid-column:span 2;grid-row:span 2}}.skill-details.svelte-x51ewb.svelte-x51ewb{display:none}.expanded.svelte-x51ewb .skill-details.svelte-x51ewb{display:block}",
+      code: "main{background:#1d1d20 !important}.skills-grid.svelte-e8q5cv.svelte-e8q5cv{--_space:1rem;padding:0;display:grid;gap:var(--_space);grid-template-columns:repeat(auto-fill, minmax(25%, 1fr));grid-auto-rows:minmax(100px, auto)}@media(max-width: 1200px){.skills-grid.svelte-e8q5cv.svelte-e8q5cv{grid-template-columns:repeat(auto-fill, minmax(25%, 1fr))}}@media(max-width: 980px){.skills-grid.svelte-e8q5cv.svelte-e8q5cv{grid-template-columns:repeat(auto-fill, minmax(20%, 1fr))}}@media(max-width: 768px){.skills-grid.svelte-e8q5cv.svelte-e8q5cv{grid-template-columns:repeat(auto-fill, minmax(20%, 1fr))}}@media(max-width: 600px){.skills-grid.svelte-e8q5cv.svelte-e8q5cv{grid-template-columns:repeat(auto-fill, minmax(33%, 1fr))}}.skill-card.svelte-e8q5cv.svelte-e8q5cv{position:relative}.skill-card.svelte-e8q5cv.svelte-e8q5cv:hover{transform:scale(1.05)}.expanded.svelte-e8q5cv.svelte-e8q5cv{grid-column:span 2;grid-row:span 2}@media(max-width: 600px){.expanded.svelte-e8q5cv.svelte-e8q5cv{grid-column:span 2;grid-row:span 2}}.skill-details.svelte-e8q5cv.svelte-e8q5cv{display:none}.expanded.svelte-e8q5cv .skill-details.svelte-e8q5cv{display:block}",
       map: null
     };
     Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -1547,18 +1622,18 @@ var init_page_svelte = __esm({
         }
       })}  ${validate_component(SubSection, "SubSection").$$render($$result, { id: "projects", heading: "Projects" }, {}, {
         default: () => {
-          return `<div class="skills-grid svelte-x51ewb">${each(projects$1, (project) => {
+          return `<div class="skills-grid svelte-e8q5cv">${each(projects$1, (project) => {
             return `<button class="${[
-              escape(null_to_empty(`skill-card text-amber-50 bg-white bg-opacity-[5%] rounded-lg shadow-md flex flex-col items-center cursor-pointer transition duration-300 ease-in-out hover:shadow-xl hover:bg-opacity-[10%] relative ${project.isExpanded ? "justify-center p-6" : "p-4"}`), true) + " svelte-x51ewb",
+              escape(null_to_empty(`skill-card text-amber-50 bg-white bg-opacity-[5%] rounded-lg shadow-md flex flex-col items-center cursor-pointer transition duration-300 ease-in-out hover:shadow-xl hover:bg-opacity-[10%] relative ${project.isExpanded ? "justify-center p-4" : "p-2.5"}`), true) + " svelte-e8q5cv",
               project.isExpanded ? "expanded" : ""
-            ].join(" ").trim()}"><figure class="flex justify-center mb-4"><img class="${escape(null_to_empty(`object-cover rounded shadow mx-auto  ${project.isExpanded ? "w-full" : "w-full"}`), true) + " svelte-x51ewb"}"${add_attribute("src", project.imgUrl, 0)}${add_attribute("alt", project.title, 0)}></figure> <span class="${escape(null_to_empty(`font-semibold ${project.isExpanded ? "text-xl" : " text-sm"}`), true) + " svelte-x51ewb"}">${escape(project.title)}</span> ${project.isExpanded ? `<div class="faster-in-blur mt-3 !flex"><a${add_attribute("href", `/${project.slug}`, 0)} class="min-w-[75px] px-2 md:px-4 my-auto py-2 text-sm bg-amber-300 bg-opacity-90 hover:bg-opacity-80 shadow-md text-white font-extrabold">Details</a> <a${add_attribute("href", project.repoUrl, 0)} class="min-w-[75px] px-2 md:px-4 my-auto py-2 text-sm bg-amber-300 bg-opacity-90 hover:bg-opacity-80 shadow-md text-white font-extrabold">GitHub</a> <a${add_attribute("href", project.liveDemo, 0)} class="min-w-[75px] px-2 md:px-4 my-auto py-2 text-sm bg-amber-300 bg-opacity-90 hover:bg-opacity-80 shadow-md text-white font-extrabold">Demo</a> </div>` : ``} </button>`;
-          })}</div>`;
+            ].join(" ").trim()}"><figure class="flex justify-center mb-4"><img class="${escape(null_to_empty(`object-cover rounded shadow mx-auto  ${project.isExpanded ? "w-full" : "w-full"}`), true) + " svelte-e8q5cv"}"${add_attribute("src", project.imgUrl, 0)}${add_attribute("alt", project.title, 0)}></figure> <span class="${escape(null_to_empty(`font-semibold ${project.isExpanded ? "text-xl" : " text-sm"}`), true) + " svelte-e8q5cv"}">${escape(project.title)}</span> ${project.isExpanded ? `<div class="faster-in-blur mt-3 !flex"><a${add_attribute("href", `/${project.slug}`, 0)} class="min-w-[75px] px-2 md:px-4 my-auto py-2 text-sm bg-amber-300 bg-opacity-90 hover:bg-opacity-80 shadow-md text-white font-extrabold">Details</a> <a${add_attribute("href", project.repoUrl, 0)} class="min-w-[75px] px-2 md:px-4 my-auto py-2 text-sm bg-amber-300 bg-opacity-90 hover:bg-opacity-80 shadow-md text-white font-extrabold">GitHub</a> <a${add_attribute("href", project.liveDemo, 0)} class="min-w-[75px] px-2 md:px-4 my-auto py-2 text-sm bg-amber-300 bg-opacity-90 hover:bg-opacity-80 shadow-md text-white font-extrabold">Demo</a> </div>` : ``} </button>`;
+          })}</div>   `;
         }
       })} ${validate_component(SubSection, "SubSection").$$render($$result, { id: "skills", heading: "Skills" }, {}, {
         default: () => {
           return `<div class="flex justify-between flex-wrap md:flex-nowrap">${each(skills, (skillset, index5) => {
             return `<div class="mb-6 md:w-[47%]"><div class="text-gray-50 font-bold uppercase">${escape(skillset.title)}</div> <ul>${each(skillset.items, (item, index22) => {
-              return `<li class="my-[6px] text-sm text-gray-300"><div class="flex gap-3 dasdadsad items-center">${item.icon ? `${validate_component(Icon, "Icon").$$render(
+              return `<li class="my-[6px] text-sm text-gray-300"><div class="flex gap-3 items-center">${item.icon ? `${validate_component(Icon, "Icon").$$render(
                 $$result,
                 {
                   type: item.icon,
@@ -1594,8 +1669,8 @@ var init__3 = __esm({
     index3 = 2;
     component3 = async () => component_cache3 ?? (component_cache3 = (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default);
     universal_id = "src/routes/+page.ts";
-    imports3 = ["_app/immutable/nodes/2.525aa90b.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/Icon.c5406e6c.js", "_app/immutable/chunks/SubSection.e1c97470.js"];
-    stylesheets3 = ["_app/immutable/assets/2.68c96077.css", "_app/immutable/assets/MenuIcon.0056b528.css"];
+    imports3 = ["_app/immutable/nodes/2.aed120e0.js", "_app/immutable/chunks/scheduler.f5d82c9d.js", "_app/immutable/chunks/index.e0aa46a0.js", "_app/immutable/chunks/Icon.ee66a5d8.js", "_app/immutable/chunks/SubSection.eb8cd66b.js"];
+    stylesheets3 = ["_app/immutable/assets/2.f950248b.css", "_app/immutable/assets/MenuIcon.0056b528.css"];
     fonts3 = [];
   }
 });
@@ -1642,7 +1717,7 @@ var init_page_svelte2 = __esm({
         $$bindings.data(data);
       return ` ${validate_component(FullSection, "FullSection").$$render($$result, { id: "project-start" }, {}, {
         default: () => {
-          return `<div class="w-full mx-auto flex flex-col md:flex-row p-4 items-center"><figure class="flex-grow-0 flex-shrink-0 md:flex-grow md:flex-shrink w-full md:w-3/5"><img${add_attribute("src", project.imgUrl, 0)}${add_attribute("alt", project.title, 0)} class="rounded-lg shadow-md w-full h-auto object-cover mb-4 md:mb-0"></figure> <div class="flex-grow md:w-[37.5%] text-center md:text-left md:ml-6"><div class="text-sm text-gray-300 mb-2"><time${add_attribute("datetime", project.date, 0)}>${escape(`${normalizeDate(project.date)} - ${normalizeDate(project.roadmap[0].releaseDate)}`)}</time></div> <h1 class="text-4xl font-bold mb-4 accent-color transition duration-300">${escape(project.title)}</h1> <p class="text-base mb-4 leading-relaxed">${escape(project.description)}</p> <div class="text-sm text-gray-300 mb-6"><p>${escape(project.details)}</p></div> <div class="flex justify-center md:justify-start gap-4"><a${add_attribute("href", project.repoUrl, 0)} class="">${validate_component(Icon, "Icon").$$render(
+          return `<div class="w-full mx-auto flex flex-col md:flex-row p-4 items-center"><figure class="flex-grow-0 flex-shrink-0 md:flex-grow md:flex-shrink w-full md:w-3/5"><img${add_attribute("src", project.imgUrl, 0)}${add_attribute("alt", project.title, 0)} class="rounded-lg shadow-md w-full h-auto object-cover mb-4 md:mb-0"></figure> <div class="flex-grow md:w-[37.5%] text-center md:text-left md:ml-6"><div class="text-sm text-gray-300 mb-2"><time${add_attribute("datetime", project.date, 0)}>${escape(`${normalizeDate(project.date)} - ${normalizeDate(project.roadmap[0]?.releaseDate) ?? ""}`)}</time></div> <h1 class="text-4xl font-bold mb-4 accent-color transition duration-300">${escape(project.title)}</h1> <p class="text-base mb-4 leading-relaxed">${escape(project.description)}</p> <div class="text-sm text-gray-300 mb-6"><p>${escape(project.details)}</p></div> <div class="flex justify-center md:justify-start gap-4"><a${add_attribute("href", project.repoUrl, 0)} class="">${validate_component(Icon, "Icon").$$render(
             $$result,
             {
               type: "github",
@@ -1708,18 +1783,6 @@ var init_page_svelte2 = __esm({
             return `<div data-svelte-h="svelte-gg4230">Screenshots (expandable)</div> <div data-svelte-h="svelte-r00vzs">REPLs</div>`;
           }
         }
-      )} ${validate_component(SubSection, "SubSection").$$render(
-        $$result,
-        {
-          id: "project-stats",
-          heading: "Statistics"
-        },
-        {},
-        {
-          default: () => {
-            return `<div class="mb-20" data-svelte-h="svelte-1vp2r5g">Git Statistics</div>`;
-          }
-        }
       )}`;
     });
   }
@@ -1743,7 +1806,7 @@ var init__4 = __esm({
     index4 = 3;
     component4 = async () => component_cache4 ?? (component_cache4 = (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default);
     universal_id2 = "src/routes/[slug]/+page.ts";
-    imports4 = ["_app/immutable/nodes/3.72ee4dbd.js", "_app/immutable/chunks/Icon.c5406e6c.js", "_app/immutable/chunks/index.b7cc0d67.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/control.f5b05b5f.js", "_app/immutable/chunks/SubSection.e1c97470.js"];
+    imports4 = ["_app/immutable/nodes/3.d0b2357b.js", "_app/immutable/chunks/Icon.ee66a5d8.js", "_app/immutable/chunks/index.e0aa46a0.js", "_app/immutable/chunks/scheduler.f5d82c9d.js", "_app/immutable/chunks/control.f5b05b5f.js", "_app/immutable/chunks/SubSection.eb8cd66b.js"];
     stylesheets4 = ["_app/immutable/assets/MenuIcon.0056b528.css"];
     fonts4 = [];
   }
@@ -1925,7 +1988,7 @@ var options = {
 		<div class="error">
 			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n"
   },
-  version_hash: "1lpc5g0"
+  version_hash: "cu8nzo"
 };
 function get_hooks() {
   return {};
@@ -5224,7 +5287,7 @@ var manifest = (() => {
     assets: /* @__PURE__ */ new Set(["favicon.png", "images/jefferson-santos-fCEJGBzAkrU-unsplash.jpg", "images/jerry-zhang-ePpaQC2c1xA-unsplash.jpg", "images/linus-nylund-Q5QspluNZmM-unsplash.jpg"]),
     mimeTypes: { ".png": "image/png", ".jpg": "image/jpeg" },
     _: {
-      client: { "start": "_app/immutable/entry/start.13c9997f.js", "app": "_app/immutable/entry/app.f357ec1a.js", "imports": ["_app/immutable/entry/start.13c9997f.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/singletons.4b9deaa3.js", "_app/immutable/chunks/control.f5b05b5f.js", "_app/immutable/entry/app.f357ec1a.js", "_app/immutable/chunks/scheduler.bc02f4d4.js", "_app/immutable/chunks/index.b7cc0d67.js"], "stylesheets": [], "fonts": [] },
+      client: { "start": "_app/immutable/entry/start.14f1b7a8.js", "app": "_app/immutable/entry/app.511fae23.js", "imports": ["_app/immutable/entry/start.14f1b7a8.js", "_app/immutable/chunks/scheduler.f5d82c9d.js", "_app/immutable/chunks/singletons.0bc841c0.js", "_app/immutable/chunks/control.f5b05b5f.js", "_app/immutable/entry/app.511fae23.js", "_app/immutable/chunks/scheduler.f5d82c9d.js", "_app/immutable/chunks/index.e0aa46a0.js"], "stylesheets": [], "fonts": [] },
       nodes: [
         __memo(() => Promise.resolve().then(() => (init__(), __exports))),
         __memo(() => Promise.resolve().then(() => (init__2(), __exports2))),

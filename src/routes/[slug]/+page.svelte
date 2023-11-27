@@ -42,7 +42,9 @@
     <div class="flex-grow md:w-[37.5%] text-center md:text-left md:ml-6">
       <div class="text-sm text-gray-300 mb-2">
         <time datetime={project.date}>
-          {`${normalizeDate(project.date)} - ${normalizeDate(project.roadmap[0].releaseDate)}`}
+          {`${normalizeDate(project.date)} - ${
+            normalizeDate(project.roadmap[0]?.releaseDate) ?? ''
+          }`}
         </time>
       </div>
       <h1 class="text-4xl font-bold mb-4 accent-color transition duration-300">
@@ -160,10 +162,6 @@
 <SubSection id="project-highlights" heading="Highlights">
   <div>Screenshots (expandable)</div>
   <div>REPLs</div>
-</SubSection>
-
-<SubSection id="project-stats" heading="Statistics">
-  <div class="mb-20">Git Statistics</div>
 </SubSection>
 
 <style>
