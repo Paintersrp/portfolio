@@ -17,6 +17,7 @@
   import { mediaQueryStore } from '$lib/stores';
   import { navItems } from '$lib/const';
   import { MenuIcon, Icon, Tooltip } from '$comp';
+  import { capFirst } from '$lib/utils/capFirst';
 
   export let data;
 
@@ -163,16 +164,14 @@
       {#each socials as social, index (index)}
         <a
           href={social.url}
-          class="uppercase font-bold mx-3 lg:mx-4"
+          class="uppercase font-bold mx-3 lg:mx-4 hover:text-opacity-90 text-amber-300 scale-95 hover:scale-100 transition-transform ease-in-out"
           target="_blank"
           rel="noopener noreferrer"
           title={social.name}
         >
-          <Icon
-            type={social.name}
-            size="md"
-            iconClass="accent-color hover:text-amber-400 transition-all duration-300 ease-in-out"
-          />
+          <Tooltip placement="top" content={capFirst(social.name)}>
+            <Icon type={social.name} size="md" />
+          </Tooltip>
         </a>
       {/each}
     </div>

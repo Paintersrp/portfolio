@@ -24,12 +24,6 @@
   }
 </script>
 
-<!-- <SubSection id={`project-${project.id}`} heading={`${project.title} JSON Data`}>
-  <pre class="whitespace-pre-wrap accent-color tracking-wide text-xs">
-    {JSON.stringify(project, undefined, 2)}
-  </pre>
-</SubSection> -->
-
 <FullSection id="project-start">
   <div class="w-full mx-auto flex flex-col md:flex-row p-4 items-center">
     <figure class="flex-grow-0 flex-shrink-0 md:flex-grow md:flex-shrink w-full md:w-3/5">

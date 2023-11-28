@@ -35,7 +35,7 @@
 <div class="w-full">
   <FullSection id="landing">
     <h2
-      class="font-light max-w-[700px] text-[1.75rem] md:text-[2rem] lg:text-[2.25rem] xl:text-[2.5rem]"
+      class="font-light max-w-[700px] text-[1.4rem] xxs:text-[1.5rem] xs:text-[1.65rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.25rem] xl:text-[2.5rem]"
     >
       Hi, I'm <span class="font-black accent-color">Ryan Painter</span> — a Full Stack Developer and
       UI Designer. I specialize in developing engaging web experiences. From dynamic backends to intuitive
@@ -44,10 +44,10 @@
     <div class="container min-h-[70px]">
       <AnimatedText
         messages={messagesToAnimate}
-        textClass="max-w-[700px] text-[1.75rem] md:text-[2rem] lg:text-[2.25rem] xl:text-[2.5rem] font-bold accent-color"
+        textClass="max-w-[700px] text-[1.4rem] xxs:text-[1.5rem] xs:text-[1.65rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.25rem] xl:text-[2.5rem] font-bold accent-color"
       />
     </div>
-    <h3 class="text-base md:text-xl">
+    <h3 class="sm:text-base/20 md:text-xl">
       Connect with me:
       <a href="mailto:paintersrp@gmail.com" class="highlight-link">paintersrp@gmail.com</a>
     </h3>
@@ -178,19 +178,19 @@
     padding: 0;
     display: grid;
     gap: var(--_space);
-    grid-template-columns: repeat(auto-fill, minmax(25%, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
     grid-auto-rows: minmax(100px, auto);
   }
 
   @media (max-width: 1200px) {
     .skills-grid {
-      grid-template-columns: repeat(auto-fill, minmax(25%, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
     }
   }
 
   @media (max-width: 980px) {
     .skills-grid {
-      grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(25%, 1fr));
     }
   }
 
@@ -200,7 +200,13 @@
     }
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 640px) {
+    .skills-grid {
+      grid-template-columns: repeat(auto-fill, minmax(25%, 1fr));
+    }
+  }
+
+  @media (max-width: 540px) {
     .skills-grid {
       grid-template-columns: repeat(auto-fill, minmax(33%, 1fr));
     }
